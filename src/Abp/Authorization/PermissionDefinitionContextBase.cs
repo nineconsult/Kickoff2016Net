@@ -16,11 +16,11 @@ namespace Abp.Authorization
 
         public Permission CreatePermission(
             string name, 
-            ILocalizableString displayName = null, 
-            bool isGrantedByDefault = false, 
-            ILocalizableString description = null, 
-            MultiTenancySides multiTenancySides = MultiTenancySides.Host | MultiTenancySides.Tenant,
-            IFeatureDependency featureDependency = null)
+            ILocalizableString displayName, 
+            bool isGrantedByDefault, 
+            ILocalizableString description, 
+            MultiTenancySides multiTenancySides,
+            IFeatureDependency featureDependency)
         {
             if (Permissions.ContainsKey(name))
             {
