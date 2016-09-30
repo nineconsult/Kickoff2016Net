@@ -35,7 +35,7 @@ namespace Abp.Events.Bus.Factories.Internals
             }
             catch (InvalidCastException iex)
             {
-                Logging.LogHelper.Logger.Error("Handler IDisposable");
+                Logging.LogHelper.Logger.Error("Handler IDisposable "+ iex.Message);
             }
         }
     }
