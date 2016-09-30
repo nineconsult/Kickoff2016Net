@@ -269,7 +269,7 @@
             return;
         }
 
-        console.log(logObject);
+        // console.log(logObject);
     };
 
     abp.log.debug = function(logObject) {
@@ -323,8 +323,12 @@
 
     abp.message = abp.message || {};
 
+    var customAlert = function myalert(message, title) {
+        console.writeln("Show this in a real dialogbox " + message + " " + title);
+    }
+
     var showMessage = function(message, title) {
-        alert((title || "") + " " + message);
+        customAlert((title || "") + " " + message);
 
         if (!$) {
             abp.log.warn("abp.message can not return promise since jQuery is not defined!");
