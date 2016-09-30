@@ -28,8 +28,8 @@ namespace Abp.Application.Features
         /// <param name="description">A brief description for this feature</param>
         /// <param name="scope">Feature scope</param>
         /// <param name="inputType">Input type</param>
-        public Feature Create(string name, string defaultValue, ILocalizableString displayName = null,
-            ILocalizableString description = null, FeatureScopes scope = FeatureScopes.All, IInputType inputType = null)
+        public Feature Create(string name, string defaultValue, ILocalizableString displayName,
+            ILocalizableString description, FeatureScopes scope, IInputType inputType)
         {
             if (Features.ContainsKey(name))
             {
