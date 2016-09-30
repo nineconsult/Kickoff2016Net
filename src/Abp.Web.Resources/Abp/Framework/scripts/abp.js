@@ -200,7 +200,7 @@
             case abp.notifications.severity.ERROR:
                 return abp.notify.error;
             case abp.notifications.severity.FATAL:
-                return abp.notify.error;
+                return abp.notify.fatal;
             case abp.notifications.severity.INFO:
             default:
                 return abp.notify.info;
@@ -342,6 +342,14 @@
         abp.log.info(title);
         abp.log.info(options);
     };
+
+    abp.notify.fatal = function (message, title, options) {
+        abp.log.warn('abp.notify.error is not implemented!');
+        abp.log.info(message);
+        abp.log.info(title);
+        abp.log.info(options);
+    };
+
 
     /* MESSAGE **************************************************/
     //Defines Message API, not implements it
