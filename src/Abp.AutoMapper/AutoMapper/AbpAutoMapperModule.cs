@@ -12,7 +12,7 @@ namespace Abp.AutoMapper
     [DependsOn(typeof (AbpKernelModule))]
     public class AbpAutoMapperModule : AbpModule
     {
-        private static bool _createdMappingsBefore;
+        private bool _createdMappingsBefore;
         private static readonly object _syncObj = new object();
 
         private readonly ITypeFinder _typeFinder;
