@@ -10,7 +10,7 @@ namespace Abp.Domain.Entities
     /// </summary>
     /// <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
     [Serializable]
-    public abstract class Entity<TPrimaryKey> : IEntity<TPrimaryKey>
+    public abstract class Entity<TPrimaryKey> : IEntity<TPrimaryKey>, IMayHaveTenant
     {
         /// <summary>
         ///     Unique identifier for this entity.
@@ -55,19 +55,12 @@ namespace Abp.Domain.Entities
                 return false;
             }
 
-            if (this is IMayHaveTenant && other is IMayHaveTenant &&
-                this.As<IMayHaveTenant>()?.TenantId != other.As<IMayHaveTenant>()?.TenantId)
+            if (this?.TenantId != other?.TenantId)
             {
                 return false;
             }
 
-            if (this is IMustHaveTenant && other is IMustHaveTenant &&
-                this.As<IMustHaveTenant>()?.TenantId != other.As<IMustHaveTenant>()?.TenantId)
-            {
-                return false;
-            }
-
-            return Id.Equals(other.Id);
+            return this?.TenantId == other?.TenantId && Id.Equals(other.Id);
         }
 
         /// <inheritdoc />
@@ -79,12 +72,7 @@ namespace Abp.Domain.Entities
         /// <inheritdoc />
         public static bool operator ==(Entity<TPrimaryKey> left, Entity<TPrimaryKey> right)
         {
-            if (Equals(left, null))
-            {
-                return Equals(right, null);
-            }
-
-            return left.Equals(right);
+            return Equals(left, null) ? Equals(right, null) : left.Equals(right);
         }
 
         /// <inheritdoc />
@@ -98,5 +86,7 @@ namespace Abp.Domain.Entities
         {
             return string.Format("[{0} {1}]", GetType().Name, Id);
         }
+
+        public int? TenantId { get; set; }
     }
 }
