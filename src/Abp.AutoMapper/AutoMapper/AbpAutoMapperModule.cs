@@ -47,8 +47,13 @@ namespace Abp.AutoMapper
                 FindAndAutoMapTypes();
                 CreateOtherMappings();
 
-                _createdMappingsBefore = true;
+                SetCreatedMappingsBefore();
             }
+        }
+
+        private static void SetCreatedMappingsBefore()
+        {
+            _createdMappingsBefore = true;
         }
 
         private void FindAndAutoMapTypes()
