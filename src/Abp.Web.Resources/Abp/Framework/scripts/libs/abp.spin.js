@@ -43,18 +43,18 @@
         var options = $.extend({}, optionsOrPromise);
 
         if (!elm) {
-            if (options.blockUI != false) {
+            if (options.blockUI) {
                 abp.ui.block();
             }
 
             $('body').spin(abp.libs.spinjs.spinner_config);
         } else {
             var $elm = $(elm);
-            var $busyIndicator = $elm.find('.abp-busy-indicator'); //TODO@Halil: What if  more than one element. What if there are nested elements?
+            var $busyIndicator = $elm.find('.abp-busy-indicator');
             if ($busyIndicator.length) {
                 $busyIndicator.spin(abp.libs.spinjs.spinner_config_inner_busy_indicator);
             } else {
-                if (options.blockUI != false) {
+                if (options.blockUI) {
                     abp.ui.block(elm);
                 }
 
