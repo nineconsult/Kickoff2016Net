@@ -7,7 +7,28 @@ namespace Abp.Auditing
 {
     public static class AuditingHelper
     {
-        public static bool ShouldSaveAudit(MethodInfo methodInfo, IAuditingConfiguration configuration, IAbpSession abpSession, bool defaultValue = false)
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="methodInfo">The info method</param>
+        /// <param name="configuration">Configuration</param>
+        /// <param name="abpSession">Session</param>
+        /// <param name="defaultValue">The default value</param>
+        /// <returns></returns>
+        public static bool ShouldSaveAudit(MethodInfo methodInfo, IAuditingConfiguration configuration, IAbpSession abpSession, bool defaultValue)
+        {
+            ShouldSaveAudit(methodInfo, configuration, abpSession);
+            return defaultValue;
+        }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="methodInfo">The info method</param>
+        /// <param name="configuration">Configuration</param>
+        /// <param name="abpSession">Session</param>
+        /// <returns></returns>
+        public static bool ShouldSaveAudit(MethodInfo methodInfo, IAuditingConfiguration configuration, IAbpSession abpSession)
         {
             if (configuration == null || !configuration.IsEnabled)
             {
@@ -29,12 +50,12 @@ namespace Abp.Auditing
                 return false;
             }
 
-            if (methodInfo.IsDefined(typeof (AuditedAttribute)))
+            if (methodInfo.IsDefined(typeof(AuditedAttribute)))
             {
                 return true;
             }
 
-            if (methodInfo.IsDefined(typeof (DisableAuditingAttribute)))
+            if (methodInfo.IsDefined(typeof(DisableAuditingAttribute)))
             {
                 return false;
             }
@@ -42,12 +63,12 @@ namespace Abp.Auditing
             var classType = methodInfo.DeclaringType;
             if (classType != null)
             {
-                if (classType.IsDefined(typeof (AuditedAttribute)))
+                if (classType.IsDefined(typeof(AuditedAttribute)))
                 {
                     return true;
                 }
 
-                if (classType.IsDefined(typeof (DisableAuditingAttribute)))
+                if (classType.IsDefined(typeof(DisableAuditingAttribute)))
                 {
                     return false;
                 }
@@ -58,7 +79,7 @@ namespace Abp.Auditing
                 }
             }
 
-            return defaultValue;
+            return false;
         }
 
         public static string Serialize(object obj)
