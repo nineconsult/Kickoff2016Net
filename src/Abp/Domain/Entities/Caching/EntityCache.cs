@@ -117,5 +117,10 @@ namespace Abp.Domain.Entities.Caching
         {
             return string.Format("EntityCache {0}", CacheName);
         }
+
+        public void Dispose()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

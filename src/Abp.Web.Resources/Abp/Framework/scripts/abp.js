@@ -307,7 +307,7 @@
     };
 
     abp.notify.info = function(message, title, options) {
-        abp.log.warn("abp.notify.info is not implemented!");
+        abp.log.warn(message, title, options);
     };
 
     abp.notify.warn = function(message, title, options) {

@@ -34,5 +34,10 @@ namespace Abp.Events.Bus.Handlers.Internals
         {
             Action(eventData);
         }
+
+        public void Dispose()
+        {
+            //
+        }
     }
 }
