@@ -189,9 +189,7 @@
             return abp.notify.success;
         case abp.notifications.severity.WARN:
             return abp.notify.warn;
-        case abp.notifications.severity.ERROR:
-            return abp.notify.error;
-        case abp.notifications.severity.FATAL:
+        case abp.notifications.severity.ERROR || abp.notifications.severity.FATAL:
             return abp.notify.error;
         case abp.notifications.severity.INFO:
         default:
