@@ -86,7 +86,7 @@
     };
 
     abp.auth.isGranted = function (permissionName) {
-        return abp.auth.allPermissions[permissionName] != undefined && abp.auth.grantedPermissions[permissionName] != undefined;
+        return abp.auth.allPermissions[permissionName] !== undefined && abp.auth.grantedPermissions[permissionName] !== undefined;
     };
 
     abp.auth.isAnyGranted = function () {
@@ -278,7 +278,7 @@
             return;
         }
 
-        if (logLevel != undefined && logLevel < abp.log.level) {
+        if (logLevel !== undefined && logLevel < abp.log.level) {
             return;
         }
 
