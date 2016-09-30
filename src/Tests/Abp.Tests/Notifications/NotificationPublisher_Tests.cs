@@ -18,8 +18,8 @@ namespace Abp.Tests.Notifications
             _store = Substitute.For<INotificationStore>();
             _backgroundJobManager = Substitute.For<IBackgroundJobManager>();
             _publisher = new NotificationPublisher(_store, _backgroundJobManager, Substitute.For<INotificationDistributer>());
-            _publisher.UnitOfWorkManager = Substitute.For<IUnitOfWorkManager>();
-            _publisher.UnitOfWorkManager.Current.Returns(Substitute.For<IActiveUnitOfWork>());
+            _publisher.SetUnitOfWorkManager(Substitute.For<IUnitOfWorkManager>());
+            _publisher.GetUnitOfWorkManager().Current.Returns(Substitute.For<IActiveUnitOfWork>());
         }
 
         [Fact]
@@ -50,8 +50,7 @@ namespace Abp.Tests.Notifications
 
         private static NotificationData CreateNotificationData()
         {
-            var notificationData = new NotificationData();
-            notificationData["TestValue"] = 42;
+            var notificationData = new NotificationData {["TestValue"] = 42};
             return notificationData;
         }
     }
