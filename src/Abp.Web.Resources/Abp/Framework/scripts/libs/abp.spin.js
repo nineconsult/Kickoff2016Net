@@ -33,19 +33,23 @@
 
     abp.ui.setBusy = function(elm, optionsOrPromise) {
         optionsOrPromise = optionsOrPromise || {};
-        if (optionsOrPromise.always || optionsOrPromise["finally"]) { //Check if it's promise
-            optionsOrPromise = {
-                promise: optionsOrPromise
-            };
+
+        //Check if it's promise
+        if (optionsOrPromise.always || optionsOrPromise["finally"]) { 
+            optionsOrPromise = {promise: optionsOrPromise};
         }
+
         const options = $.extend({}, optionsOrPromise);
+
         if (!elm) {
             if (options.blockUI !== false) {
                 abp.ui.block();
             }
 
             $("body").spin(abp.libs.spinjs.spinner_config);
-        } else {
+
+        }
+        else {
             const $elm = $(elm);
             const $busyIndicator = $elm.find(".abp-busy-indicator"); //TODO@Halil: What if  more than one element. What if there are nested elements?
             if ($busyIndicator.length) {
@@ -59,18 +63,24 @@
             }
         }
 
+        abp.ui.setPromise(options);
+
+
+    };
+
+    abp.ui.setPromise = function(options) {
         if (options.promise) { //Supports Q and jQuery.Deferred
             if (options.promise.always) {
-                options.promise.always(function() {
+                options.promise.always(function () {
                     abp.ui.clearBusy(elm);
                 });
             } else if (options.promise["finally"]) {
-                options.promise["finally"](function() {
+                options.promise["finally"](function () {
                     abp.ui.clearBusy(elm);
                 });
             }
         }
-    };
+    }
 
     abp.ui.clearBusy = function(elm) {
         //TODO@Halil: Maybe better to do not call unblock if it's not blocked by setBusy

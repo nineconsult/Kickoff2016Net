@@ -26,11 +26,9 @@
     //Connect to the server
     abp.signalr.connect = function() {
         $.connection.hub.start().done(function() {
-            abp.log.debug("Connected to SignalR server!"); //TODO: Remove log
+            
             abp.event.trigger("abp.signalr.connected");
-            commonHub.server.register().done(function() {
-                abp.log.debug("Registered to the SignalR server!"); //TODO: Remove log
-            });
+            commonHub.server.register().done();
         });
     };
 
