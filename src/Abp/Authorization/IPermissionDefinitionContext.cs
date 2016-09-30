@@ -21,11 +21,11 @@ namespace Abp.Authorization
         /// <returns>New created permission</returns>
         Permission CreatePermission(
             string name, 
-            ILocalizableString displayName = null, 
-            bool isGrantedByDefault = false, 
-            ILocalizableString description = null, 
-            MultiTenancySides multiTenancySides = MultiTenancySides.Host | MultiTenancySides.Tenant,
-            IFeatureDependency featureDependency = null
+            ILocalizableString displayName , 
+            bool isGrantedByDefault, 
+            ILocalizableString description, 
+            MultiTenancySides multiTenancySides,
+            IFeatureDependency featureDependency
             );
 
         /// <summary>

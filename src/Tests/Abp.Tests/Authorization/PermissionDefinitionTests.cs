@@ -2,6 +2,7 @@
 using Abp.Authorization;
 using Abp.Configuration.Startup;
 using Abp.Localization;
+using Abp.MultiTenancy;
 using Castle.MicroKernel.Registration;
 using NSubstitute;
 using Shouldly;
@@ -44,13 +45,13 @@ namespace Abp.Tests.Authorization
         public override void SetPermissions(IPermissionDefinitionContext context)
         {
             //Create a root permission group for 'Administration' permissions
-            var administration = context.CreatePermission("Abp.Zero.Administration", new FixedLocalizableString("Administration"));
+            var administration = context.CreatePermission("Abp.Zero.Administration", new FixedLocalizableString("Administration"),false,null, MultiTenancySides.Host | MultiTenancySides.Tenant,null);
 
             //Create 'User management' permission under 'Administration' group
-            var userManagement = administration.CreateChildPermission("Abp.Zero.Administration.UserManagement", new FixedLocalizableString("User management"));
+            var userManagement = administration.CreateChildPermission("Abp.Zero.Administration.UserManagement", new FixedLocalizableString("User management"), false, null, MultiTenancySides.Host | MultiTenancySides.Tenant, null);
 
             //Create 'Change permissions' (to be able to change permissions of a user) permission as child of 'User management' permission.
-            userManagement.CreateChildPermission("Abp.Zero.Administration.UserManagement.ChangePermissions", new FixedLocalizableString("Change permissions"));
+            userManagement.CreateChildPermission("Abp.Zero.Administration.UserManagement.ChangePermissions", new FixedLocalizableString("Change permissions"), false, null, MultiTenancySides.Host | MultiTenancySides.Tenant, null);
         }
     }
 
@@ -63,10 +64,10 @@ namespace Abp.Tests.Authorization
             administration.ShouldNotBe(null);
 
             //Create 'Role management' permission under 'Administration' group
-            var roleManegement = administration.CreateChildPermission("Abp.Zero.Administration.RoleManagement", new FixedLocalizableString("Role management"));
+            var roleManegement = administration.CreateChildPermission("Abp.Zero.Administration.RoleManagement", new FixedLocalizableString("Role management"),false,null, MultiTenancySides.Host | MultiTenancySides.Tenant,null);
 
             //Create 'Create role' (to be able to create a new role) permission  as child of 'Role management' permission.
-            roleManegement.CreateChildPermission("Abp.Zero.Administration.RoleManagement.CreateRole", new FixedLocalizableString("Create role"));
+            roleManegement.CreateChildPermission("Abp.Zero.Administration.RoleManagement.CreateRole", new FixedLocalizableString("Create role"), false, null, MultiTenancySides.Host | MultiTenancySides.Tenant, null);
         }
     }
 }

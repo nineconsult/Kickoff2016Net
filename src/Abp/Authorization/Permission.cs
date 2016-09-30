@@ -72,11 +72,11 @@ namespace Abp.Authorization
         /// <param name="featureDependency">Depended feature(s) of this permission</param>
         public Permission(
             string name,
-            ILocalizableString displayName = null,
-            bool isGrantedByDefault = false,
-            ILocalizableString description = null,
-            MultiTenancySides multiTenancySides = MultiTenancySides.Host | MultiTenancySides.Tenant,
-            IFeatureDependency featureDependency = null)
+            ILocalizableString displayName,
+            bool isGrantedByDefault,
+            ILocalizableString description,
+            MultiTenancySides multiTenancySides,
+            IFeatureDependency featureDependency)
         {
             if (name == null)
             {
@@ -100,11 +100,11 @@ namespace Abp.Authorization
         /// <returns>Returns newly created child permission</returns>
         public Permission CreateChildPermission(
             string name, 
-            ILocalizableString displayName = null, 
-            bool isGrantedByDefault = false, 
-            ILocalizableString description = null, 
-            MultiTenancySides multiTenancySides = MultiTenancySides.Host | MultiTenancySides.Tenant,
-            IFeatureDependency featureDependency = null)
+            ILocalizableString displayName, 
+            bool isGrantedByDefault, 
+            ILocalizableString description, 
+            MultiTenancySides multiTenancySides,
+            IFeatureDependency featureDependency)
         {
             var permission = new Permission(name, displayName, isGrantedByDefault, description, multiTenancySides, featureDependency) { Parent = this };
             _children.Add(permission);
