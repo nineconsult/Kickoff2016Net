@@ -484,7 +484,7 @@
     abp.utils.createNamespace = function (root, ns) {
         var parts = ns.split('.');
         for (var i = 0; i < parts.length; i++) {
-            if (typeof root[parts[i]] == 'undefined') {
+            if (typeof root[parts[i]] === 'undefined') {
                 root[parts[i]] = {};
             }
 
