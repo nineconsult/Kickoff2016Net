@@ -314,9 +314,10 @@
 
     abp.notify = abp.notify || {};
 
-    abp.notify.success = function (message, title, options) {
-        abp.log.warn('abp.notify.success is not implemented!');
-    };
+    // AT Lave
+    //abp.notify.success = function (message, title, options) {
+    //    abp.log.warn('abp.notify.success is not implemented!');
+    //};
 
     abp.notify.info = function (message, title, options) {
         abp.log.warn('abp.notify.info is not implemented!');
@@ -336,8 +337,7 @@
     abp.message = abp.message || {};
 
     var showMessage = function (message, title) {
-        alert((title || '') + ' ' + message);
-
+        
         if (!$) {
             abp.log.warn('abp.message can not return promise since jQuery is not defined!');
             return null;
