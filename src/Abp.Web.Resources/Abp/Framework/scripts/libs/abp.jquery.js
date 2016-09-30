@@ -68,39 +68,39 @@
             }
         },
 
-        handleResponse: function(data, userOptions, $dfd) {
-            if (data) {
-                if (data.success === true) {
-                    $dfd && $dfd.resolve(data.result, data);
-                    userOptions.success && userOptions.success(data.result, data);
+        handleResponse: function (data, userOptions, $dfd) {
+            
+            if (data.success === true) {
+                $dfd && $dfd.resolve(data.result, data);
+                userOptions.success && userOptions.success(data.result, data);
 
-                    if (data.targetUrl) {
-                        abp.ajax.handleTargetUrl(data.targetUrl);
-                    }
-                } else if (data.success === false) {
-                    let messagePromise = null;
-                    if (data.error) {
-                        messagePromise = abp.ajax.showError(data.error);
-                    } else {
-                        data.error = abp.ajax.defaultError;
-                    }
-
-                    abp.ajax.logError(data.error);
-
-                    $dfd && $dfd.reject(data.error);
-                    userOptions.error && userOptions.error(data.error);
-
-                    if (data.unAuthorizedRequest) {
-                        abp.ajax.handleUnAuthorizedRequest(messagePromise, data.targetUrl);
-                    }
-                } else { //not wrapped result
-                    $dfd && $dfd.resolve(data);
-                    userOptions.success && userOptions.success(data);
+                if (data.targetUrl) {
+                    abp.ajax.handleTargetUrl(data.targetUrl);
                 }
-            } else { //no data sent to back
-                $dfd && $dfd.resolve();
-                userOptions.success && userOptions.success();
-            }
+                return;
+            } else if (data.success === false) {
+                let messagePromise = null;
+                if (data.error) {
+                    messagePromise = abp.ajax.showError(data.error);
+                } else {
+                    data.error = abp.ajax.defaultError;
+                }
+
+                abp.ajax.logError(data.error);
+
+                $dfd && $dfd.reject(data.error);
+                userOptions.error && userOptions.error(data.error);
+
+                if (data.unAuthorizedRequest) {
+                    abp.ajax.handleUnAuthorizedRequest(messagePromise, data.targetUrl);
+                }
+                return;
+            } 
+
+            // if above is not handled then
+            $dfd && $dfd.resolve();
+            userOptions.success && userOptions.success();
+            
         },
 
         blockUI: function(options) {
