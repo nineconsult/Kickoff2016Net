@@ -201,8 +201,6 @@
                 result = abp.notify.warn;
                 break;
             case abp.notifications.severity.ERROR:
-                result = abp.notify.error;
-                break;
             case abp.notifications.severity.FATAL:
                 result = abp.notify.error;
                 break;
