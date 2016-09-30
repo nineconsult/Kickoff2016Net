@@ -11,36 +11,36 @@ namespace Abp.Web
         /// <summary>
         ///     GET
         /// </summary>
-        Get,
+        Get = 0,
 
         /// <summary>
         ///     POST
         /// </summary>
-        Post,
+        Post = 1,
 
         /// <summary>
         ///     PUT
         /// </summary>
-        Put,
+        Put = 2,
 
         /// <summary>
         ///     DELETE
         /// </summary>
-        Delete,
+        Delete = 4,
 
         /// <summary>
         ///     OPTIONS
         /// </summary>
-        Options,
+        Options = 8,
 
         /// <summary>
         ///     TRACE
         /// </summary>
-        Trace,
+        Trace = 16,
 
         /// <summary>
         ///     HEAD
         /// </summary>
-        Head
+        Head = 32
     }
 }
