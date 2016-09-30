@@ -191,6 +191,11 @@ namespace Abp.TestBase.SampleApplication.Tests.People
             {
                 _messageRepository.Insert(new Message(FakeTenantId, string.Format("{0} is created with Id = {1}!", eventData.Entity.Name, eventData.Entity.Id)));
             }
+
+            public void Dispose()
+            {
+                
+            }
         }
     }
 }

@@ -258,6 +258,11 @@
         FATAL: 5
     };
 
+    /// Returns json elemenet
+    function getLogObject(message, title, options) {
+        return { title: title, message: message, options: options };
+    }
+
     abp.log.level = abp.log.levels.DEBUG;
 
     abp.log.log = function(logObject, logLevel) {
@@ -303,19 +308,19 @@
     abp.notify = abp.notify || {};
 
     abp.notify.success = function(message, title, options) {
-        abp.log.warn("abp.notify.success is not implemented!");
+        abp.log.warn(getLogObject(message, title, options));
     };
 
     abp.notify.info = function(message, title, options) {
-        abp.log.warn(message, title, options);
+        abp.log.warn(getLogObject(message, title, options));
     };
 
     abp.notify.warn = function(message, title, options) {
-        abp.log.warn("abp.notify.warn is not implemented!");
+        abp.log.warn(getLogObject(message, title, options));
     };
 
     abp.notify.error = function(message, title, options) {
-        abp.log.warn("abp.notify.error is not implemented!");
+        abp.log.warn(getLogObject(message, title, options));
     };
 
     /* MESSAGE **************************************************/
@@ -341,27 +346,27 @@
     };
 
     abp.message.info = function(message, title) {
-        abp.log.warn("abp.message.info is not implemented!");
+      
         return showMessage(message, title);
     };
 
     abp.message.success = function(message, title) {
-        abp.log.warn("abp.message.success is not implemented!");
+        
         return showMessage(message, title);
     };
 
     abp.message.warn = function(message, title) {
-        abp.log.warn("abp.message.warn is not implemented!");
+ 
         return showMessage(message, title);
     };
 
     abp.message.error = function(message, title) {
-        abp.log.warn("abp.message.error is not implemented!");
+      
         return showMessage(message, title);
     };
 
     abp.message.confirm = function(message, titleOrCallback, callback) {
-        abp.log.warn("abp.message.confirm is not implemented!");
+       
 
         if (titleOrCallback && !(typeof titleOrCallback === "string")) {
             callback = titleOrCallback;
@@ -387,22 +392,23 @@
     //Defines UI Block API, not implements it
 
     abp.ui.block = function(elm) {
-        abp.log.warn("abp.ui.block is not implemented!");
+        abp.log.warn("abp.ui.block is not implemented! elm param" + elm);
     };
 
-    abp.ui.unblock = function(elm) {
-        abp.log.warn("abp.ui.unblock is not implemented!");
+    abp.ui.unblock = function (elm) {
+        //
+        abp.log.warn("abp.ui.unblock is not implemented! elm param:"+elm);
     };
 
     /* UI BUSY */
     //Defines UI Busy API, not implements it
 
     abp.ui.setBusy = function(elm, optionsOrPromise) {
-        abp.log.warn("abp.ui.setBusy is not implemented!");
+        abp.log.warn("abp.ui.setBusy is not implemented!"+elm + " options: "+optionsOrPromise);
     };
 
     abp.ui.clearBusy = function(elm) {
-        abp.log.warn("abp.ui.clearBusy is not implemented!");
+        abp.log.warn("abp.ui.clearBusy is not implemented! elm:" + elm);
     };
 
     /* SIMPLE EVENT BUS *****************************************/
