@@ -14,8 +14,8 @@ namespace Abp.TestBase.SampleApplication.ContacLists
 
         public override void SetFeatures(IFeatureDefinitionContext context)
         {
-            var contacts = context.Create(Names.Contacts, "false");
-            contacts.CreateChildFeature(Names.MaxContactCount, "100", inputType: new SingleLineStringInputType(new NumericValueValidator(1, 10000)));
+            var contacts = context.Create(Names.Contacts, "false",null,null,FeatureScopes.All,null);
+            contacts.CreateChildFeature(Names.MaxContactCount, "100",null,null,FeatureScopes.All, new SingleLineStringInputType(new NumericValueValidator(1, 10000)));
         }
     }
 }
