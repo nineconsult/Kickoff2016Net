@@ -59,6 +59,9 @@ namespace Abp.Configuration
         /// </summary>
         public object CustomData { get; set; }
 
+
+    
+
         /// <summary>
         /// Creates a new <see cref="SettingDefinition"/> object.
         /// </summary>
@@ -74,14 +77,15 @@ namespace Abp.Configuration
         public SettingDefinition(
             string name, 
             string defaultValue, 
-            ILocalizableString displayName = null, 
-            SettingDefinitionGroup group = null, 
-            ILocalizableString description = null, 
-            SettingScopes scopes = SettingScopes.Application, 
-            bool isVisibleToClients = false, 
-            bool isInherited = true,
-            object customData = null)
+            ILocalizableString displayName, 
+            SettingDefinitionGroup group, 
+            ILocalizableString description, 
+            SettingScopes scopes, 
+            bool isVisibleToClients, 
+            bool isInherited,
+            object customData)
         {
+            
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException("name");

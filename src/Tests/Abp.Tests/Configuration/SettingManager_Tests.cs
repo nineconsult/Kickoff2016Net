@@ -180,9 +180,9 @@ namespace Abp.Tests.Configuration
         {
             var settings = new Dictionary<string, SettingDefinition>
             {
-                {MyAppLevelSetting, new SettingDefinition(MyAppLevelSetting, "42")},
-                {MyAllLevelsSetting, new SettingDefinition(MyAllLevelsSetting, "application level default value", scopes: SettingScopes.Application | SettingScopes.Tenant | SettingScopes.User)},
-                {MyNotInheritedSetting, new SettingDefinition(MyNotInheritedSetting, "default-value", scopes: SettingScopes.Application | SettingScopes.Tenant, isInherited: false)},
+                {MyAppLevelSetting, new SettingDefinition(MyAppLevelSetting, "42",null,null,null,SettingScopes.Application,true,false,null)},
+                {MyAllLevelsSetting, new SettingDefinition(MyAllLevelsSetting, "application level default value", null,null,null, SettingScopes.Application | SettingScopes.Tenant | SettingScopes.User,false,true,null)},
+                {MyNotInheritedSetting, new SettingDefinition(MyNotInheritedSetting, "default-value", null,null, null, SettingScopes.Application | SettingScopes.Tenant, false,false,null)},
             };
 
             var definitionManager = Substitute.For<ISettingDefinitionManager>();

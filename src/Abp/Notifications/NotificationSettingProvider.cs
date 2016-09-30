@@ -14,8 +14,8 @@ namespace Abp.Notifications
                     NotificationSettingNames.ReceiveNotifications,
                     "true",
                     L("ReceiveNotifications"),
-                    scopes: SettingScopes.User,
-                    isVisibleToClients: true)
+                    null,null, SettingScopes.User
+                    ,true,true,null)
             };
         }
 
