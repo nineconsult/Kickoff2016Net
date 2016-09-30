@@ -57,10 +57,8 @@ namespace Abp
         /// Gets localization source.
         /// It's valid if <see cref="LocalizationSourceName"/> is set.
         /// </summary>
-        protected ILocalizationSource LocalizationSource
+        protected ILocalizationSource LocalizationSource()
         {
-            get
-            {
                 if (LocalizationSourceName == null)
                 {
                     throw new AbpException("Must set LocalizationSourceName before, in order to get LocalizationSource");
@@ -72,8 +70,8 @@ namespace Abp
                 }
 
                 return _localizationSource;
-            }
         }
+
         private ILocalizationSource _localizationSource;
 
         /// <summary>
@@ -97,7 +95,7 @@ namespace Abp
         /// <returns>Localized string</returns>
         protected virtual string L(string name)
         {
-            return LocalizationSource.GetString(name);
+            return LocalizationSource()?.GetString(name) ?? string.Empty;
         }
 
         /// <summary>
@@ -108,7 +106,7 @@ namespace Abp
         /// <returns>Localized string</returns>
         protected string L(string name, params object[] args)
         {
-            return LocalizationSource.GetString(name, args);
+            return LocalizationSource()?.GetString(name, args) ?? string.Empty;
         }
 
         /// <summary>
@@ -119,7 +117,7 @@ namespace Abp
         /// <returns>Localized string</returns>
         protected virtual string L(string name, CultureInfo culture)
         {
-            return LocalizationSource.GetString(name, culture);
+            return LocalizationSource()?.GetString(name, culture) ?? string.Empty;
         }
 
         /// <summary>
@@ -131,7 +129,7 @@ namespace Abp
         /// <returns>Localized string</returns>
         protected string L(string name, CultureInfo culture, params object[] args)
         {
-            return LocalizationSource.GetString(name, culture, args);
+            return LocalizationSource()?.GetString(name, culture, args) ?? string.Empty;
         }
     }
 }
