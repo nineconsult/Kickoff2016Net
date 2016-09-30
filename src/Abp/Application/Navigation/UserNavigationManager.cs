@@ -79,7 +79,7 @@ namespace Abp.Application.Navigation
 
             using (var featureDependencyContext = _iocResolver.ResolveAsDisposable<FeatureDependencyContext>())
             {
-                featureDependencyContext.Object.TenantId = user == null ? null : user.TenantId;
+                featureDependencyContext.Object.TenantId = user?.TenantId;
 
                 foreach (var menuItemDefinition in menuItemDefinitions)
                 {
@@ -94,7 +94,7 @@ namespace Abp.Application.Navigation
                     }
 
                     if (menuItemDefinition.FeatureDependency != null &&
-                        (AbpSession.MultiTenancySide == MultiTenancySides.Tenant || (user != null && user.TenantId != null)) &&
+                        (AbpSession.MultiTenancySide == MultiTenancySides.Tenant || (user?.TenantId != null)) &&
                         !(await menuItemDefinition.FeatureDependency.IsSatisfiedAsync(featureDependencyContext.Object)))
                     {
                         continue;
