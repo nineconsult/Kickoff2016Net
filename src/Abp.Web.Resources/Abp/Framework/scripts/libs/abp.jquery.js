@@ -147,7 +147,9 @@
                 abp.ajax.handleResponse(data, userOptions);
             };
 
-            //TODO: Error?
+            options.error = function(message, details) {
+                abp.ajax.defaultError(message, details);
+            };
 
             options.complete = function() {
                 abp.ajax.unblockUI(options);

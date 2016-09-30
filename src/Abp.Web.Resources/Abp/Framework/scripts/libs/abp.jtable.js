@@ -149,8 +149,9 @@
         },
 
         //Disable showing error messages
-        _showError: function(message) {
+        _showError: function() {
             //do nothing since Abp handles error messages!
+            return;
         }
 
     });
