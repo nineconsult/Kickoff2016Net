@@ -28,7 +28,15 @@ namespace Abp.Events.Bus.Factories.Internals
         /// <param name="handler">Handler to be released</param>
         public void ReleaseHandler(IEventHandler handler)
         {
-            (handler as IDisposable)?.Dispose();
+            try
+            {
+                var handlerDispose = (IDisposable) handler;
+                handlerDispose?.Dispose();
+            }
+            catch (InvalidCastException iex)
+            {
+                Logging.LogHelper.Logger.Error("Handler IDisposable");
+            }
         }
     }
 }
