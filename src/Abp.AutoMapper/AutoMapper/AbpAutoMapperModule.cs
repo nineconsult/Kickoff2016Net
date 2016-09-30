@@ -15,7 +15,7 @@ namespace Abp.AutoMapper
 
         private readonly ITypeFinder _typeFinder;
 
-        private static bool _createdMappingsBefore;
+        private bool _createdMappingsBefore;
         private static readonly object _syncObj = new object();
 
         public AbpAutoMapperModule(ITypeFinder typeFinder)
