@@ -75,22 +75,19 @@ namespace Abp
         ///     Gets localization source.
         ///     It's valid if <see cref="LocalizationSourceName" /> is set.
         /// </summary>
-        protected ILocalizationSource LocalizationSource
+        protected ILocalizationSource GetLocalizationSource()
         {
-            get
+            if (LocalizationSourceName == null)
             {
-                if (LocalizationSourceName == null)
-                {
-                    throw new AbpException("Must set LocalizationSourceName before, in order to get LocalizationSource");
-                }
-
-                if (_localizationSource == null || _localizationSource.Name != LocalizationSourceName)
-                {
-                    _localizationSource = LocalizationManager.GetSource(LocalizationSourceName);
-                }
-
-                return _localizationSource;
+                throw new AbpException("Must set LocalizationSourceName before, in order to get LocalizationSource");
             }
+
+            if (_localizationSource == null || _localizationSource.Name != LocalizationSourceName)
+            {
+                _localizationSource = LocalizationManager.GetSource(LocalizationSourceName);
+            }
+
+            return _localizationSource;
         }
 
         /// <summary>
@@ -105,7 +102,7 @@ namespace Abp
         /// <returns>Localized string</returns>
         protected virtual string L(string name)
         {
-            return LocalizationSource.GetString(name);
+            return GetLocalizationSource().GetString(name);
         }
 
         /// <summary>
@@ -116,7 +113,7 @@ namespace Abp
         /// <returns>Localized string</returns>
         protected string L(string name, params object[] args)
         {
-            return LocalizationSource.GetString(name, args);
+            return GetLocalizationSource().GetString(name, args);
         }
 
         /// <summary>
@@ -127,7 +124,7 @@ namespace Abp
         /// <returns>Localized string</returns>
         protected virtual string L(string name, CultureInfo culture)
         {
-            return LocalizationSource.GetString(name, culture);
+            return GetLocalizationSource().GetString(name, culture);
         }
 
         /// <summary>
@@ -139,7 +136,7 @@ namespace Abp
         /// <returns>Localized string</returns>
         protected string L(string name, CultureInfo culture, params object[] args)
         {
-            return LocalizationSource.GetString(name, culture, args);
+            return GetLocalizationSource().GetString(name, culture, args);
         }
     }
 }
