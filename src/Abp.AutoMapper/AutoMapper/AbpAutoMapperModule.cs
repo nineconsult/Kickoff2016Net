@@ -15,7 +15,6 @@ namespace Abp.AutoMapper
 
         private readonly ITypeFinder _typeFinder;
 
-        private static bool _createdMappingsBefore;
         private static readonly object _syncObj = new object();
 
         public AbpAutoMapperModule(ITypeFinder typeFinder)
@@ -31,25 +30,11 @@ namespace Abp.AutoMapper
 
         public override void PostInitialize()
         {
-            CreateMappings();
+            //Ensure that this Posiinitialize method is called only once, preferably in application start
+            FindAndAutoMapTypes();
+            CreateOtherMappings();
         }
 
-        private void CreateMappings()
-        {
-            lock (_syncObj)
-            {
-                //We should prevent duplicate mapping in an application, since AutoMapper is static.
-                if (_createdMappingsBefore)
-                {
-                    return;
-                }
-
-                FindAndAutoMapTypes();
-                CreateOtherMappings();
-
-                _createdMappingsBefore = true;
-            }
-        }
 
         private void FindAndAutoMapTypes()
         {
