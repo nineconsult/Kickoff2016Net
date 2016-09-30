@@ -13,5 +13,10 @@ namespace Abp.Web.Api.Tests.Controllers.Filters
         {
             LastException = eventData.Exception;
         }
+
+        public void Dispose()
+        {
+            LastException = null;
+        }
     }
 }
