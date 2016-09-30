@@ -159,7 +159,7 @@
 
         //Disable showing error messages
         _showError: function (message) {
-            //do nothing since Abp handles error messages!
+            abp.log.warn(message);
         }
 
     });
