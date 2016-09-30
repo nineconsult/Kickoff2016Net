@@ -28,7 +28,7 @@ namespace Abp.Application.Features
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             Name = name;
@@ -37,6 +37,94 @@ namespace Abp.Application.Features
             Scope = scope;
             DefaultValue = defaultValue;
             InputType = inputType ?? new CheckboxInputType();
+
+            _children = new List<Feature>();
+            Attributes = new Dictionary<string, object>();
+        }
+
+        /// <summary>
+        ///     Creates a new feature.
+        /// </summary>
+        /// <param name="name">Unique name of the feature</param>
+        /// <param name="defaultValue">Default value</param>
+        /// <param name="displayName">Display name of the feature</param>
+        /// <param name="description">A brief description for this feature</param>
+        /// <param name="scope">Feature scope</param>
+        public Feature(string name, string defaultValue, ILocalizableString displayName = null, ILocalizableString description = null, FeatureScopes scope = FeatureScopes.All)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            Name = name;
+            DisplayName = displayName;
+            Description = description;
+            Scope = scope;
+            DefaultValue = defaultValue;
+
+            _children = new List<Feature>();
+            Attributes = new Dictionary<string, object>();
+        }
+
+        /// <summary>
+        ///     Creates a new feature.
+        /// </summary>
+        /// <param name="name">Unique name of the feature</param>
+        /// <param name="defaultValue">Default value</param>
+        /// <param name="displayName">Display name of the feature</param>
+        /// <param name="description">A brief description for this feature</param>
+        public Feature(string name, string defaultValue, ILocalizableString displayName = null, ILocalizableString description = null)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            Name = name;
+            DisplayName = displayName;
+            Description = description;
+            DefaultValue = defaultValue;
+
+            _children = new List<Feature>();
+            Attributes = new Dictionary<string, object>();
+        }
+
+        /// <summary>
+        ///     Creates a new feature.
+        /// </summary>
+        /// <param name="name">Unique name of the feature</param>
+        /// <param name="defaultValue">Default value</param>
+        /// <param name="displayName">Display name of the feature</param>
+        public Feature(string name, string defaultValue, ILocalizableString displayName = null)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            Name = name;
+            DisplayName = displayName;
+            DefaultValue = defaultValue;
+
+            _children = new List<Feature>();
+            Attributes = new Dictionary<string, object>();
+        }
+
+        /// <summary>
+        ///     Creates a new feature.
+        /// </summary>
+        /// <param name="name">Unique name of the feature</param>
+        /// <param name="defaultValue">Default value</param>
+        public Feature(string name, string defaultValue)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            Name = name;
+            DefaultValue = defaultValue;
 
             _children = new List<Feature>();
             Attributes = new Dictionary<string, object>();
