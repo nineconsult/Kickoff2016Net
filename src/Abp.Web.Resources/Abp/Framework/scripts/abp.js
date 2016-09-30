@@ -86,7 +86,7 @@
     };
 
     abp.auth.isGranted = function (permissionName) {
-        return abp.auth.allPermissions[permissionName] != undefined && abp.auth.grantedPermissions[permissionName] != undefined;
+        return abp.auth.allPermissions[permissionName] !== undefined && abp.auth.grantedPermissions[permissionName] !== undefined;
     };
 
     abp.auth.isAnyGranted = function () {
@@ -196,15 +196,20 @@
         switch (severity) {
             case abp.notifications.severity.SUCCESS:
                 result = abp.notify.success;
+                break;
             case abp.notifications.severity.WARN:
                 result = abp.notify.warn;
+                break;
             case abp.notifications.severity.ERROR:
                 result = abp.notify.error;
+                break;
             case abp.notifications.severity.FATAL:
                 result = abp.notify.error;
+                break;
             case abp.notifications.severity.INFO:
             default:
                 result = abp.notify.info;
+                break;
         }
         return result;
     };
