@@ -113,8 +113,9 @@ namespace Abp.Application.Features
         /// Adds a child feature.
         /// </summary>
         /// <returns>Returns newly created child feature</returns>
-        public Feature CreateChildFeature(string name, string defaultValue, ILocalizableString displayName = null, ILocalizableString description = null, FeatureScopes scope = FeatureScopes.All, IInputType inputType = null)
+        public Feature CreateChildFeature(string name, string defaultValue, ILocalizableString displayName, ILocalizableString description, FeatureScopes scope, IInputType inputType)
         {
+            //scoope = FeatureScopes.All
             var feature = new Feature(name, defaultValue, displayName, description, scope, inputType) { Parent = this };
             _children.Add(feature);
             return feature;
