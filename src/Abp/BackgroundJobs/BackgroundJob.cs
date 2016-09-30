@@ -32,18 +32,22 @@ namespace Abp.BackgroundJobs
         /// <summary>
         ///     Reference to <see cref="IUnitOfWorkManager" />.
         /// </summary>
-        public IUnitOfWorkManager UnitOfWorkManager
+        public void SetUnitOfWorkManager(IUnitOfWorkManager value)
         {
-            get
-            {
-                if (_unitOfWorkManager == null)
-                {
-                    throw new AbpException("Must set UnitOfWorkManager before use it.");
-                }
+            _unitOfWorkManager = value;
+        }
 
-                return _unitOfWorkManager;
+        /// <summary>
+        ///     Reference to <see cref="IUnitOfWorkManager" />.
+        /// </summary>
+        public IUnitOfWorkManager GetUnitOfWorkManager()
+        {
+            if (_unitOfWorkManager == null)
+            {
+                throw new AbpException("Must set UnitOfWorkManager before use it.");
             }
-            set { _unitOfWorkManager = value; }
+
+            return _unitOfWorkManager;
         }
 
         /// <summary>
@@ -51,7 +55,7 @@ namespace Abp.BackgroundJobs
         /// </summary>
         protected IActiveUnitOfWork CurrentUnitOfWork
         {
-            get { return UnitOfWorkManager.Current; }
+            get { return GetUnitOfWorkManager().Current; }
         }
 
         /// <summary>
