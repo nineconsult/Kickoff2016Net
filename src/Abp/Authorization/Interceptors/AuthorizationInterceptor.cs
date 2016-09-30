@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using Abp.Dependency;
 using Abp.Reflection;
-using Abp.Threading;
 using Castle.DynamicProxy;
 
 namespace Abp.Authorization.Interceptors
@@ -33,44 +31,9 @@ namespace Abp.Authorization.Interceptors
                 return;
             }
 
-            //TODO: Async pre-action does not works with Castle Windsor. So, it's cancelled until another solution is found (issue #381).
-
-            //if (AsyncHelper.IsAsyncMethod(invocation.Method))
-            //{
-            //    InterceptAsync(invocation, authorizeAttributes);
-            //}
-            //else
-            //{
             InterceptSync(invocation, authorizeAttributes);
-            //}
         }
 
-        private void InterceptAsync(IInvocation invocation, IEnumerable<AbpAuthorizeAttribute> authorizeAttributes)
-        {
-            if (invocation.Method.ReturnType == typeof (Task))
-            {
-                invocation.ReturnValue = InternalAsyncHelper
-                    .AwaitTaskWithPreActionAndPostActionAndFinally(
-                        () =>
-                        {
-                            invocation.Proceed();
-                            return (Task) invocation.ReturnValue;
-                        }, () => AuthorizeAsync(authorizeAttributes)
-                    );
-            }
-            else //Task<TResult>
-            {
-                invocation.ReturnValue = InternalAsyncHelper
-                    .CallAwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult(
-                        invocation.Method.ReturnType.GenericTypeArguments[0],
-                        () =>
-                        {
-                            invocation.Proceed();
-                            return invocation.ReturnValue;
-                        }, async () => await AuthorizeAsync(authorizeAttributes)
-                    );
-            }
-        }
 
         private void InterceptSync(IInvocation invocation, IEnumerable<AbpAuthorizeAttribute> authorizeAttributes)
         {
@@ -83,14 +46,6 @@ namespace Abp.Authorization.Interceptors
             using (var authorizationAttributeHelper = _iocResolver.ResolveAsDisposable<IAuthorizeAttributeHelper>())
             {
                 authorizationAttributeHelper.Object.Authorize(authorizeAttributes);
-            }
-        }
-
-        private async Task AuthorizeAsync(IEnumerable<AbpAuthorizeAttribute> authorizeAttributes)
-        {
-            using (var authorizationAttributeHelper = _iocResolver.ResolveAsDisposable<IAuthorizeAttributeHelper>())
-            {
-                await authorizationAttributeHelper.Object.AuthorizeAsync(authorizeAttributes);
             }
         }
     }
