@@ -4,7 +4,6 @@ using Abp.Threading.BackgroundWorkers;
 
 namespace Abp.BackgroundJobs
 {
-    //TODO: Create a non-generic EnqueueAsync extension method to IBackgroundJobManager which takes types as input parameters rather than generic parameters.
     /// <summary>
     /// Defines interface of a job manager.
     /// </summary>

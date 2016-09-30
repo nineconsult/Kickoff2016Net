@@ -37,12 +37,12 @@ namespace Abp.Auditing
                 return true;
             }
 
-            if (type.IsDefined(typeof(AuditedAttribute), true)) //TODO: true or false?
+            if (type.IsDefined(typeof(AuditedAttribute), true)) 
             {
                 return true;
             }
 
-            if (type.GetMethods().Any(m => m.IsDefined(typeof(AuditedAttribute), true))) //TODO: true or false?
+            if (type.GetMethods().Any(m => m.IsDefined(typeof(AuditedAttribute), true))) 
             {
                 return true;
             }

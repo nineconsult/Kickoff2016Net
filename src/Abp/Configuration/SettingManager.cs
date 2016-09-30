@@ -93,7 +93,6 @@ namespace Abp.Configuration
                 {
                     var setting = settingDefinitions.GetOrDefault(settingValue.Name);
 
-                    //TODO: Conditions get complicated, try to simplify it
                     if (setting == null || !setting.Scopes.HasFlag(SettingScopes.Application))
                     {
                         continue;
@@ -116,7 +115,6 @@ namespace Abp.Configuration
                 {
                     var setting = settingDefinitions.GetOrDefault(settingValue.Name);
 
-                    //TODO: Conditions get complicated, try to simplify it
                     if (setting == null || !setting.Scopes.HasFlag(SettingScopes.Tenant))
                     {
                         continue;

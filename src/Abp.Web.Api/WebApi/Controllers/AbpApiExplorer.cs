@@ -13,7 +13,6 @@ using System.Web.Http.Dispatcher;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.ValueProviders;
 
-//TODO: This code need to be refactored.
 
 namespace Abp.Web.Api.Description
 {

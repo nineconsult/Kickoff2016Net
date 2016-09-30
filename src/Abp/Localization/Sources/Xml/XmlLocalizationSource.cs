@@ -14,7 +14,7 @@ namespace Abp.Localization.Sources.Xml
     [Obsolete("Directly use DictionaryBasedLocalizationSource with XmlFileLocalizationDictionaryProvider instead of this class")]
     public class XmlLocalizationSource : DictionaryBasedLocalizationSource, ISingletonDependency
     {
-        internal static string RootDirectoryOfApplication { get; set; } //TODO: Find a better way of passing root directory
+        internal static string RootDirectoryOfApplication { get; set; } 
 
         static XmlLocalizationSource()
         {

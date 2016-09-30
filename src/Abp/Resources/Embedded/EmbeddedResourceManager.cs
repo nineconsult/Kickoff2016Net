@@ -58,7 +58,7 @@ namespace Abp.Resources.Embedded
 
         private EmbeddedResourcePathInfo GetPathInfoForFullPath(string fullPath)
         {
-            foreach (var resourcePathInfo in _resourcePaths.Values.ToImmutableList()) //TODO@hikalkan: Test for multi-threading (possible multiple enumeration problem).
+            foreach (var resourcePathInfo in _resourcePaths.Values.ToImmutableList()) 
             {
                 if (fullPath.StartsWith(resourcePathInfo.Path))
                 {

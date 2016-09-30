@@ -72,8 +72,6 @@ namespace Abp.Application.Navigation
 
         private async Task<int> FillUserMenuItems(UserIdentifier user, IList<MenuItemDefinition> menuItemDefinitions, IList<UserMenuItem> userMenuItems)
         {
-            //TODO: Can be optimized by re-using FeatureDependencyContext.
-
             var addedMenuItemCount = 0;
 
             using (var featureDependencyContext = _iocResolver.ResolveAsDisposable<FeatureDependencyContext>())

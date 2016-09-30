@@ -148,7 +148,6 @@
                 abp.ajax.handleResponse(data, userOptions);
             };
 
-            //TODO: Error?
 
             options.complete = function () {
                 abp.ajax.unblockUI(options);

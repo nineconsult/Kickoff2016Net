@@ -181,8 +181,6 @@ namespace Abp.Events.Bus
         /// <inheritdoc/>
         public void Trigger(Type eventType, object eventSource, IEventData eventData)
         {
-            //TODO: This method can be optimized by adding all possibilities to a dictionary.
-
             eventData.EventSource = eventSource;
 
             foreach (var factoryToTrigger in GetHandlerFactories(eventType))

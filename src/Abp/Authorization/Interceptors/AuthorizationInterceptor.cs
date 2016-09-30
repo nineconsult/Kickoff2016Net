@@ -32,16 +32,7 @@ namespace Abp.Authorization.Interceptors
                 return;
             }
 
-            //TODO: Async pre-action does not works with Castle Windsor. So, it's cancelled until another solution is found (issue #381).
-
-            //if (AsyncHelper.IsAsyncMethod(invocation.Method))
-            //{
-            //    InterceptAsync(invocation, authorizeAttributes);
-            //}
-            //else
-            //{
                 InterceptSync(invocation, authorizeAttributes);
-            //}
         }
 
         private void InterceptAsync(IInvocation invocation, IEnumerable<AbpAuthorizeAttribute> authorizeAttributes)

@@ -6,7 +6,6 @@ using Abp.Web.Models;
 namespace Abp.Web.Mvc.Models
 {
     /// <summary>
-    /// TODO: THIS CLASS IS NOT FINISHED AND TESTED YET!
     /// </summary>
     public static class ModelStateExtensions
     {

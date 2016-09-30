@@ -22,7 +22,7 @@ namespace Abp.Tests.Reflection
         public static void Should_Find_Attributes()
         {
             var attributes = ReflectionHelper.GetAttributesOfMemberAndDeclaringType<MyAttribute>(typeof(MyDerivedList).GetMethod("DoIt"));
-            attributes.Count.ShouldBe(2); //TODO: Why not find MyList's attribute?
+            attributes.Count.ShouldBe(2); 
             attributes[0].Number.ShouldBe(1);
             attributes[1].Number.ShouldBe(2);
             //attributes[2].Number.ShouldBe(3);

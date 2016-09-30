@@ -40,7 +40,7 @@ namespace Abp.Web.Mvc.Resources
              */
             RouteTable.Routes.MapRoute(
                 name: "EmbeddedResource:" + rootPath,
-                url: rootPath + "/{*pathInfo}", //TODO: Define extension?
+                url: rootPath + "/{*pathInfo}", 
                 defaults: new
                 {
                     controller = "AbpNoController",

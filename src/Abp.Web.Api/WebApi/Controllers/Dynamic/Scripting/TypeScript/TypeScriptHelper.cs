@@ -105,7 +105,6 @@ namespace Abp.WebApi.Controllers.Dynamic.Scripting.TypeScript
 
         public static string GenericSpecificName(Type type)
         {
-            //todo: update for Typescript's generic syntax once invented
             string name = type.Name;
             int index = name.IndexOf('`');
             name = index == -1 ? name : name.Substring(0, index);
@@ -116,12 +115,5 @@ namespace Abp.WebApi.Controllers.Dynamic.Scripting.TypeScript
             return name;
         }
 
-        //todo: no use will be removed
-        public static string GenerateJsMethodParameterList(MethodInfo methodInfo)
-        {
-            var paramNames = methodInfo.GetParameters().Select(prm => prm.Name.ToCamelCase()).ToList();
-            paramNames.Add("httpParams");
-            return string.Join(", ", paramNames);
-        }
     }
 }

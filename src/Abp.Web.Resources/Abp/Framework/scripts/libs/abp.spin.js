@@ -50,7 +50,7 @@
             $('body').spin(abp.libs.spinjs.spinner_config);
         } else {
             var $elm = $(elm);
-            var $busyIndicator = $elm.find('.abp-busy-indicator'); //TODO@Halil: What if  more than one element. What if there are nested elements?
+            var $busyIndicator = $elm.find('.abp-busy-indicator'); 
             if ($busyIndicator.length) {
                 $busyIndicator.spin(abp.libs.spinjs.spinner_config_inner_busy_indicator);
             } else {
@@ -76,7 +76,7 @@
     };
 
     abp.ui.clearBusy = function (elm) {
-        //TODO@Halil: Maybe better to do not call unblock if it's not blocked by setBusy
+
         if (!elm) {
             abp.ui.unblock();
             $('body').spin(false);

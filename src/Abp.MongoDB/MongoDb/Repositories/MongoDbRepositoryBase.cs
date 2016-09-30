@@ -55,13 +55,13 @@ namespace Abp.MongoDb.Repositories
         public override TEntity Get(TPrimaryKey id)
         {
             var query = MongoDB.Driver.Builders.Query<TEntity>.EQ(e => e.Id, id);
-            return Collection.FindOne(query); //TODO: What if no entity with id?
+            return Collection.FindOne(query); 
         }
 
         public override TEntity FirstOrDefault(TPrimaryKey id)
         {
             var query = MongoDB.Driver.Builders.Query<TEntity>.EQ(e => e.Id, id);
-            return Collection.FindOne(query); //TODO: What if no entity with id?
+            return Collection.FindOne(query); 
         }
 
         public override TEntity Insert(TEntity entity)

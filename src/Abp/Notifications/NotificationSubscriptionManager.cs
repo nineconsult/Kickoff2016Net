@@ -64,7 +64,6 @@ namespace Abp.Notifications
                 );
         }
         
-        // TODO: Can work only for single database approach!
         public async Task<List<NotificationSubscription>> GetSubscriptionsAsync(string notificationName, EntityIdentifier entityIdentifier = null)
         {
             var notificationSubscriptionInfos = await _store.GetSubscriptionsAsync(

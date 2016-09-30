@@ -100,7 +100,7 @@ namespace Abp.Domain.Uow
             }
 
             PreventMultipleBegin();
-            Options = options; //TODO: Do not set options like that, instead make a copy?
+            Options = options; 
 
             SetFilters(options.FilterOverrides);
 
@@ -118,8 +118,6 @@ namespace Abp.Domain.Uow
         /// <inheritdoc/>
         public IDisposable DisableFilter(params string[] filterNames)
         {
-            //TODO: Check if filters exists?
-
             var disabledFilters = new List<string>();
 
             foreach (var filterName in filterNames)
@@ -140,8 +138,6 @@ namespace Abp.Domain.Uow
         /// <inheritdoc/>
         public IDisposable EnableFilter(params string[] filterNames)
         {
-            //TODO: Check if filters exists?
-
             var enabledFilters = new List<string>();
 
             foreach (var filterName in filterNames)

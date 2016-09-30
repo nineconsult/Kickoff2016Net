@@ -21,7 +21,7 @@ namespace Abp.Web.Mvc.Resources.Embedded.Handlers
             var fileName = _routeData.Values["pathInfo"] as string;
             if (fileName == null)
             {
-                context.Response.StatusCode = 404; //TODO: Is this enough?
+                context.Response.StatusCode = 404; 
                 return;
             }
 

@@ -16,7 +16,7 @@ namespace Abp.Web
         /// <summary>
         /// The search option used to find assemblies in bin folder. 
         /// </summary>
-        public static SearchOption FindAssembliesSearchOption = SearchOption.TopDirectoryOnly; //TODO: Make this non static and rename to SearchOption
+        public static SearchOption FindAssembliesSearchOption = SearchOption.TopDirectoryOnly; 
 
         private List<Assembly> _assemblies;
 

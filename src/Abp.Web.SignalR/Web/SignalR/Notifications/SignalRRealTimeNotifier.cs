@@ -58,8 +58,6 @@ namespace Abp.Web.SignalR.Notifications
                         Logger.Debug("Can not get user " + userNotification.UserId + " from SignalR hub!");
                         continue;
                     }
-
-                    //TODO: await call or not?
                     signalRClient.getNotification(userNotification);
                 }
                 catch (Exception ex)

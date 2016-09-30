@@ -16,7 +16,6 @@ namespace Abp.Domain.Uow
 
         private const string ContextKey = "Abp.UnitOfWork.Current";
 
-        //TODO: Clear periodically..?
         private static readonly ConcurrentDictionary<string, IUnitOfWork> UnitOfWorkDictionary = new ConcurrentDictionary<string, IUnitOfWork>();
 
         public CallContextCurrentUnitOfWorkProvider()
@@ -35,7 +34,6 @@ namespace Abp.Domain.Uow
             IUnitOfWork unitOfWork;
             if (!UnitOfWorkDictionary.TryGetValue(unitOfWorkKey, out unitOfWork))
             {
-                //logger.Warn("There is a unitOfWorkKey in CallContext but not in UnitOfWorkDictionary (on GetCurrentUow)! UnitOfWork key: " + unitOfWorkKey);
                 CallContext.FreeNamedDataSlot(ContextKey);
                 return null;
             }
@@ -73,10 +71,7 @@ namespace Abp.Domain.Uow
 
                     value.Outer = outer;
                 }
-                else
-                {
-                    //logger.Warn("There is a unitOfWorkKey in CallContext but not in UnitOfWorkDictionary (on SetCurrentUow)! UnitOfWork key: " + unitOfWorkKey);
-                }
+
             }
 
             unitOfWorkKey = value.Id;
