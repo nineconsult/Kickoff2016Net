@@ -8,7 +8,7 @@ using Abp.Events.Bus.Handlers;
 
 namespace Abp
 {
-    class Class1 : Abp.Domain.Entities.IMayHaveTenant, Abp.Domain.Entities.IMustHaveTenant
+    class Class1<TPrimaryKey> : Entity<TPrimaryKey>, Abp.Domain.Entities.IMayHaveTenant, Abp.Domain.Entities.IMustHaveTenant
     {
         public int? TenantId
         {
