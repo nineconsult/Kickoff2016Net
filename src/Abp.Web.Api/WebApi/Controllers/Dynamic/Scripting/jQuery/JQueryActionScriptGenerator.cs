@@ -6,15 +6,15 @@ namespace Abp.WebApi.Controllers.Dynamic.Scripting.jQuery
 {
     internal class JQueryActionScriptGenerator
     {
-        private readonly DynamicApiControllerInfo _controllerInfo;
-        private readonly DynamicApiActionInfo _actionInfo;
-
         private const string JsMethodTemplate =
-@"    serviceNamespace.{jsMethodName} = function({jsMethodParameterList}) {
+            @"    serviceNamespace.{jsMethodName} = function({jsMethodParameterList}) {
         return abp.ajax($.extend({
 {ajaxCallParameters}
         }, ajaxParams));
     };";
+
+        private readonly DynamicApiActionInfo _actionInfo;
+        private readonly DynamicApiControllerInfo _controllerInfo;
 
         public JQueryActionScriptGenerator(DynamicApiControllerInfo controllerInfo, DynamicApiActionInfo actionInfo)
         {
@@ -38,7 +38,7 @@ namespace Abp.WebApi.Controllers.Dynamic.Scripting.jQuery
         protected string GenerateAjaxCallParameters()
         {
             var script = new StringBuilder();
-            
+
             script.AppendLine("            url: abp.appPath + '" + ActionScriptingHelper.GenerateUrlWithParameters(_controllerInfo, _actionInfo) + "',");
             script.AppendLine("            type: '" + _actionInfo.Verb.ToString().ToUpperInvariant() + "',");
 
@@ -48,9 +48,9 @@ namespace Abp.WebApi.Controllers.Dynamic.Scripting.jQuery
             }
             else
             {
-                script.Append("            data: JSON.stringify(" + ActionScriptingHelper.GenerateBody(_actionInfo) + ")");                
+                script.Append("            data: JSON.stringify(" + ActionScriptingHelper.GenerateBody(_actionInfo) + ")");
             }
-            
+
             return script.ToString();
         }
     }

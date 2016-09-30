@@ -10,12 +10,12 @@ using Abp.Web.Localization;
 namespace Abp.Web
 {
     /// <summary>
-    /// This module is used to use ABP in ASP.NET web applications.
+    ///     This module is used to use ABP in ASP.NET web applications.
     /// </summary>
-    [DependsOn(typeof(AbpKernelModule))]    
+    [DependsOn(typeof (AbpKernelModule))]
     public class AbpWebModule : AbpModule
     {
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public override void PreInitialize()
         {
             if (HttpContext.Current != null)
@@ -33,10 +33,10 @@ namespace Abp.Web
                         )));
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public override void Initialize()
         {
-            IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());            
+            IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
         }
     }
 }

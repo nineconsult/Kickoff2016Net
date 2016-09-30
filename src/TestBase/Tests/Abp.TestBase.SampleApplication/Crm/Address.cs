@@ -13,9 +13,9 @@ namespace Abp.TestBase.SampleApplication.Crm
 
         public string FullAddress { get; set; }
 
-        public DateTime CreationTime { get; set; }
-
         public Modifier LastModifier { get; set; }
+
+        public DateTime CreationTime { get; set; }
     }
 
     [ComplexType]

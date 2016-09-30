@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Abp.Authorization;
 using Abp.Collections.Extensions;
 using Abp.Extensions;
 using Abp.Runtime.Validation;
@@ -16,20 +17,17 @@ namespace Abp.Web.Models
     {
         private readonly IAbpWebModuleConfiguration _configuration;
 
-        public IExceptionToErrorInfoConverter Next { set; private get; }
-
-        private bool SendAllExceptionsToClients
-        {
-            get
-            {
-                return _configuration.SendAllExceptionsToClients;
-            }
-        }
-
         public DefaultErrorInfoConverter(IAbpWebModuleConfiguration configuration)
         {
             _configuration = configuration;
         }
+
+        private bool SendAllExceptionsToClients
+        {
+            get { return _configuration.SendAllExceptionsToClients; }
+        }
+
+        public IExceptionToErrorInfoConverter Next { set; private get; }
 
         public ErrorInfo Convert(Exception exception)
         {
@@ -56,15 +54,15 @@ namespace Abp.Web.Models
             if (exception is AbpValidationException)
             {
                 return new ErrorInfo(AbpWebLocalizedMessages.ValidationError)
-                       {
-                           ValidationErrors = GetValidationErrorInfos(exception as AbpValidationException),
-                           Details = GetValidationErrorNarrative(exception as AbpValidationException)
-                       };
+                {
+                    ValidationErrors = GetValidationErrorInfos(exception as AbpValidationException),
+                    Details = GetValidationErrorNarrative(exception as AbpValidationException)
+                };
             }
 
-            if (exception is Abp.Authorization.AbpAuthorizationException)
+            if (exception is AbpAuthorizationException)
             {
-                var authorizationException = exception as Abp.Authorization.AbpAuthorizationException;
+                var authorizationException = exception as AbpAuthorizationException;
                 return new ErrorInfo(authorizationException.Message);
             }
 
@@ -163,7 +161,7 @@ namespace Abp.Web.Models
         {
             var detailBuilder = new StringBuilder();
             detailBuilder.AppendLine(AbpWebLocalizedMessages.ValidationNarrativeTitle);
-            
+
             foreach (var validationResult in validationException.ValidationErrors)
             {
                 detailBuilder.AppendFormat(" - {0}", validationResult.ErrorMessage);

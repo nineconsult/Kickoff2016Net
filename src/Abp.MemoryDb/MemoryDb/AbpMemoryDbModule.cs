@@ -5,7 +5,7 @@ using Abp.Modules;
 namespace Abp.MemoryDb
 {
     /// <summary>
-    /// This module is used to implement "Data Access Layer" in MemoryDb.
+    ///     This module is used to implement "Data Access Layer" in MemoryDb.
     /// </summary>
     public class AbpMemoryDbModule : AbpModule
     {

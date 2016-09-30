@@ -3,12 +3,12 @@ using System;
 namespace Abp.Extensions
 {
     /// <summary>
-    /// Extension methods for <see cref="EventHandler"/>.
+    ///     Extension methods for <see cref="EventHandler" />.
     /// </summary>
     public static class EventHandlerExtensions
     {
         /// <summary>
-        /// Raises given event safely with given arguments.
+        ///     Raises given event safely with given arguments.
         /// </summary>
         /// <param name="eventHandler">The event handler</param>
         /// <param name="sender">Source of the event</param>
@@ -18,7 +18,7 @@ namespace Abp.Extensions
         }
 
         /// <summary>
-        /// Raises given event safely with given arguments.
+        ///     Raises given event safely with given arguments.
         /// </summary>
         /// <param name="eventHandler">The event handler</param>
         /// <param name="sender">Source of the event</param>
@@ -34,9 +34,9 @@ namespace Abp.Extensions
         }
 
         /// <summary>
-        /// Raises given event safely with given arguments.
+        ///     Raises given event safely with given arguments.
         /// </summary>
-        /// <typeparam name="TEventArgs">Type of the <see cref="EventArgs"/></typeparam>
+        /// <typeparam name="TEventArgs">Type of the <see cref="EventArgs" /></typeparam>
         /// <param name="eventHandler">The event handler</param>
         /// <param name="sender">Source of the event</param>
         /// <param name="e">Event argument</param>

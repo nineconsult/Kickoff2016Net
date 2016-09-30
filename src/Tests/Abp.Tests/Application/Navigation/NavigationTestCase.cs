@@ -12,10 +12,6 @@ namespace Abp.Tests.Application.Navigation
 {
     internal class NavigationTestCase
     {
-        public NavigationManager NavigationManager { get; private set; }
-
-        public UserNavigationManager UserNavigationManager { get; private set; }
-
         private readonly IIocManager _iocManager;
 
         public NavigationTestCase()
@@ -28,6 +24,10 @@ namespace Abp.Tests.Application.Navigation
             _iocManager = iocManager;
             Initialize();
         }
+
+        public NavigationManager NavigationManager { get; private set; }
+
+        public UserNavigationManager UserNavigationManager { get; private set; }
 
         private void Initialize()
         {
@@ -105,10 +105,8 @@ namespace Abp.Tests.Application.Navigation
                 adminMenu.AddItem(
                     new MenuItemDefinition(
                         "Abp.Zero.Administration.Setting",
-                        new FixedLocalizableString("Setting management"),
-                        icon: "fa fa-cog",
-                        url: "#/admin/settings",
-                        customData: new MyCustomDataClass { Data1 = 42, Data2 = "FortyTwo" }
+                        new FixedLocalizableString("Setting management"), "fa fa-cog", "#/admin/settings",
+                        customData: new MyCustomDataClass {Data1 = 42, Data2 = "FortyTwo"}
                         )
                     );
             }

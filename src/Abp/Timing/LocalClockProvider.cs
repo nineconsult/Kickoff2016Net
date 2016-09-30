@@ -3,7 +3,7 @@ using System;
 namespace Abp.Timing
 {
     /// <summary>
-    /// Implements <see cref="IClockProvider"/> to work with local times.
+    ///     Implements <see cref="IClockProvider" /> to work with local times.
     /// </summary>
     public class LocalClockProvider : IClockProvider
     {
@@ -14,10 +14,7 @@ namespace Abp.Timing
 
         public DateTimeKind Kind
         {
-            get
-            {
-                return DateTimeKind.Local;
-            }
+            get { return DateTimeKind.Local; }
         }
 
         public DateTime Normalize(DateTime dateTime)

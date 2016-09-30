@@ -5,21 +5,17 @@ using Nito.AsyncEx;
 namespace Abp.Runtime.Caching
 {
     /// <summary>
-    /// Base class for caches.
-    /// It's used to simplify implementing <see cref="ICache"/>.
+    ///     Base class for caches.
+    ///     It's used to simplify implementing <see cref="ICache" />.
     /// </summary>
     public abstract class CacheBase : ICache
     {
-        public string Name { get; private set; }
-
-        public TimeSpan DefaultSlidingExpireTime { get; set; }
+        private readonly AsyncLock _asyncLock = new AsyncLock();
 
         protected readonly object SyncObj = new object();
 
-        private readonly AsyncLock _asyncLock = new AsyncLock();
-
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
         /// <param name="name"></param>
         protected CacheBase(string name)
@@ -27,6 +23,10 @@ namespace Abp.Runtime.Caching
             Name = name;
             DefaultSlidingExpireTime = TimeSpan.FromHours(1);
         }
+
+        public string Name { get; }
+
+        public TimeSpan DefaultSlidingExpireTime { get; set; }
 
         public virtual object Get(string key, Func<string, object> factory)
         {
@@ -111,7 +111,6 @@ namespace Abp.Runtime.Caching
 
         public virtual void Dispose()
         {
-
         }
     }
 }

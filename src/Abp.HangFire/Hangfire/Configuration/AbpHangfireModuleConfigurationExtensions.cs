@@ -8,7 +8,7 @@ namespace Abp.Hangfire.Configuration
     public static class AbpHangfireConfigurationExtensions
     {
         /// <summary>
-        /// Used to configure ABP Hangfire module.
+        ///     Used to configure ABP Hangfire module.
         /// </summary>
         public static IAbpHangfireConfiguration AbpHangfire(this IModuleConfigurations configurations)
         {
@@ -16,7 +16,7 @@ namespace Abp.Hangfire.Configuration
         }
 
         /// <summary>
-        /// Configures to use Hangfire for background job management.
+        ///     Configures to use Hangfire for background job management.
         /// </summary>
         public static void UseHangfire(this IBackgroundJobConfiguration backgroundJobConfiguration, Action<IAbpHangfireConfiguration> configureAction)
         {

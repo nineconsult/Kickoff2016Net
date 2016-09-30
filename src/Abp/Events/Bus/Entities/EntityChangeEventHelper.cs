@@ -5,12 +5,10 @@ using Abp.Domain.Uow;
 namespace Abp.Events.Bus.Entities
 {
     /// <summary>
-    /// Used to trigger entity change events.
+    ///     Used to trigger entity change events.
     /// </summary>
     public class EntityChangeEventHelper : ITransientDependency, IEntityChangeEventHelper
     {
-        public IEventBus EventBus { get; set; }
-
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         public EntityChangeEventHelper(IUnitOfWorkManager unitOfWorkManager)
@@ -19,34 +17,36 @@ namespace Abp.Events.Bus.Entities
             EventBus = NullEventBus.Instance;
         }
 
+        public IEventBus EventBus { get; set; }
+
         public void TriggerEntityCreatingEvent(object entity)
         {
-            TriggerEventWithEntity(typeof(EntityCreatingEventData<>), entity, true);
+            TriggerEventWithEntity(typeof (EntityCreatingEventData<>), entity, true);
         }
 
         public void TriggerEntityCreatedEventOnUowCompleted(object entity)
         {
-            TriggerEventWithEntity(typeof(EntityCreatedEventData<>), entity, false);
+            TriggerEventWithEntity(typeof (EntityCreatedEventData<>), entity, false);
         }
 
         public void TriggerEntityUpdatingEvent(object entity)
         {
-            TriggerEventWithEntity(typeof(EntityUpdatingEventData<>), entity, true);
+            TriggerEventWithEntity(typeof (EntityUpdatingEventData<>), entity, true);
         }
 
         public void TriggerEntityUpdatedEventOnUowCompleted(object entity)
         {
-            TriggerEventWithEntity(typeof(EntityUpdatedEventData<>), entity, false);
+            TriggerEventWithEntity(typeof (EntityUpdatedEventData<>), entity, false);
         }
 
         public void TriggerEntityDeletingEvent(object entity)
         {
-            TriggerEventWithEntity(typeof(EntityDeletingEventData<>), entity, true);
+            TriggerEventWithEntity(typeof (EntityDeletingEventData<>), entity, true);
         }
 
         public void TriggerEntityDeletedEventOnUowCompleted(object entity)
         {
-            TriggerEventWithEntity(typeof(EntityDeletedEventData<>), entity, false);
+            TriggerEventWithEntity(typeof (EntityDeletedEventData<>), entity, false);
         }
 
         private void TriggerEventWithEntity(Type genericEventType, object entity, bool triggerImmediately)
@@ -56,11 +56,11 @@ namespace Abp.Events.Bus.Entities
 
             if (triggerImmediately || _unitOfWorkManager.Current == null)
             {
-                EventBus.Trigger(eventType, (IEventData)Activator.CreateInstance(eventType, new[] { entity }));
+                EventBus.Trigger(eventType, (IEventData) Activator.CreateInstance(eventType, entity));
                 return;
             }
 
-            _unitOfWorkManager.Current.Completed += (sender, args) => EventBus.Trigger(eventType, (IEventData)Activator.CreateInstance(eventType, new[] { entity }));
+            _unitOfWorkManager.Current.Completed += (sender, args) => EventBus.Trigger(eventType, (IEventData) Activator.CreateInstance(eventType, entity));
         }
     }
 }

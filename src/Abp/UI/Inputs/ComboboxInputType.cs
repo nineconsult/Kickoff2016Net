@@ -4,17 +4,14 @@ using Abp.Runtime.Validation;
 namespace Abp.UI.Inputs
 {
     /// <summary>
-    /// Combobox value UI type.
+    ///     Combobox value UI type.
     /// </summary>
     [Serializable]
     [InputType("COMBOBOX")]
     public class ComboboxInputType : InputTypeBase
     {
-        public ILocalizableComboboxItemSource ItemSource { get; set; }
-
         public ComboboxInputType()
         {
-
         }
 
         public ComboboxInputType(ILocalizableComboboxItemSource itemSource)
@@ -27,5 +24,7 @@ namespace Abp.UI.Inputs
         {
             ItemSource = itemSource;
         }
+
+        public ILocalizableComboboxItemSource ItemSource { get; set; }
     }
 }

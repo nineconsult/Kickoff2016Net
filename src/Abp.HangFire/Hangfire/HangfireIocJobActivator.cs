@@ -29,7 +29,7 @@ namespace Abp.Hangfire
             return new HangfireIocJobActivatorScope(this, _iocResolver);
         }
 
-        class HangfireIocJobActivatorScope : JobActivatorScope
+        private class HangfireIocJobActivatorScope : JobActivatorScope
         {
             private readonly JobActivator _activator;
             private readonly IIocResolver _iocResolver;

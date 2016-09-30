@@ -5,7 +5,7 @@ namespace Abp.Localization
     public static class LocalizationManagerExtensions
     {
         /// <summary>
-        /// Gets a localized string in current language.
+        ///     Gets a localized string in current language.
         /// </summary>
         /// <returns>Localized string</returns>
         public static string GetString(this ILocalizationManager localizationManager, LocalizableString localizableString)
@@ -14,7 +14,7 @@ namespace Abp.Localization
         }
 
         /// <summary>
-        /// Gets a localized string in specified language.
+        ///     Gets a localized string in specified language.
         /// </summary>
         /// <returns>Localized string</returns>
         public static string GetString(this ILocalizationManager localizationManager, LocalizableString localizableString, CultureInfo culture)
@@ -23,7 +23,7 @@ namespace Abp.Localization
         }
 
         /// <summary>
-        /// Gets a localized string in current language.
+        ///     Gets a localized string in current language.
         /// </summary>
         /// <param name="localizationManager">Localization manager instance</param>
         /// <param name="sourceName">Name of the localization source</param>
@@ -35,7 +35,7 @@ namespace Abp.Localization
         }
 
         /// <summary>
-        /// Gets a localized string in specified language.
+        ///     Gets a localized string in specified language.
         /// </summary>
         /// <param name="localizationManager">Localization manager instance</param>
         /// <param name="sourceName">Name of the localization source</param>

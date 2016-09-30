@@ -4,7 +4,7 @@ using Abp.AutoMapper;
 
 namespace Abp.TestBase.SampleApplication.People.Dto
 {
-    [AutoMapTo(typeof(Person))]
+    [AutoMapTo(typeof (Person))]
     public class CreatePersonInput : IInputDto
     {
         [Range(1, int.MaxValue)]

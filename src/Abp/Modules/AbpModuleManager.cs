@@ -9,16 +9,14 @@ using Castle.Core.Logging;
 namespace Abp.Modules
 {
     /// <summary>
-    /// This class is used to manage modules.
+    ///     This class is used to manage modules.
     /// </summary>
     internal class AbpModuleManager : IAbpModuleManager
     {
-        public ILogger Logger { get; set; }
-
-        private readonly AbpModuleCollection _modules;
-
         private readonly IIocManager _iocManager;
         private readonly IModuleFinder _moduleFinder;
+
+        private readonly AbpModuleCollection _modules;
 
         public AbpModuleManager(IIocManager iocManager, IModuleFinder moduleFinder)
         {
@@ -27,6 +25,8 @@ namespace Abp.Modules
             _moduleFinder = moduleFinder;
             Logger = NullLogger.Instance;
         }
+
+        public ILogger Logger { get; set; }
 
         public virtual void InitializeModules()
         {
@@ -70,7 +70,7 @@ namespace Abp.Modules
             //Add to module collection
             foreach (var moduleType in moduleTypes)
             {
-                var moduleObject = (AbpModule)_iocManager.Resolve(moduleType);
+                var moduleObject = (AbpModule) _iocManager.Resolve(moduleType);
 
                 moduleObject.IocManager = _iocManager;
                 moduleObject.Configuration = _iocManager.Resolve<IAbpStartupConfiguration>();

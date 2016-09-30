@@ -15,23 +15,23 @@ using Abp.Threading;
 namespace Abp.Web
 {
     /// <summary>
-    /// This class is used to simplify starting of ABP system using <see cref="AbpBootstrapper"/> class..
-    /// Inherit from this class in global.asax instead of <see cref="HttpApplication"/> to be able to start ABP system.
+    ///     This class is used to simplify starting of ABP system using <see cref="AbpBootstrapper" /> class..
+    ///     Inherit from this class in global.asax instead of <see cref="HttpApplication" /> to be able to start ABP system.
     /// </summary>
     public abstract class AbpWebApplication : HttpApplication
     {
-        /// <summary>
-        /// Gets a reference to the <see cref="AbpBootstrapper"/> instance.
-        /// </summary>
-        protected AbpBootstrapper AbpBootstrapper { get; private set; }
-
         protected AbpWebApplication()
         {
             AbpBootstrapper = new AbpBootstrapper();
         }
 
         /// <summary>
-        /// This method is called by ASP.NET system on web application's startup.
+        ///     Gets a reference to the <see cref="AbpBootstrapper" /> instance.
+        /// </summary>
+        protected AbpBootstrapper AbpBootstrapper { get; }
+
+        /// <summary>
+        ///     This method is called by ASP.NET system on web application's startup.
         /// </summary>
         protected virtual void Application_Start(object sender, EventArgs e)
         {
@@ -42,7 +42,7 @@ namespace Abp.Web
         }
 
         /// <summary>
-        /// This method is called by ASP.NET system on web application shutdown.
+        ///     This method is called by ASP.NET system on web application shutdown.
         /// </summary>
         protected virtual void Application_End(object sender, EventArgs e)
         {
@@ -50,23 +50,21 @@ namespace Abp.Web
         }
 
         /// <summary>
-        /// This method is called by ASP.NET system when a session starts.
+        ///     This method is called by ASP.NET system when a session starts.
         /// </summary>
         protected virtual void Session_Start(object sender, EventArgs e)
         {
-
         }
 
         /// <summary>
-        /// This method is called by ASP.NET system when a session ends.
+        ///     This method is called by ASP.NET system when a session ends.
         /// </summary>
         protected virtual void Session_End(object sender, EventArgs e)
         {
-
         }
 
         /// <summary>
-        /// This method is called by ASP.NET system when a request starts.
+        ///     This method is called by ASP.NET system when a request starts.
         /// </summary>
         protected virtual void Application_BeginRequest(object sender, EventArgs e)
         {
@@ -91,11 +89,10 @@ namespace Abp.Web
         }
 
         /// <summary>
-        /// This method is called by ASP.NET system when a request ends.
+        ///     This method is called by ASP.NET system when a request ends.
         /// </summary>
         protected virtual void Application_EndRequest(object sender, EventArgs e)
         {
-
         }
 
         protected virtual void Application_AuthenticateRequest(object sender, EventArgs e)
@@ -105,11 +102,10 @@ namespace Abp.Web
 
         protected virtual void Application_Error(object sender, EventArgs e)
         {
-
         }
 
         /// <summary>
-        /// Tries to set current tenant Id.
+        ///     Tries to set current tenant Id.
         /// </summary>
         protected virtual void TrySetTenantId()
         {
@@ -141,7 +137,7 @@ namespace Abp.Web
         }
 
         /// <summary>
-        /// Resolves current tenant id or returns null if can not.
+        ///     Resolves current tenant id or returns null if can not.
         /// </summary>
         protected virtual int? ResolveTenantIdOrNull()
         {

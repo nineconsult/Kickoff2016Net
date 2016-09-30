@@ -10,10 +10,7 @@ using Abp;
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
 [assembly: ComVisible(false)]
-
 [assembly: Guid("428822a6-8e50-4bd0-9da3-1da3c27728b7")]
-
 [assembly: AssemblyVersion(AbpConsts.CurrentVersion)]
 [assembly: AssemblyFileVersion(AbpConsts.CurrentVersion)]

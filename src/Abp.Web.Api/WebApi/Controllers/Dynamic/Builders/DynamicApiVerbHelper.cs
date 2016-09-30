@@ -4,11 +4,11 @@ using Abp.Web;
 namespace Abp.WebApi.Controllers.Dynamic.Builders
 {
     /// <summary>
-    /// NOTE: This is not used (as all members are private)
+    ///     NOTE: This is not used (as all members are private)
     /// </summary>
     internal static class DynamicApiVerbHelper
     {
-        public  static HttpVerb GetConventionalVerbForMethodName(string methodName)
+        public static HttpVerb GetConventionalVerbForMethodName(string methodName)
         {
             if (methodName.StartsWith("Get", StringComparison.InvariantCultureIgnoreCase))
             {

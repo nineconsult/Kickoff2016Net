@@ -7,6 +7,14 @@ namespace Abp.TestBase.Runtime.Session
 {
     public class TestAbpSession : IAbpSession, ISingletonDependency
     {
+        private readonly IMultiTenancyConfig _multiTenancy;
+        private int? _tenantId;
+
+        public TestAbpSession(IMultiTenancyConfig multiTenancy)
+        {
+            _multiTenancy = multiTenancy;
+        }
+
         public long? UserId { get; set; }
 
         public int? TenantId
@@ -17,7 +25,7 @@ namespace Abp.TestBase.Runtime.Session
                 {
                     return 1;
                 }
-                
+
                 return _tenantId;
             }
             set
@@ -31,19 +39,14 @@ namespace Abp.TestBase.Runtime.Session
             }
         }
 
-        public MultiTenancySides MultiTenancySide { get { return GetCurrentMultiTenancySide(); } }
-        
-        public long? ImpersonatorUserId { get; set; }
-        
-        public int? ImpersonatorTenantId { get; set; }
-
-        private readonly IMultiTenancyConfig _multiTenancy;
-        private int? _tenantId;
-
-        public TestAbpSession(IMultiTenancyConfig multiTenancy)
+        public MultiTenancySides MultiTenancySide
         {
-            _multiTenancy = multiTenancy;
+            get { return GetCurrentMultiTenancySide(); }
         }
+
+        public long? ImpersonatorUserId { get; set; }
+
+        public int? ImpersonatorTenantId { get; set; }
 
         private MultiTenancySides GetCurrentMultiTenancySide()
         {

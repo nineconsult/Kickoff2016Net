@@ -7,12 +7,6 @@ namespace Abp.Runtime.Caching.Configuration
 {
     internal class CachingConfiguration : ICachingConfiguration
     {
-        public IAbpStartupConfiguration AbpConfiguration { get; private set; }
-
-        public IReadOnlyList<ICacheConfigurator> Configurators
-        {
-            get { return _configurators.ToImmutableList(); }
-        }
         private readonly List<ICacheConfigurator> _configurators;
 
         public CachingConfiguration(IAbpStartupConfiguration abpConfiguration)
@@ -20,6 +14,13 @@ namespace Abp.Runtime.Caching.Configuration
             AbpConfiguration = abpConfiguration;
 
             _configurators = new List<ICacheConfigurator>();
+        }
+
+        public IAbpStartupConfiguration AbpConfiguration { get; }
+
+        public IReadOnlyList<ICacheConfigurator> Configurators
+        {
+            get { return _configurators.ToImmutableList(); }
         }
 
         public void ConfigureAll(Action<ICache> initAction)

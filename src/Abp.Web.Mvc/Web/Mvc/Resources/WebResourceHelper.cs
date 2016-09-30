@@ -9,11 +9,10 @@ using Abp.Web.Mvc.Resources.Embedded.Handlers;
 namespace Abp.Web.Mvc.Resources
 {
     /// <summary>
-    /// A helper class to simplify expose web resources.
+    ///     A helper class to simplify expose web resources.
     /// </summary>
     public static class WebResourceHelper
     {
-        private static IEmbeddedResourceManager EmbeddedResourceManager { get { return LazyEmbeddedResourceManager.Value; } }
         private static readonly Lazy<IEmbeddedResourceManager> LazyEmbeddedResourceManager;
 
         static WebResourceHelper()
@@ -21,12 +20,17 @@ namespace Abp.Web.Mvc.Resources
             LazyEmbeddedResourceManager = new Lazy<IEmbeddedResourceManager>(IocManager.Instance.Resolve<IEmbeddedResourceManager>, true);
         }
 
+        private static IEmbeddedResourceManager EmbeddedResourceManager
+        {
+            get { return LazyEmbeddedResourceManager.Value; }
+        }
+
         /// <summary>
-        /// Exposes one or more embedded resources to web clients.
-        /// It can be used to embed javascript/css files into assemblies and use them in html pages easily.
+        ///     Exposes one or more embedded resources to web clients.
+        ///     It can be used to embed javascript/css files into assemblies and use them in html pages easily.
         /// </summary>
         /// <param name="rootPath">
-        /// Root path of the resource. Can include '/' for deeper paths.
+        ///     Root path of the resource. Can include '/' for deeper paths.
         /// </param>
         /// <param name="assembly">The assembly contains resources</param>
         /// <param name="resourceNamespace">Root namespace of the resources</param>
@@ -38,10 +42,8 @@ namespace Abp.Web.Mvc.Resources
              * properly and use this route accidently.
              * We should find a better way of serving embedded resources in the future, but this works as I tested.
              */
-            RouteTable.Routes.MapRoute(
-                name: "EmbeddedResource:" + rootPath,
-                url: rootPath + "/{*pathInfo}", //TODO: Define extension?
-                defaults: new
+            RouteTable.Routes.MapRoute("EmbeddedResource:" + rootPath, rootPath + "/{*pathInfo}", //TODO: Define extension?
+                new
                 {
                     controller = "AbpNoController",
                     action = "AbpNoAction"
@@ -50,7 +52,7 @@ namespace Abp.Web.Mvc.Resources
         }
 
         /// <summary>
-        /// Gets an embedded resource file.
+        ///     Gets an embedded resource file.
         /// </summary>
         /// <param name="fullResourcePath">Full path of the resource</param>
         /// <returns>Embedded resource file</returns>

@@ -21,7 +21,7 @@ namespace Abp.Web.Tests.Localization
         protected override void AddModules(ITypeList<AbpModule> modules)
         {
             base.AddModules(modules);
-            modules.Add(typeof(AbpWebModule));
+            modules.Add(typeof (AbpWebModule));
         }
 
         [Fact]

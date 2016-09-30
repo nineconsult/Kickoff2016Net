@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Reflection;
 using Abp.Application.Services;
 using Abp.Dependency;
@@ -19,10 +18,10 @@ namespace Abp.Web.Api.Tests.DynamicApiController.BatchBuilding
 
             DynamicApiControllerBuilder
                 .ForAll<IApplicationService>(Assembly.GetExecutingAssembly(), "myapp")
-                .Where(type => type == typeof(IMyFirstAppService))
+                .Where(type => type == typeof (IMyFirstAppService))
                 .ForMethods(builder =>
                 {
-                    if (builder.Method.IsDefined(typeof(MyIgnoreApiAttribute)))
+                    if (builder.Method.IsDefined(typeof (MyIgnoreApiAttribute)))
                     {
                         builder.DontCreate = true;
                     }
@@ -59,7 +58,6 @@ namespace Abp.Web.Api.Tests.DynamicApiController.BatchBuilding
 
         public class MyIgnoreApiAttribute : Attribute
         {
-
         }
     }
 }

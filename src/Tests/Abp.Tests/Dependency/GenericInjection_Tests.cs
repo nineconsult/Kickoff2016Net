@@ -15,10 +15,10 @@ namespace Abp.Tests.Dependency
                 );
 
             var genericObj = LocalIocManager.Resolve<IEmpty<MyClass>>();
-            genericObj.GenericArg.GetType().ShouldBe(typeof(MyClass));
+            genericObj.GenericArg.GetType().ShouldBe(typeof (MyClass));
         }
 
-        public interface IEmpty<T> where T : class 
+        public interface IEmpty<T> where T : class
         {
             T GenericArg { get; set; }
         }
@@ -30,7 +30,6 @@ namespace Abp.Tests.Dependency
 
         public class MyClass
         {
-
         }
     }
 }

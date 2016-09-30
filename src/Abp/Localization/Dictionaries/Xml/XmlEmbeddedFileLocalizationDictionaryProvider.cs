@@ -5,15 +5,15 @@ using Abp.IO.Extensions;
 namespace Abp.Localization.Dictionaries.Xml
 {
     /// <summary>
-    /// Provides localization dictionaries from XML files embedded into an <see cref="Assembly"/>.
+    ///     Provides localization dictionaries from XML files embedded into an <see cref="Assembly" />.
     /// </summary>
     public class XmlEmbeddedFileLocalizationDictionaryProvider : LocalizationDictionaryProviderBase
     {
         private readonly Assembly _assembly;
         private readonly string _rootNamespace;
-        
+
         /// <summary>
-        /// Creates a new <see cref="XmlEmbeddedFileLocalizationDictionaryProvider"/> object.
+        ///     Creates a new <see cref="XmlEmbeddedFileLocalizationDictionaryProvider" /> object.
         /// </summary>
         /// <param name="assembly">Assembly that contains embedded xml files</param>
         /// <param name="rootNamespace">Namespace of the embedded xml dictionary files</param>

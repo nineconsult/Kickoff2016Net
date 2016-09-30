@@ -1,5 +1,5 @@
 ﻿var abp = abp || {};
-(function () {
+(function() {
     if (!moment || !moment.tz) {
         return;
     }
@@ -10,9 +10,9 @@
 
     /* FUNCTIONS **************************************************/
 
-    abp.timing.convertToUserTimezone = function (date) {
-        var momentDate = moment(date);
-        var targetDate = momentDate.clone().tz(abp.timing.timeZoneInfo.iana.timeZoneId);
+    abp.timing.convertToUserTimezone = function(date) {
+        const momentDate = moment(date);
+        const targetDate = momentDate.clone().tz(abp.timing.timeZoneInfo.iana.timeZoneId);
         return targetDate;
     };
 

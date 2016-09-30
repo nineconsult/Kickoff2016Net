@@ -29,7 +29,6 @@ namespace Abp.NHibernate.Tests
                         ModificationDate = new DateTime(2017, 05, 27, 14, 0, 0, DateTimeKind.Local)
                     }
                 });
-
             });
         }
 

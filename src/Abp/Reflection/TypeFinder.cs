@@ -9,15 +9,15 @@ namespace Abp.Reflection
 {
     public class TypeFinder : ITypeFinder
     {
-        public ILogger Logger { get; set; }
-
-        public IAssemblyFinder AssemblyFinder { get; set; }
-
         public TypeFinder()
         {
             AssemblyFinder = CurrentDomainAssemblyFinder.Instance;
             Logger = NullLogger.Instance;
         }
+
+        public ILogger Logger { get; set; }
+
+        public IAssemblyFinder AssemblyFinder { get; set; }
 
         public Type[] Find(Func<Type, bool> predicate)
         {

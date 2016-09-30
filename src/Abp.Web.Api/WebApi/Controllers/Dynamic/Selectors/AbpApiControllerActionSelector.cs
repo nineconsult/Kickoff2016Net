@@ -5,12 +5,12 @@ using Abp.WebApi.Controllers.Dynamic.Builders;
 namespace Abp.WebApi.Controllers.Dynamic.Selectors
 {
     /// <summary>
-    /// This class overrides ApiControllerActionSelector to select actions of dynamic ApiControllers.
+    ///     This class overrides ApiControllerActionSelector to select actions of dynamic ApiControllers.
     /// </summary>
     public class AbpApiControllerActionSelector : ApiControllerActionSelector
     {
         /// <summary>
-        /// This class is called by Web API system to select action method from given controller.
+        ///     This class is called by Web API system to select action method from given controller.
         /// </summary>
         /// <param name="controllerContext">Controller context</param>
         /// <returns>Action to be used</returns>
@@ -26,11 +26,11 @@ namespace Abp.WebApi.Controllers.Dynamic.Selectors
             var controllerInfo = controllerInfoObj as DynamicApiControllerInfo;
             if (controllerInfo == null)
             {
-                throw new AbpException("__AbpDynamicApiControllerInfo in ControllerDescriptor.Properties is not a " + typeof(DynamicApiControllerInfo).FullName + " class.");
+                throw new AbpException("__AbpDynamicApiControllerInfo in ControllerDescriptor.Properties is not a " + typeof (DynamicApiControllerInfo).FullName + " class.");
             }
 
             //No action name case
-            var hasActionName = (bool)controllerContext.ControllerDescriptor.Properties["__AbpDynamicApiHasActionName"];
+            var hasActionName = (bool) controllerContext.ControllerDescriptor.Properties["__AbpDynamicApiHasActionName"];
             if (!hasActionName)
             {
                 return GetActionDescriptorByCurrentHttpVerb(controllerContext, controllerInfo);
@@ -46,8 +46,8 @@ namespace Abp.WebApi.Controllers.Dynamic.Selectors
             var actionName = DynamicApiServiceNameHelper.GetActionNameInServiceNameWithAction(serviceNameWithAction);
 
             return GetActionDescriptorByActionName(
-                controllerContext, 
-                controllerInfo, 
+                controllerContext,
+                controllerInfo,
                 actionName
                 );
         }

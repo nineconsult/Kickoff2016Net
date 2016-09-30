@@ -9,9 +9,9 @@ namespace Abp.Tests.Notifications
 {
     public class NotificationPublisher_Tests : TestBaseWithLocalIocManager
     {
+        private readonly IBackgroundJobManager _backgroundJobManager;
         private readonly NotificationPublisher _publisher;
         private readonly INotificationStore _store;
-        private readonly IBackgroundJobManager _backgroundJobManager;
 
         public NotificationPublisher_Tests()
         {

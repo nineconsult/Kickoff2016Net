@@ -9,8 +9,8 @@ namespace Abp.Tests.Reflection.Extensions
     public class MemberInfoExtensions_Tests
     {
         [Theory]
-        [InlineData(typeof(MyClass))]
-        [InlineData(typeof(MyBaseClass))]
+        [InlineData(typeof (MyClass))]
+        [InlineData(typeof (MyBaseClass))]
         public void GetSingleAttributeOfTypeOrBaseTypesOrNull_Test(Type type)
         {
             var attr = type.GetSingleAttributeOfTypeOrBaseTypesOrNull<MultiTenancySideAttribute>();
@@ -20,13 +20,11 @@ namespace Abp.Tests.Reflection.Extensions
 
         private class MyClass : MyBaseClass
         {
-            
         }
 
         [MultiTenancySide(MultiTenancySides.Host)]
         private abstract class MyBaseClass
         {
-
         }
     }
 }

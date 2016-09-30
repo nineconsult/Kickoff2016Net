@@ -26,8 +26,8 @@ namespace Abp.Web.Mvc.Tests.ModelBinders.Binders
             Clock.Provider = new UtcClockProvider();
 
             var resultDate = new DateTime(2016, 04, 13, 08, 58, 10, 526, Clock.Kind);
-            var fields = new NameValueCollection { { "date", sourceDate } };
-            var metaData = ModelMetadataProviders.Current.GetMetadataForType(null, typeof(DateTime?));
+            var fields = new NameValueCollection {{"date", sourceDate}};
+            var metaData = ModelMetadataProviders.Current.GetMetadataForType(null, typeof (DateTime?));
 
             var binderContext = new ModelBindingContext
             {
@@ -70,8 +70,8 @@ namespace Abp.Web.Mvc.Tests.ModelBinders.Binders
             Clock.Provider = new LocalClockProvider();
             var resultDate = new DateTime(2016, 04, 13, 08, 58, 10, 526, DateTimeKind.Utc).ToLocalTime();
 
-            var fields = new NameValueCollection { { "date", sourceDate } };
-            var metaData = ModelMetadataProviders.Current.GetMetadataForType(null, typeof(DateTime?));
+            var fields = new NameValueCollection {{"date", sourceDate}};
+            var metaData = ModelMetadataProviders.Current.GetMetadataForType(null, typeof (DateTime?));
 
             var binderContext = new ModelBindingContext
             {

@@ -11,7 +11,7 @@ using Abp.Timing.Timezone;
 namespace Abp.Web.Timing
 {
     /// <summary>
-    /// This class is used to build timing script.
+    ///     This class is used to build timing script.
     /// </summary>
     public class TimingScriptManager : ITimingScriptManager, ITransientDependency
     {

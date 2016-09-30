@@ -9,6 +9,18 @@ namespace Abp.Runtime.Validation
     [Validator("STRING")]
     public class StringValueValidator : ValueValidatorBase
     {
+        public StringValueValidator()
+        {
+        }
+
+        public StringValueValidator(int minLength = 0, int maxLength = 0, string regularExpression = null, bool allowNull = false)
+        {
+            MinLength = minLength;
+            MaxLength = maxLength;
+            RegularExpression = regularExpression;
+            AllowNull = allowNull;
+        }
+
         public bool AllowNull
         {
             get { return (this["AllowNull"] ?? "false").To<bool>(); }
@@ -33,19 +45,6 @@ namespace Abp.Runtime.Validation
             set { this["RegularExpression"] = value; }
         }
 
-        public StringValueValidator()
-        {
-            
-        }
-
-        public StringValueValidator(int minLength = 0, int maxLength = 0, string regularExpression = null, bool allowNull = false)
-        {
-            MinLength = minLength;
-            MaxLength = maxLength;
-            RegularExpression = regularExpression;
-            AllowNull = allowNull;
-        }
-
         public override bool IsValid(object value)
         {
             if (value == null)
@@ -59,7 +58,7 @@ namespace Abp.Runtime.Validation
             }
 
             var strValue = value as string;
-            
+
             if (MinLength > 0 && strValue.Length < MinLength)
             {
                 return false;

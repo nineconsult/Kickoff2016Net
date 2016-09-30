@@ -1,7 +1,7 @@
 /* Adapter for jTable (http://jtable.org) to ASP.NET Boilerplate (http://aspnetboilerplate.com)
  * by Halil ibrahim Kalkan (http://halilibrahimkalkan.com).
  */
-(function ($) {
+(function($) {
 
     if (!$ || !$.hik || !$.hik.jtable) {
         return;
@@ -16,8 +16,8 @@
     $.extend(true, $.hik.jtable.prototype, {
 
         //Override _create function to change actions according to Abp system
-        _create: function () {
-            var self = this;
+        _create: function() {
+            const self = this;
             base._create.apply(self, arguments);
 
             if (self.options.actions.listAction) {
@@ -38,20 +38,18 @@
         },
 
         //LIST ACTION ADAPTER
-        _adaptListActionforAbp: function () {
+        _adaptListActionforAbp: function() {
             var self = this;
             var originalListAction = self.options.actions.listAction;
-            self.options.actions.listAction = function (postData, jtParams) {
-                return $.Deferred(function ($dfd) {
-
-                    var input = $.extend({}, postData, {
+            self.options.actions.listAction = function(postData, jtParams) {
+                return $.Deferred(function($dfd) {
+                    const input = $.extend({}, postData, {
                         skipCount: jtParams.jtStartIndex,
                         maxResultCount: jtParams.jtPageSize,
                         sorting: jtParams.jtSorting
                     });
-
                     originalListAction.method(input)
-                        .done(function (result) {
+                        .done(function(result) {
                             $dfd.resolve({
                                 "Result": "OK",
                                 "Records": result.items || result[originalListAction.recordsField],
@@ -59,7 +57,7 @@
                                 originalResult: result
                             });
                         })
-                        .fail(function (error) {
+                        .fail(function(error) {
                             self._handlerForFailOnAbpRequest($dfd, error);
                         });
                 });
@@ -67,23 +65,21 @@
         },
 
         //CREATE ACTION ADAPTER
-        _adaptCreateActionforAbp: function () {
+        _adaptCreateActionforAbp: function() {
             var self = this;
             var originalCreateAction = self.options.actions.createAction;
-            self.options.actions.createAction = function (postData) {
-                return $.Deferred(function ($dfd) {
-
-                    var input = $.extend({}, postData);
-
+            self.options.actions.createAction = function(postData) {
+                return $.Deferred(function($dfd) {
+                    const input = $.extend({}, postData);
                     originalCreateAction.method(input)
-                        .done(function (result) {
+                        .done(function(result) {
                             $dfd.resolve({
                                 "Result": "OK",
                                 "Record": originalCreateAction.recordField ? result[originalCreateAction.recordField] : result,
                                 originalResult: result
                             });
                         })
-                        .fail(function (error) {
+                        .fail(function(error) {
                             self._handlerForFailOnAbpRequest($dfd, error);
                         });
                 });
@@ -91,21 +87,18 @@
         },
 
         //UPDATE ACTION ADAPTER
-        _adaptUpdateActionforAbp: function () {
+        _adaptUpdateActionforAbp: function() {
             var self = this;
             var originalUpdateAction = self.options.actions.updateAction;
-            self.options.actions.updateAction = function (postData) {
-                return $.Deferred(function ($dfd) {
-
-                    var input = $.extend({}, postData);
-
+            self.options.actions.updateAction = function(postData) {
+                return $.Deferred(function($dfd) {
+                    const input = $.extend({}, postData);
                     originalUpdateAction.method(input)
-                        .done(function (result) {
-                            var jtableResult = {
+                        .done(function(result) {
+                            const jtableResult = {
                                 "Result": "OK",
                                 originalResult: result
                             };
-
                             if (originalUpdateAction.returnsRecord) {
                                 if (originalUpdateAction.recordField) {
                                     jtableResult.Record = result[originalUpdateAction.recordField];
@@ -116,7 +109,7 @@
 
                             $dfd.resolve(jtableResult);
                         })
-                        .fail(function (error) {
+                        .fail(function(error) {
                             self._handlerForFailOnAbpRequest($dfd, error);
                         });
                 });
@@ -124,29 +117,27 @@
         },
 
         //DELETE ACTION ADAPTER
-        _adaptDeleteActionforAbp: function () {
+        _adaptDeleteActionforAbp: function() {
             var self = this;
             var originalDeleteAction = self.options.actions.deleteAction;
-            self.options.actions.deleteAction = function (postData) {
-                return $.Deferred(function ($dfd) {
-
-                    var input = $.extend({}, postData);
-
+            self.options.actions.deleteAction = function(postData) {
+                return $.Deferred(function($dfd) {
+                    const input = $.extend({}, postData);
                     originalDeleteAction.method(input)
-                        .done(function (result) {
+                        .done(function(result) {
                             $dfd.resolve({
                                 "Result": "OK",
                                 originalResult: result
                             });
                         })
-                        .fail(function (error) {
+                        .fail(function(error) {
                             self._handlerForFailOnAbpRequest($dfd, error);
                         });
                 });
             };
         },
 
-        _handlerForFailOnAbpRequest: function ($dfd, error) {
+        _handlerForFailOnAbpRequest: function($dfd, error) {
             if (error && error.message) {
                 $dfd.resolve({
                     Result: "ERROR",
@@ -158,7 +149,7 @@
         },
 
         //Disable showing error messages
-        _showError: function (message) {
+        _showError: function(message) {
             //do nothing since Abp handles error messages!
         }
 

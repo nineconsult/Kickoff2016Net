@@ -62,16 +62,16 @@ namespace Abp.Tests.Startup
         public ICollection<Type> FindAll()
         {
             return new List<Type>
-                   {
-                       typeof (MyOtherModule),
-                       typeof (MyTestModule),
-                       typeof (MyAnotherModule)
-                   };
+            {
+                typeof (MyOtherModule),
+                typeof (MyTestModule),
+                typeof (MyAnotherModule)
+            };
         }
     }
 
-    [DependsOn(typeof(MyOtherModule))]
-    [DependsOn(typeof(MyAnotherModule))]
+    [DependsOn(typeof (MyOtherModule))]
+    [DependsOn(typeof (MyAnotherModule))]
     public class MyTestModule : MyEventCounterModuleBase
     {
         private readonly MyOtherModule _otherModule;
@@ -119,7 +119,6 @@ namespace Abp.Tests.Startup
 
     public class MyAnotherModule : MyEventCounterModuleBase
     {
-
     }
 
     public abstract class MyEventCounterModuleBase : AbpModule

@@ -6,7 +6,7 @@ using Abp.WebApi.Controllers.Dynamic.Clients;
 
 namespace Abp.Web.Api.Tests
 {
-    [DependsOn(typeof(AbpWebApiModule))]
+    [DependsOn(typeof (AbpWebApiModule))]
     public class AbpWebApiTestModule : AbpModule
     {
         public override void PreInitialize()
@@ -18,9 +18,9 @@ namespace Abp.Web.Api.Tests
         public override void Initialize()
         {
             base.Initialize();
-            
+
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-            
+
             DynamicApiClientBuilder
                 .For<IMyAppService>("http://www.aspnetboilerplate.com/api/services/myapp/myservice")
                 .Build();

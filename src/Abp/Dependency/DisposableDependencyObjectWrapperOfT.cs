@@ -5,7 +5,6 @@ namespace Abp.Dependency
         public DisposableDependencyObjectWrapper(IIocResolver iocResolver, object obj)
             : base(iocResolver, obj)
         {
-
         }
     }
 
@@ -13,13 +12,13 @@ namespace Abp.Dependency
     {
         private readonly IIocResolver _iocResolver;
 
-        public T Object { get; private set; }
-
         public DisposableDependencyObjectWrapper(IIocResolver iocResolver, T obj)
         {
             _iocResolver = iocResolver;
             Object = obj;
         }
+
+        public T Object { get; }
 
         public void Dispose()
         {

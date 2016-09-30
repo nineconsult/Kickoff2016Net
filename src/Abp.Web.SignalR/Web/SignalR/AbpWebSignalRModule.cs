@@ -7,19 +7,19 @@ using Newtonsoft.Json;
 namespace Abp.Web.SignalR
 {
     /// <summary>
-    /// ABP SignalR integration module.
+    ///     ABP SignalR integration module.
     /// </summary>
-    [DependsOn(typeof(AbpKernelModule))]
+    [DependsOn(typeof (AbpKernelModule))]
     public class AbpWebSignalRModule : AbpModule
     {
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public override void PreInitialize()
         {
             GlobalHost.DependencyResolver = new WindsorDependencyResolver(IocManager.IocContainer);
             UseAbpSignalRContractResolver();
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
@@ -32,7 +32,7 @@ namespace Abp.Web.SignalR
                 {
                     ContractResolver = new AbpSignalRContractResolver()
                 });
-            
+
             IocManager.IocContainer.Register(
                 Component.For<JsonSerializer>().UsingFactoryMethod(() => serializer)
                 );

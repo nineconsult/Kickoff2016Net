@@ -13,8 +13,8 @@ namespace Abp.Tests.Configuration
 {
     public class SettingManager_Tests : TestBaseWithLocalIocManager
     {
-        private const string MyAppLevelSetting = "MyAppLevelSetting";
         private const string MyAllLevelsSetting = "MyAllLevelsSetting";
+        private const string MyAppLevelSetting = "MyAppLevelSetting";
         private const string MyNotInheritedSetting = "MyNotInheritedSetting";
 
         private SettingManager CreateSettingManager()
@@ -97,7 +97,7 @@ namespace Abp.Tests.Configuration
             (await settingManager.GetAllSettingValuesForTenantAsync(2)).Count.ShouldBe(0);
             (await settingManager.GetAllSettingValuesForTenantAsync(3)).Count.ShouldBe(0);
 
-            (await settingManager.GetAllSettingValuesForUserAsync(new UserIdentifier(1,1))).Count.ShouldBe(1);
+            (await settingManager.GetAllSettingValuesForUserAsync(new UserIdentifier(1, 1))).Count.ShouldBe(1);
             (await settingManager.GetAllSettingValuesForUserAsync(new UserIdentifier(1, 2))).Count.ShouldBe(1);
             (await settingManager.GetAllSettingValuesForUserAsync(new UserIdentifier(1, 3))).Count.ShouldBe(0);
         }
@@ -182,7 +182,7 @@ namespace Abp.Tests.Configuration
             {
                 {MyAppLevelSetting, new SettingDefinition(MyAppLevelSetting, "42")},
                 {MyAllLevelsSetting, new SettingDefinition(MyAllLevelsSetting, "application level default value", scopes: SettingScopes.Application | SettingScopes.Tenant | SettingScopes.User)},
-                {MyNotInheritedSetting, new SettingDefinition(MyNotInheritedSetting, "default-value", scopes: SettingScopes.Application | SettingScopes.Tenant, isInherited: false)},
+                {MyNotInheritedSetting, new SettingDefinition(MyNotInheritedSetting, "default-value", scopes: SettingScopes.Application | SettingScopes.Tenant, isInherited: false)}
             };
 
             var definitionManager = Substitute.For<ISettingDefinitionManager>();
@@ -207,7 +207,7 @@ namespace Abp.Tests.Configuration
                     new SettingInfo(1, null, MyAllLevelsSetting, "tenant 1 stored value"),
                     new SettingInfo(1, 1, MyAllLevelsSetting, "user 1 stored value"),
                     new SettingInfo(1, 2, MyAllLevelsSetting, "user 2 stored value"),
-                    new SettingInfo(null, null, MyNotInheritedSetting, "application value"),
+                    new SettingInfo(null, null, MyNotInheritedSetting, "application value")
                 };
             }
 

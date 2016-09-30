@@ -22,7 +22,7 @@ namespace Abp.TestBase.Tests.Application.Services
         [Fact]
         public void Should_Work_Proper_With_Right_Inputs()
         {
-            var output = _myAppService.MyMethod(new MyMethodInput { MyStringValue = "test" });
+            var output = _myAppService.MyMethod(new MyMethodInput {MyStringValue = "test"});
             output.Result.ShouldBe(42);
         }
 
@@ -30,17 +30,17 @@ namespace Abp.TestBase.Tests.Application.Services
         public void Should_Not_Work_With_Wrong_Inputs()
         {
             Assert.Throws<AbpValidationException>(() => _myAppService.MyMethod(new MyMethodInput())); //MyStringValue is not supplied!
-            Assert.Throws<AbpValidationException>(() => _myAppService.MyMethod(new MyMethodInput { MyStringValue = "a" })); //MyStringValue's min length should be 3!
+            Assert.Throws<AbpValidationException>(() => _myAppService.MyMethod(new MyMethodInput {MyStringValue = "a"})); //MyStringValue's min length should be 3!
         }
 
         [Fact]
         public void Should_Work_With_Right_Nesned_Inputs()
         {
             var output = _myAppService.MyMethod2(new MyMethod2Input
-                            {
-                                MyStringValue2 = "test 1",
-                                Input1 = new MyMethodInput { MyStringValue = "test 2" }
-                            });
+            {
+                MyStringValue2 = "test 1",
+                Input1 = new MyMethodInput {MyStringValue = "test 2"}
+            });
             output.Result.ShouldBe(42);
         }
 
@@ -60,9 +60,9 @@ namespace Abp.TestBase.Tests.Application.Services
         {
             Assert.Throws<AbpValidationException>(() =>
                 _myAppService.MyMethod2(new MyMethod2Input //Input1 is not set
-                                        {
-                                            MyStringValue2 = "test 1"
-                                        }));
+                {
+                    MyStringValue2 = "test 1"
+                }));
         }
 
         [Fact]
@@ -74,9 +74,9 @@ namespace Abp.TestBase.Tests.Application.Services
                     {
                         MyStringValue2 = "test 1",
                         ListItems = new List<MyClassInList>
-                                    {
-                                        new MyClassInList {ValueInList = null}
-                                    }
+                        {
+                            new MyClassInList {ValueInList = null}
+                        }
                     }));
         }
 
@@ -89,9 +89,9 @@ namespace Abp.TestBase.Tests.Application.Services
                     {
                         MyStringValue2 = "test 1",
                         ArrayItems = new[]
-                                     {
-                                         new MyClassInList {ValueInList = null}
-                                     }
+                        {
+                            new MyClassInList {ValueInList = null}
+                        }
                     }));
         }
 
@@ -117,22 +117,22 @@ namespace Abp.TestBase.Tests.Application.Services
         {
             public MyMethodOutput MyMethod(MyMethodInput input)
             {
-                return new MyMethodOutput { Result = 42 };
+                return new MyMethodOutput {Result = 42};
             }
 
             public MyMethodOutput MyMethod2(MyMethod2Input input)
             {
-                return new MyMethodOutput { Result = 42 };
+                return new MyMethodOutput {Result = 42};
             }
 
             public MyMethodOutput MyMethod3(MyMethod3Input input)
             {
-                return new MyMethodOutput { Result = 42 };
+                return new MyMethodOutput {Result = 42};
             }
 
             public MyMethodOutput MyMethod4(MyMethod4Input input)
             {
-                return new MyMethodOutput { Result = 42 };
+                return new MyMethodOutput {Result = 42};
             }
         }
 

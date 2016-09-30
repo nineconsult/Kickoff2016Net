@@ -3,12 +3,12 @@ using Abp.Threading;
 namespace Abp.Authorization
 {
     /// <summary>
-    /// Extension methods for <see cref="IPermissionDependency"/>.
+    ///     Extension methods for <see cref="IPermissionDependency" />.
     /// </summary>
     public static class PermissionDependencyExtensions
     {
         /// <summary>
-        /// Checks if permission dependency is satisfied.
+        ///     Checks if permission dependency is satisfied.
         /// </summary>
         /// <param name="permissionDependency">The permission dependency</param>
         /// <param name="context">Context.</param>

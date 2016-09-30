@@ -7,7 +7,7 @@ namespace Abp.UI.Inputs
     {
         string Value { get; set; }
 
-        [JsonConverter(typeof(LocalizableStringToStringJsonConverter))]
+        [JsonConverter(typeof (LocalizableStringToStringJsonConverter))]
         ILocalizableString DisplayText { get; set; }
     }
 }

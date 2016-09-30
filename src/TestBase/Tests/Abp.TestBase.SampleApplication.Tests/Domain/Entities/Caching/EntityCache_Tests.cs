@@ -39,7 +39,6 @@ namespace Abp.TestBase.SampleApplication.Tests.Domain.Entities.Caching
 
         public interface IMessageCache : IEntityCache<MessageCacheItem>
         {
-
         }
 
         public class MessageCache : EntityCache<Message, MessageCacheItem>, IMessageCache, ITransientDependency
@@ -47,11 +46,10 @@ namespace Abp.TestBase.SampleApplication.Tests.Domain.Entities.Caching
             public MessageCache(ICacheManager cacheManager, IRepository<Message, int> repository)
                 : base(cacheManager, repository)
             {
-
             }
         }
 
-        [AutoMapFrom(typeof(Message))]
+        [AutoMapFrom(typeof (Message))]
         public class MessageCacheItem
         {
             public string Text { get; set; }

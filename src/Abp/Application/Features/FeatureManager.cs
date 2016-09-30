@@ -6,30 +6,17 @@ using Abp.Dependency;
 namespace Abp.Application.Features
 {
     /// <summary>
-    /// Implements <see cref="IFeatureManager"/>.
+    ///     Implements <see cref="IFeatureManager" />.
     /// </summary>
     internal class FeatureManager : FeatureDefinitionContextBase, IFeatureManager, ISingletonDependency
     {
-        private readonly IIocManager _iocManager;
         private readonly IFeatureConfiguration _featureConfiguration;
+        private readonly IIocManager _iocManager;
 
         public FeatureManager(IIocManager iocManager, IFeatureConfiguration featureConfiguration)
         {
             _iocManager = iocManager;
             _featureConfiguration = featureConfiguration;
-        }
-
-        public void Initialize()
-        {
-            foreach (var providerType in _featureConfiguration.Providers)
-            {
-                using (var provider = CreateProvider(providerType))
-                {
-                    provider.Object.SetFeatures(this);
-                }
-            }
-
-            Features.AddAllFeatures();
         }
 
         public Feature Get(string name)
@@ -46,6 +33,19 @@ namespace Abp.Application.Features
         public IReadOnlyList<Feature> GetAll()
         {
             return Features.Values.ToImmutableList();
+        }
+
+        public void Initialize()
+        {
+            foreach (var providerType in _featureConfiguration.Providers)
+            {
+                using (var provider = CreateProvider(providerType))
+                {
+                    provider.Object.SetFeatures(this);
+                }
+            }
+
+            Features.AddAllFeatures();
         }
 
         private IDisposableDependencyObjectWrapper<FeatureProvider> CreateProvider(Type providerType)

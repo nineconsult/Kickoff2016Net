@@ -8,17 +8,17 @@ using Abp.Dependency;
 namespace Abp.RealTime
 {
     /// <summary>
-    /// Implements <see cref="IOnlineClientManager"/>.
+    ///     Implements <see cref="IOnlineClientManager" />.
     /// </summary>
     public class OnlineClientManager : IOnlineClientManager, ISingletonDependency
     {
         /// <summary>
-        /// Online clients.
+        ///     Online clients.
         /// </summary>
         private readonly ConcurrentDictionary<string, IOnlineClient> _clients;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OnlineClientManager"/> class.
+        ///     Initializes a new instance of the <see cref="OnlineClientManager" /> class.
         /// </summary>
         public OnlineClientManager()
         {

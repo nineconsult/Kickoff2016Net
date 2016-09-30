@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Transactions;
 using Abp.Collections.Extensions;
 using Abp.Domain.Uow;
-using Abp.Json;
 using Abp.Runtime.Session;
 using Abp.Threading;
 using Abp.Timing;
@@ -16,15 +15,9 @@ namespace Abp.Auditing
 {
     internal class AuditingInterceptor : IInterceptor
     {
-        public IAbpSession AbpSession { get; set; }
-
-        public ILogger Logger { get; set; }
-
-        public IAuditingStore AuditingStore { get; set; }
+        private readonly IAuditInfoProvider _auditInfoProvider;
 
         private readonly IAuditingConfiguration _configuration;
-
-        private readonly IAuditInfoProvider _auditInfoProvider;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         public AuditingInterceptor(IAuditingConfiguration configuration, IAuditInfoProvider auditInfoProvider, IUnitOfWorkManager unitOfWorkManager)
@@ -37,6 +30,12 @@ namespace Abp.Auditing
             Logger = NullLogger.Instance;
             AuditingStore = SimpleLogAuditingStore.Instance;
         }
+
+        public IAbpSession AbpSession { get; set; }
+
+        public ILogger Logger { get; set; }
+
+        public IAuditingStore AuditingStore { get; set; }
 
         public void Intercept(IInvocation invocation)
         {
@@ -99,13 +98,14 @@ namespace Abp.Auditing
                 AuditingStore.Save(auditInfo);
             }
         }
+
         private void PerformAsyncAuditing(IInvocation invocation, AuditInfo auditInfo)
         {
             var stopwatch = Stopwatch.StartNew();
 
             invocation.Proceed();
 
-            if (invocation.Method.ReturnType == typeof(Task))
+            if (invocation.Method.ReturnType == typeof (Task))
             {
                 invocation.ReturnValue = InternalAsyncHelper.AwaitTaskWithFinally(
                     (Task) invocation.ReturnValue,
@@ -133,7 +133,7 @@ namespace Abp.Auditing
                 }
 
                 var dictionary = new Dictionary<string, object>();
-                for (int i = 0; i < parameters.Length; i++)
+                for (var i = 0; i < parameters.Length; i++)
                 {
                     var parameter = parameters[i];
                     var argument = invocation.Arguments[i];

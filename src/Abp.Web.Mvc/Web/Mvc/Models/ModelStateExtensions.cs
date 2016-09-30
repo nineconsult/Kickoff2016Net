@@ -6,7 +6,7 @@ using Abp.Web.Models;
 namespace Abp.Web.Mvc.Models
 {
     /// <summary>
-    /// TODO: THIS CLASS IS NOT FINISHED AND TESTED YET!
+    ///     TODO: THIS CLASS IS NOT FINISHED AND TESTED YET!
     /// </summary>
     public static class ModelStateExtensions
     {
@@ -28,9 +28,9 @@ namespace Abp.Web.Mvc.Models
             }
 
             var errorInfo = new ErrorInfo(AbpWebLocalizedMessages.ValidationError)
-                            {
-                                ValidationErrors = validationErrors.ToArray()
-                            };
+            {
+                ValidationErrors = validationErrors.ToArray()
+            };
 
             return new MvcAjaxResponse(errorInfo);
         }

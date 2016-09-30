@@ -12,7 +12,7 @@ namespace Abp.Tests.Json
         public void Test_1()
         {
             var str = JsonSerializationHelper.SerializeWithType(new MyClass1("John"));
-            var result = (MyClass1)JsonSerializationHelper.DeserializeWithType(str);
+            var result = (MyClass1) JsonSerializationHelper.DeserializeWithType(str);
             result.ShouldNotBeNull();
             result.Name.ShouldBe("John");
         }
@@ -23,7 +23,7 @@ namespace Abp.Tests.Json
             Clock.Provider = new UtcClockProvider();
 
             var str = "Abp.Tests.Json.JsonSerializationHelper_Tests+MyClass2, Abp.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|{\"Date\":\"2016-04-13T16:58:10.526+08:00\"}";
-            var result = (MyClass2)JsonSerializationHelper.DeserializeWithType(str);
+            var result = (MyClass2) JsonSerializationHelper.DeserializeWithType(str);
             result.ShouldNotBeNull();
             result.Date.ShouldBe(new DateTime(2016, 04, 13, 08, 58, 10, 526, Clock.Kind));
             result.Date.Kind.ShouldBe(Clock.Kind);
@@ -36,7 +36,7 @@ namespace Abp.Tests.Json
 
             var myClass = new MyClass2(new DateTime(2016, 04, 13, 08, 58, 10, 526, Clock.Kind));
             var str = JsonSerializationHelper.SerializeWithType(myClass);
-            var result = (MyClass2)JsonSerializationHelper.DeserializeWithType(str);
+            var result = (MyClass2) JsonSerializationHelper.DeserializeWithType(str);
 
             result.Date.ShouldBe(new DateTime(2016, 04, 13, 08, 58, 10, 526, Clock.Kind));
             result.Date.Kind.ShouldBe(Clock.Kind);
@@ -44,27 +44,26 @@ namespace Abp.Tests.Json
 
         public class MyClass1
         {
-            public string Name { get; set; }
-
             public MyClass1()
             {
-
             }
 
             public MyClass1(string name)
             {
                 Name = name;
             }
+
+            public string Name { get; set; }
         }
 
         public class MyClass2
         {
-            public DateTime Date { get; set; }
-
             public MyClass2(DateTime date)
             {
                 Date = date;
             }
+
+            public DateTime Date { get; set; }
         }
     }
 }

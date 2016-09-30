@@ -4,8 +4,9 @@ using Newtonsoft.Json;
 namespace Abp.Localization
 {
     /// <summary>
-    /// This class can be used to serialize <see cref="ILocalizableString"/> to <see cref="string"/> during serialization.
-    /// It does not work for deserialization.
+    ///     This class can be used to serialize <see cref="ILocalizableString" /> to <see cref="string" /> during
+    ///     serialization.
+    ///     It does not work for deserialization.
     /// </summary>
     public class LocalizableStringToStringJsonConverter : JsonConverter
     {

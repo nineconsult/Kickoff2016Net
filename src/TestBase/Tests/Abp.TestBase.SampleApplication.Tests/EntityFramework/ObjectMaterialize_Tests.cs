@@ -1,14 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
-using System.Linq;
-using Abp.Domain.Repositories;
+﻿using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.TestBase.SampleApplication.Crm;
 using Abp.Timing;
-using Castle.Core.Internal;
-using Shouldly;
-using Xunit;
 
 namespace Abp.TestBase.SampleApplication.Tests.EntityFramework
 {
@@ -22,7 +15,7 @@ namespace Abp.TestBase.SampleApplication.Tests.EntityFramework
             _companyRepository = Resolve<IRepository<Company>>();
             _unitOfWorkManager = Resolve<IUnitOfWorkManager>();
 
-            if (RandomHelper.GetRandomOf(new[] { 1, 2 }) == 1)
+            if (RandomHelper.GetRandomOf(1, 2) == 1)
             {
                 Clock.Provider = new LocalClockProvider();
             }

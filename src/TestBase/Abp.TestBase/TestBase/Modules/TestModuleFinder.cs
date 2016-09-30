@@ -7,12 +7,12 @@ namespace Abp.TestBase.Modules
 {
     public class TestModuleFinder : IModuleFinder
     {
-        public ITypeList<AbpModule> Modules { get; private set; }
-
         public TestModuleFinder()
         {
             Modules = new TypeList<AbpModule>();
         }
+
+        public ITypeList<AbpModule> Modules { get; }
 
         public ICollection<Type> FindAll()
         {

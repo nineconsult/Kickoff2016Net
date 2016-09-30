@@ -7,8 +7,8 @@ using Abp.Dependency;
 namespace Abp.WebApi.Controllers
 {
     /// <summary>
-    /// This class is used to use IOC system to create api controllers.
-    /// It's used by ASP.NET system.
+    ///     This class is used to use IOC system to create api controllers.
+    ///     It's used by ASP.NET system.
     /// </summary>
     public class AbpApiControllerActivator : IHttpControllerActivator
     {

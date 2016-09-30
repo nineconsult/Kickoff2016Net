@@ -7,38 +7,18 @@ using Abp.WebApi.Controllers.Dynamic.Interceptors;
 namespace Abp.WebApi.Controllers.Dynamic.Builders
 {
     /// <summary>
-    /// Used to build <see cref="DynamicApiControllerInfo"/> object.
+    ///     Used to build <see cref="DynamicApiControllerInfo" /> object.
     /// </summary>
     /// <typeparam name="T">The of the proxied object</typeparam>
     internal class ApiControllerBuilder<T> : IApiControllerBuilder<T>
     {
         /// <summary>
-        /// Name of the controller.
-        /// </summary>
-        public string ServiceName { get; private set; }
-
-        /// <summary>
-        /// Gets type of the service interface for this dynamic controller.
-        /// </summary>
-        public Type ServiceInterfaceType { get; private set; }
-
-        /// <summary>
-        /// Action Filters to apply to this dynamic controller.
-        /// </summary>
-        public IFilter[] Filters { get; private set; }
-
-        /// <summary>
-        /// True, if using conventional verbs for this dynamic controller.
-        /// </summary>
-        public bool ConventionalVerbs { get; private set; }
-
-        /// <summary>
-        /// List of all action builders for this controller.
+        ///     List of all action builders for this controller.
         /// </summary>
         private readonly IDictionary<string, ApiControllerActionBuilder<T>> _actionBuilders;
-        
+
         /// <summary>
-        /// Creates a new instance of ApiControllerInfoBuilder.
+        ///     Creates a new instance of ApiControllerInfoBuilder.
         /// </summary>
         /// <param name="serviceName">Name of the controller</param>
         public ApiControllerBuilder(string serviceName)
@@ -58,7 +38,7 @@ namespace Abp.WebApi.Controllers.Dynamic.Builders
 
             _actionBuilders = new Dictionary<string, ApiControllerActionBuilder<T>>();
 
-            foreach (var methodInfo in DynamicApiControllerActionHelper.GetMethodsOfType(typeof(T)))
+            foreach (var methodInfo in DynamicApiControllerActionHelper.GetMethodsOfType(typeof (T)))
             {
                 var actionBuilder = new ApiControllerActionBuilder<T>(this, methodInfo);
 
@@ -72,7 +52,27 @@ namespace Abp.WebApi.Controllers.Dynamic.Builders
         }
 
         /// <summary>
-        /// The adds Action filters for the whole Dynamic Controller
+        ///     Name of the controller.
+        /// </summary>
+        public string ServiceName { get; }
+
+        /// <summary>
+        ///     Gets type of the service interface for this dynamic controller.
+        /// </summary>
+        public Type ServiceInterfaceType { get; }
+
+        /// <summary>
+        ///     Action Filters to apply to this dynamic controller.
+        /// </summary>
+        public IFilter[] Filters { get; private set; }
+
+        /// <summary>
+        ///     True, if using conventional verbs for this dynamic controller.
+        /// </summary>
+        public bool ConventionalVerbs { get; private set; }
+
+        /// <summary>
+        ///     The adds Action filters for the whole Dynamic Controller
         /// </summary>
         /// <param name="filters"> The filters. </param>
         /// <returns>The current Controller Builder </returns>
@@ -83,7 +83,7 @@ namespace Abp.WebApi.Controllers.Dynamic.Builders
         }
 
         /// <summary>
-        /// Used to specify a method definition.
+        ///     Used to specify a method definition.
         /// </summary>
         /// <param name="methodName">Name of the method in proxied type</param>
         /// <returns>Action builder</returns>
@@ -91,7 +91,7 @@ namespace Abp.WebApi.Controllers.Dynamic.Builders
         {
             if (!_actionBuilders.ContainsKey(methodName))
             {
-                throw new AbpException("There is no method with name " + methodName + " in type " + typeof(T).Name);
+                throw new AbpException("There is no method with name " + methodName + " in type " + typeof (T).Name);
             }
 
             return _actionBuilders[methodName];
@@ -114,19 +114,19 @@ namespace Abp.WebApi.Controllers.Dynamic.Builders
         }
 
         /// <summary>
-        /// Builds the controller.
-        /// This method must be called at last of the build operation.
+        ///     Builds the controller.
+        ///     This method must be called at last of the build operation.
         /// </summary>
         public void Build()
         {
             var controllerInfo = new DynamicApiControllerInfo(
                 ServiceName,
                 ServiceInterfaceType,
-                typeof(DynamicApiController<T>),
-                typeof(AbpDynamicApiControllerInterceptor<T>),
+                typeof (DynamicApiController<T>),
+                typeof (AbpDynamicApiControllerInterceptor<T>),
                 Filters
                 );
-            
+
             foreach (var actionBuilder in _actionBuilders.Values)
             {
                 if (actionBuilder.DontCreate)
@@ -136,7 +136,7 @@ namespace Abp.WebApi.Controllers.Dynamic.Builders
 
                 controllerInfo.Actions[actionBuilder.ActionName] = actionBuilder.BuildActionInfo(ConventionalVerbs);
             }
-            
+
             DynamicApiControllerManager.Register(controllerInfo);
         }
     }

@@ -23,38 +23,13 @@ using EntityFramework.DynamicFilters;
 namespace Abp.EntityFramework
 {
     /// <summary>
-    /// Base class for all DbContext classes in the application.
+    ///     Base class for all DbContext classes in the application.
     /// </summary>
     public abstract class AbpDbContext : DbContext, ITransientDependency, IShouldInitialize
     {
         /// <summary>
-        /// Used to get current session values.
-        /// </summary>
-        public IAbpSession AbpSession { get; set; }
-
-        /// <summary>
-        /// Used to trigger entity change events.
-        /// </summary>
-        public IEntityChangeEventHelper EntityChangeEventHelper { get; set; }
-
-        /// <summary>
-        /// Reference to the logger.
-        /// </summary>
-        public ILogger Logger { get; set; }
-
-        /// <summary>
-        /// Reference to GUID generator.
-        /// </summary>
-        public IGuidGenerator GuidGenerator { get; set; }
-
-        /// <summary>
-        /// Reference to the current UOW provider.
-        /// </summary>
-        public ICurrentUnitOfWorkProvider CurrentUnitOfWorkProvider { get; set; }
-
-        /// <summary>
-        /// Constructor.
-        /// Uses <see cref="IAbpStartupConfiguration.DefaultNameOrConnectionString"/> as connection string.
+        ///     Constructor.
+        ///     Uses <see cref="IAbpStartupConfiguration.DefaultNameOrConnectionString" /> as connection string.
         /// </summary>
         protected AbpDbContext()
         {
@@ -62,7 +37,7 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
         protected AbpDbContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
@@ -71,7 +46,7 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
         protected AbpDbContext(DbCompiledModel model)
             : base(model)
@@ -80,7 +55,7 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
         protected AbpDbContext(DbConnection existingConnection, bool contextOwnsConnection)
             : base(existingConnection, contextOwnsConnection)
@@ -89,7 +64,7 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
         protected AbpDbContext(string nameOrConnectionString, DbCompiledModel model)
             : base(nameOrConnectionString, model)
@@ -98,7 +73,7 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
         protected AbpDbContext(ObjectContext objectContext, bool dbContextOwnsObjectContext)
             : base(objectContext, dbContextOwnsObjectContext)
@@ -107,12 +82,44 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
         protected AbpDbContext(DbConnection existingConnection, DbCompiledModel model, bool contextOwnsConnection)
             : base(existingConnection, model, contextOwnsConnection)
         {
             InitializeDbContext();
+        }
+
+        /// <summary>
+        ///     Used to get current session values.
+        /// </summary>
+        public IAbpSession AbpSession { get; set; }
+
+        /// <summary>
+        ///     Used to trigger entity change events.
+        /// </summary>
+        public IEntityChangeEventHelper EntityChangeEventHelper { get; set; }
+
+        /// <summary>
+        ///     Reference to the logger.
+        /// </summary>
+        public ILogger Logger { get; set; }
+
+        /// <summary>
+        ///     Reference to GUID generator.
+        /// </summary>
+        public IGuidGenerator GuidGenerator { get; set; }
+
+        /// <summary>
+        ///     Reference to the current UOW provider.
+        /// </summary>
+        public ICurrentUnitOfWorkProvider CurrentUnitOfWorkProvider { get; set; }
+
+        public virtual void Initialize()
+        {
+            Database.Initialize(false);
+            this.SetFilterScopedParameterValue(AbpDataFilters.MustHaveTenant, AbpDataFilters.Parameters.TenantId, AbpSession.TenantId ?? 0);
+            this.SetFilterScopedParameterValue(AbpDataFilters.MayHaveTenant, AbpDataFilters.Parameters.TenantId, AbpSession.TenantId);
         }
 
         private void InitializeDbContext()
@@ -123,15 +130,15 @@ namespace Abp.EntityFramework
 
         private void RegisterToChanges()
         {
-            ((IObjectContextAdapter)this)
+            ((IObjectContextAdapter) this)
                 .ObjectContext
                 .ObjectStateManager
                 .ObjectStateManagerChanged += ObjectStateManager_ObjectStateManagerChanged;
         }
 
-        protected virtual void ObjectStateManager_ObjectStateManagerChanged(object sender, System.ComponentModel.CollectionChangeEventArgs e)
+        protected virtual void ObjectStateManager_ObjectStateManagerChanged(object sender, CollectionChangeEventArgs e)
         {
-            var contextAdapter = (IObjectContextAdapter)this;
+            var contextAdapter = (IObjectContextAdapter) this;
             if (e.Action != CollectionChangeAction.Add)
             {
                 return;
@@ -159,18 +166,11 @@ namespace Abp.EntityFramework
             GuidGenerator = SequentialGuidGenerator.Instance;
         }
 
-        public virtual void Initialize()
-        {
-            Database.Initialize(false);
-            this.SetFilterScopedParameterValue(AbpDataFilters.MustHaveTenant, AbpDataFilters.Parameters.TenantId, AbpSession.TenantId ?? 0);
-            this.SetFilterScopedParameterValue(AbpDataFilters.MayHaveTenant, AbpDataFilters.Parameters.TenantId, AbpSession.TenantId);
-        }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Filter(AbpDataFilters.SoftDelete, (ISoftDelete d) => d.IsDeleted, false);
-            modelBuilder.Filter(AbpDataFilters.MustHaveTenant, (IMustHaveTenant t, int tenantId) => t.TenantId == tenantId || (int?)t.TenantId == null, 0);
+            modelBuilder.Filter(AbpDataFilters.MustHaveTenant, (IMustHaveTenant t, int tenantId) => t.TenantId == tenantId || (int?) t.TenantId == null, 0);
             modelBuilder.Filter(AbpDataFilters.MayHaveTenant, (IMayHaveTenant t, int? tenantId) => t.TenantId == tenantId, 0);
         }
 

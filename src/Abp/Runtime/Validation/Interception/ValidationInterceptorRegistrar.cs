@@ -14,9 +14,9 @@ namespace Abp.Runtime.Validation.Interception
 
         private static void Kernel_ComponentRegistered(string key, IHandler handler)
         {
-            if (typeof(IApplicationService).IsAssignableFrom(handler.ComponentModel.Implementation))
+            if (typeof (IApplicationService).IsAssignableFrom(handler.ComponentModel.Implementation))
             {
-                handler.ComponentModel.Interceptors.Add(new InterceptorReference(typeof(ValidationInterceptor)));
+                handler.ComponentModel.Interceptors.Add(new InterceptorReference(typeof (ValidationInterceptor)));
             }
         }
     }

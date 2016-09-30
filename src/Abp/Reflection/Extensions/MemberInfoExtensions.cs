@@ -4,12 +4,12 @@ using System.Reflection;
 namespace Abp.Reflection.Extensions
 {
     /// <summary>
-    /// Extensions to <see cref="MemberInfo"/>.
+    ///     Extensions to <see cref="MemberInfo" />.
     /// </summary>
     public static class MemberInfoExtensions
     {
         /// <summary>
-        /// Gets a single attribute for a member.
+        ///     Gets a single attribute for a member.
         /// </summary>
         /// <typeparam name="TAttribute">Type of the attribute</typeparam>
         /// <param name="memberInfo">The member that will be checked for the attribute</param>
@@ -23,10 +23,10 @@ namespace Abp.Reflection.Extensions
                 throw new ArgumentNullException("memberInfo");
             }
 
-            var attrs = memberInfo.GetCustomAttributes(typeof(TAttribute), inherit);
+            var attrs = memberInfo.GetCustomAttributes(typeof (TAttribute), inherit);
             if (attrs.Length > 0)
             {
-                return (TAttribute)attrs[0];
+                return (TAttribute) attrs[0];
             }
 
             return default(TAttribute);

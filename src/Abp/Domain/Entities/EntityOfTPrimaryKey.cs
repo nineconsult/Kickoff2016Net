@@ -5,20 +5,20 @@ using Abp.Extensions;
 namespace Abp.Domain.Entities
 {
     /// <summary>
-    /// Basic implementation of IEntity interface.
-    /// An entity can inherit this class of directly implement to IEntity interface.
+    ///     Basic implementation of IEntity interface.
+    ///     An entity can inherit this class of directly implement to IEntity interface.
     /// </summary>
     /// <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
     [Serializable]
     public abstract class Entity<TPrimaryKey> : IEntity<TPrimaryKey>
     {
         /// <summary>
-        /// Unique identifier for this entity.
+        ///     Unique identifier for this entity.
         /// </summary>
         public virtual TPrimaryKey Id { get; set; }
 
         /// <summary>
-        /// Checks if this entity is transient (it has not an Id).
+        ///     Checks if this entity is transient (it has not an Id).
         /// </summary>
         /// <returns>True, if this entity is transient</returns>
         public virtual bool IsTransient()
@@ -26,7 +26,7 @@ namespace Abp.Domain.Entities
             return EqualityComparer<TPrimaryKey>.Default.Equals(Id, default(TPrimaryKey));
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public override bool Equals(object obj)
         {
             if (obj == null || !(obj is Entity<TPrimaryKey>))
@@ -41,7 +41,7 @@ namespace Abp.Domain.Entities
             }
 
             //Transient objects are not considered as equal
-            var other = (Entity<TPrimaryKey>)obj;
+            var other = (Entity<TPrimaryKey>) obj;
             if (IsTransient() && other.IsTransient())
             {
                 return false;
@@ -70,13 +70,13 @@ namespace Abp.Domain.Entities
             return Id.Equals(other.Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public override int GetHashCode()
         {
             return Id.GetHashCode();
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public static bool operator ==(Entity<TPrimaryKey> left, Entity<TPrimaryKey> right)
         {
             if (Equals(left, null))
@@ -87,13 +87,13 @@ namespace Abp.Domain.Entities
             return left.Equals(right);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public static bool operator !=(Entity<TPrimaryKey> left, Entity<TPrimaryKey> right)
         {
             return !(left == right);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public override string ToString()
         {
             return string.Format("[{0} {1}]", GetType().Name, Id);

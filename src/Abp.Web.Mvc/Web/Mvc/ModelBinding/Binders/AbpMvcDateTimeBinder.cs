@@ -5,7 +5,7 @@ using Abp.Timing;
 namespace Abp.Web.Mvc.ModelBinding.Binders
 {
     /// <summary>
-    /// Binds any browser request datetime to utc datetime
+    ///     Binds any browser request datetime to utc datetime
     /// </summary>
     public class AbpMvcDateTimeBinder : DefaultModelBinder
     {

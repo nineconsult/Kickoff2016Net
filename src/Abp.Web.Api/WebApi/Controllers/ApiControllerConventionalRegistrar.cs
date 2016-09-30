@@ -5,7 +5,7 @@ using Castle.MicroKernel.Registration;
 namespace Abp.WebApi.Controllers
 {
     /// <summary>
-    /// Registers all Web API Controllers derived from <see cref="ApiController"/>.
+    ///     Registers all Web API Controllers derived from <see cref="ApiController" />.
     /// </summary>
     public class ApiControllerConventionalRegistrar : IConventionalDependencyRegistrar
     {

@@ -8,18 +8,17 @@ using Abp.Runtime.Caching.Configuration;
 namespace Abp.Runtime.Caching
 {
     /// <summary>
-    /// Base class for cache managers.
+    ///     Base class for cache managers.
     /// </summary>
     public abstract class CacheManagerBase : ICacheManager, ISingletonDependency
     {
-        protected readonly IIocManager IocManager;
-
-        protected readonly ICachingConfiguration Configuration;
-
         protected readonly ConcurrentDictionary<string, ICache> Caches;
 
+        protected readonly ICachingConfiguration Configuration;
+        protected readonly IIocManager IocManager;
+
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
         /// <param name="iocManager"></param>
         /// <param name="configuration"></param>
@@ -34,10 +33,10 @@ namespace Abp.Runtime.Caching
         {
             return Caches.Values.ToImmutableList();
         }
-        
+
         public virtual ICache GetCache(string name)
         {
-            return Caches.GetOrAdd(name, (cacheName) =>
+            return Caches.GetOrAdd(name, cacheName =>
             {
                 var cache = CreateCacheImplementation(cacheName);
 
@@ -66,7 +65,7 @@ namespace Abp.Runtime.Caching
         }
 
         /// <summary>
-        /// Used to create actual cache implementation.
+        ///     Used to create actual cache implementation.
         /// </summary>
         /// <param name="name">Name of the cache</param>
         /// <returns>Cache object</returns>

@@ -11,7 +11,7 @@ namespace Abp.Tests.Threading
 
         public LockExtensions_Tests()
         {
-            _list = new List<int> { 1 };
+            _list = new List<int> {1};
         }
 
         [Fact]

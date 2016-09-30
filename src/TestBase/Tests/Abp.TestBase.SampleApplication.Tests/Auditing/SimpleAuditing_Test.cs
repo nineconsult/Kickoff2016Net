@@ -10,9 +10,8 @@ namespace Abp.TestBase.SampleApplication.Tests.Auditing
 {
     public class SimpleAuditing_Test : SampleApplicationTestBase
     {
-        private readonly IPersonAppService _personAppService;
-
         private IAuditingStore _auditingStore;
+        private readonly IPersonAppService _personAppService;
 
         public SimpleAuditing_Test()
         {
@@ -29,6 +28,37 @@ namespace Abp.TestBase.SampleApplication.Tests.Auditing
                 );
         }
 
+        [Audited]
+        public class MyServiceWithClassAudited
+        {
+            public virtual void Test1()
+            {
+            }
+
+            public void Test2()
+            {
+            }
+        }
+
+        public class MyServiceWithMethodAudited
+        {
+            [Audited]
+            public virtual void Test1()
+            {
+            }
+
+            public virtual void Test2()
+            {
+            }
+        }
+
+        public class MyServiceWithNotAudited
+        {
+            public virtual void Test1()
+            {
+            }
+        }
+
         #region CASES WRITE AUDIT LOGS
 
         [Fact]
@@ -36,7 +66,7 @@ namespace Abp.TestBase.SampleApplication.Tests.Auditing
         {
             /* All application service methods are audited as conventional. */
 
-            await _personAppService.CreatePersonAsync(new CreatePersonInput { ContactListId = 1, Name = "john" });
+            await _personAppService.CreatePersonAsync(new CreatePersonInput {ContactListId = 1, Name = "john"});
             _auditingStore.Received().SaveAsync(Arg.Any<AuditInfo>());
         }
 
@@ -98,41 +128,5 @@ namespace Abp.TestBase.SampleApplication.Tests.Auditing
         }
 
         #endregion
-
-        [Audited]
-        public class MyServiceWithClassAudited
-        {
-            public virtual void Test1()
-            {
-
-            }
-
-            public void Test2()
-            {
-
-            }
-        }
-
-        public class MyServiceWithMethodAudited
-        {
-            [Audited]
-            public virtual void Test1()
-            {
-
-            }
-
-            public virtual void Test2()
-            {
-
-            }
-        }
-
-        public class MyServiceWithNotAudited
-        {
-            public virtual void Test1()
-            {
-
-            }
-        }
     }
 }

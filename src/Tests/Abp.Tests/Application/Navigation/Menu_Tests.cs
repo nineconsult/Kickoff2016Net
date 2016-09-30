@@ -20,7 +20,7 @@ namespace Abp.Tests.Application.Navigation
             var adminMenuItemDefinition = mainMenuDefinition.GetItemByNameOrNull("Abp.Zero.Administration");
             adminMenuItemDefinition.ShouldNotBe(null);
             adminMenuItemDefinition.Items.Count.ShouldBe(3);
-            
+
             //Check user menus
             var userMenu = await testCase.UserNavigationManager.GetMenuAsync(mainMenuDefinition.Name, 1, 1);
             userMenu.Items.Count.ShouldBe(1);

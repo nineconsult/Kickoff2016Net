@@ -7,8 +7,8 @@ namespace Abp.WebApi.Controllers.Dynamic.Scripting.Angular
 {
     internal class AngularActionScriptWriter
     {
-        private readonly DynamicApiControllerInfo _controllerInfo;
         private readonly DynamicApiActionInfo _actionInfo;
+        private readonly DynamicApiControllerInfo _controllerInfo;
 
         public AngularActionScriptWriter(DynamicApiControllerInfo controllerInfo, DynamicApiActionInfo methodInfo)
         {

@@ -9,14 +9,14 @@ namespace Abp.Tests.Events.Bus
 
         public static int DisposeCount { get; set; }
 
-        public void HandleEvent(MySimpleEventData eventData)
-        {
-            ++HandleCount;
-        }
-
         public void Dispose()
         {
             ++DisposeCount;
+        }
+
+        public void HandleEvent(MySimpleEventData eventData)
+        {
+            ++HandleCount;
         }
     }
 }

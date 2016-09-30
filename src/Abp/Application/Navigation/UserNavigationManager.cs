@@ -13,13 +13,10 @@ namespace Abp.Application.Navigation
 {
     internal class UserNavigationManager : IUserNavigationManager, ITransientDependency
     {
-        public IPermissionChecker PermissionChecker { get; set; }
-
-        public IAbpSession AbpSession { get; set; }
+        private readonly IIocResolver _iocResolver;
+        private readonly ILocalizationContext _localizationContext;
 
         private readonly INavigationManager _navigationManager;
-        private readonly ILocalizationContext _localizationContext;
-        private readonly IIocResolver _iocResolver;
 
         public UserNavigationManager(
             INavigationManager navigationManager,
@@ -32,6 +29,10 @@ namespace Abp.Application.Navigation
             PermissionChecker = NullPermissionChecker.Instance;
             AbpSession = NullAbpSession.Instance;
         }
+
+        public IPermissionChecker PermissionChecker { get; set; }
+
+        public IAbpSession AbpSession { get; set; }
 
         [Obsolete("Use GetMenuAsync(UserIdentifier) instead.")]
         public Task<UserMenu> GetMenuAsync(string menuName, long? userId, int? tenantId = null)

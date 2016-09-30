@@ -86,7 +86,7 @@ namespace Abp.TestBase.SampleApplication.Tests.People
             personToBeDeleted.IsDeleted.ShouldBe(false);
             personToBeDeleted.DeletionTime.ShouldBe(null);
             personToBeDeleted.DeleterUserId.ShouldBe(null);
-            
+
             //Delete it
             await _personRepository.DeleteAsync(personToBeDeleted.Id);
 

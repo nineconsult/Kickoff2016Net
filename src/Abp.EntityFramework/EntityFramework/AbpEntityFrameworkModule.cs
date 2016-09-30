@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Reflection;
+﻿using System.Reflection;
 using Abp.Collections.Extensions;
 using Abp.Dependency;
 using Abp.EntityFramework.Repositories;
@@ -14,13 +11,11 @@ using Castle.MicroKernel.Registration;
 namespace Abp.EntityFramework
 {
     /// <summary>
-    /// This module is used to implement "Data Access Layer" in EntityFramework.
+    ///     This module is used to implement "Data Access Layer" in EntityFramework.
     /// </summary>
-    [DependsOn(typeof(AbpKernelModule))]
+    [DependsOn(typeof (AbpKernelModule))]
     public class AbpEntityFrameworkModule : AbpModule
     {
-        public ILogger Logger { get; set; }
-
         private readonly ITypeFinder _typeFinder;
 
         public AbpEntityFrameworkModule(ITypeFinder typeFinder)
@@ -29,13 +24,15 @@ namespace Abp.EntityFramework
             Logger = NullLogger.Instance;
         }
 
+        public ILogger Logger { get; set; }
+
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
 
             IocManager.IocContainer.Register(
-                Component.For(typeof(IDbContextProvider<>))
-                    .ImplementedBy(typeof(UnitOfWorkDbContextProvider<>))
+                Component.For(typeof (IDbContextProvider<>))
+                    .ImplementedBy(typeof (UnitOfWorkDbContextProvider<>))
                     .LifestyleTransient()
                 );
 
@@ -49,7 +46,7 @@ namespace Abp.EntityFramework
                     type.IsPublic &&
                     !type.IsAbstract &&
                     type.IsClass &&
-                    typeof(AbpDbContext).IsAssignableFrom(type)
+                    typeof (AbpDbContext).IsAssignableFrom(type)
                     );
 
             if (dbContextTypes.IsNullOrEmpty())

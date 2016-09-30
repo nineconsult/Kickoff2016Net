@@ -4,27 +4,16 @@ using System.Globalization;
 namespace Abp.Localization
 {
     /// <summary>
-    /// Represents a string that can be localized.
+    ///     Represents a string that can be localized.
     /// </summary>
     [Serializable]
     public class LocalizableString : ILocalizableString
     {
         /// <summary>
-        /// Unique name of the localization source.
-        /// </summary>
-        public virtual string SourceName { get; private set; }
-
-        /// <summary>
-        /// Unique Name of the string to be localized.
-        /// </summary>
-        public virtual string Name { get; private set; }
-
-        /// <summary>
-        /// Needed for serialization.
+        ///     Needed for serialization.
         /// </summary>
         private LocalizableString()
         {
-            
         }
 
         /// <param name="name">Unique name of the localization source</param>
@@ -44,6 +33,16 @@ namespace Abp.Localization
             Name = name;
             SourceName = sourceName;
         }
+
+        /// <summary>
+        ///     Unique name of the localization source.
+        /// </summary>
+        public virtual string SourceName { get; }
+
+        /// <summary>
+        ///     Unique Name of the string to be localized.
+        /// </summary>
+        public virtual string Name { get; }
 
         public string Localize(ILocalizationContext context)
         {

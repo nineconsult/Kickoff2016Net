@@ -26,7 +26,7 @@ namespace Abp.Auditing
         {
             if (ShouldIntercept(handler.ComponentModel.Implementation))
             {
-                handler.ComponentModel.Interceptors.Add(new InterceptorReference(typeof(AuditingInterceptor)));
+                handler.ComponentModel.Interceptors.Add(new InterceptorReference(typeof (AuditingInterceptor)));
             }
         }
 
@@ -37,12 +37,12 @@ namespace Abp.Auditing
                 return true;
             }
 
-            if (type.IsDefined(typeof(AuditedAttribute), true)) //TODO: true or false?
+            if (type.IsDefined(typeof (AuditedAttribute), true)) //TODO: true or false?
             {
                 return true;
             }
 
-            if (type.GetMethods().Any(m => m.IsDefined(typeof(AuditedAttribute), true))) //TODO: true or false?
+            if (type.GetMethods().Any(m => m.IsDefined(typeof (AuditedAttribute), true))) //TODO: true or false?
             {
                 return true;
             }

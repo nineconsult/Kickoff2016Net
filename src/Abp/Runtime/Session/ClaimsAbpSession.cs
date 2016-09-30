@@ -9,11 +9,22 @@ using Abp.Runtime.Security;
 namespace Abp.Runtime.Session
 {
     /// <summary>
-    /// Implements <see cref="IAbpSession"/> to get session properties from claims of <see cref="Thread.CurrentPrincipal"/>.
+    ///     Implements <see cref="IAbpSession" /> to get session properties from claims of
+    ///     <see cref="Thread.CurrentPrincipal" />.
     /// </summary>
     public class ClaimsAbpSession : IAbpSession
     {
         private const int DefaultTenantId = 1;
+
+        private readonly IMultiTenancyConfig _multiTenancy;
+
+        /// <summary>
+        ///     Constructor.
+        /// </summary>
+        public ClaimsAbpSession(IMultiTenancyConfig multiTenancy)
+        {
+            _multiTenancy = multiTenancy;
+        }
 
         public virtual long? UserId
         {
@@ -125,16 +136,6 @@ namespace Abp.Runtime.Session
 
                 return Convert.ToInt32(impersonatorTenantIdClaim.Value);
             }
-        }
-
-        private readonly IMultiTenancyConfig _multiTenancy;
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        public ClaimsAbpSession(IMultiTenancyConfig multiTenancy)
-        {
-            _multiTenancy = multiTenancy;
         }
     }
 }

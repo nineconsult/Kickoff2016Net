@@ -8,11 +8,11 @@ namespace Abp.TestBase.SampleApplication.ContacLists
     [Table("ContactLists")]
     public class ContactList : Entity, IMustHaveTenant
     {
-        public virtual int TenantId { get; set; }
-
         public virtual string Name { get; set; }
 
         [ForeignKey("ContactListId")]
         public virtual ICollection<Person> People { get; set; }
+
+        public virtual int TenantId { get; set; }
     }
 }

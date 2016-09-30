@@ -8,15 +8,15 @@ using Abp.Json;
 namespace Abp.Notifications
 {
     /// <summary>
-    /// Implements <see cref="INotificationSubscriptionManager"/>.
+    ///     Implements <see cref="INotificationSubscriptionManager" />.
     /// </summary>
     public class NotificationSubscriptionManager : INotificationSubscriptionManager, ITransientDependency
     {
-        private readonly INotificationStore _store;
         private readonly INotificationDefinitionManager _notificationDefinitionManager;
+        private readonly INotificationStore _store;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NotificationSubscriptionManager"/> class.
+        ///     Initializes a new instance of the <see cref="NotificationSubscriptionManager" /> class.
         /// </summary>
         public NotificationSubscriptionManager(INotificationStore store, INotificationDefinitionManager notificationDefinitionManager)
         {
@@ -63,7 +63,7 @@ namespace Abp.Notifications
                 entityIdentifier == null ? null : entityIdentifier.Id.ToJsonString()
                 );
         }
-        
+
         // TODO: Can work only for single database approach!
         public async Task<List<NotificationSubscription>> GetSubscriptionsAsync(string notificationName, EntityIdentifier entityIdentifier = null)
         {
@@ -81,7 +81,7 @@ namespace Abp.Notifications
         public async Task<List<NotificationSubscription>> GetSubscriptionsAsync(int? tenantId, string notificationName, EntityIdentifier entityIdentifier = null)
         {
             var notificationSubscriptionInfos = await _store.GetSubscriptionsAsync(
-                new[] { tenantId },
+                new[] {tenantId},
                 notificationName,
                 entityIdentifier == null ? null : entityIdentifier.Type.FullName,
                 entityIdentifier == null ? null : entityIdentifier.Id.ToJsonString()

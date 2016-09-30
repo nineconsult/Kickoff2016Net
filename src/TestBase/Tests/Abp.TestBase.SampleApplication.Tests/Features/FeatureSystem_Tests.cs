@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Abp.TestBase.SampleApplication.Tests.Features
 {
-    public class FeatureSystem_Tests: SampleApplicationTestBase
+    public class FeatureSystem_Tests : SampleApplicationTestBase
     {
         private readonly IFeatureManager _featureManager;
 

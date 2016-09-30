@@ -1,5 +1,4 @@
 ﻿using Abp.Configuration;
-using NUnit.Framework;
 using Shouldly;
 using Xunit;
 
@@ -45,7 +44,6 @@ namespace Abp.Tests.Configuration
 
         private class MyConfig : DictionaryBasedConfig
         {
-
         }
 
         private class TestClass

@@ -23,7 +23,6 @@ namespace Abp.Tests.Domain.Uow
             {
                 using (var uow = new InnerUnitOfWorkCompleteHandle())
                 {
-
                 }
             }).Message.ShouldBe(InnerUnitOfWorkCompleteHandle.DidNotCallCompleteMethodExceptionMessage);
         }
@@ -33,13 +32,13 @@ namespace Abp.Tests.Domain.Uow
         {
             Assert.Throws<Exception>(
                 new Action(() =>
-                           {
-                               using (var uow = new InnerUnitOfWorkCompleteHandle())
-                               {
-                                   throw new Exception("My inner exception!");
-                                   uow.Complete();
-                               }
-                           })).Message.ShouldBe("My inner exception!");
+                {
+                    using (var uow = new InnerUnitOfWorkCompleteHandle())
+                    {
+                        throw new Exception("My inner exception!");
+                        uow.Complete();
+                    }
+                })).Message.ShouldBe("My inner exception!");
         }
     }
 }

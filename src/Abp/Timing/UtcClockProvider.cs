@@ -3,7 +3,7 @@ using System;
 namespace Abp.Timing
 {
     /// <summary>
-    /// Implements <see cref="IClockProvider"/> to work with UTC times.
+    ///     Implements <see cref="IClockProvider" /> to work with UTC times.
     /// </summary>
     public class UtcClockProvider : IClockProvider
     {
@@ -14,10 +14,7 @@ namespace Abp.Timing
 
         public DateTimeKind Kind
         {
-            get
-            {
-                return DateTimeKind.Utc;
-            }
+            get { return DateTimeKind.Utc; }
         }
 
         public DateTime Normalize(DateTime dateTime)

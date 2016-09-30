@@ -4,7 +4,7 @@ using Abp.Localization.Dictionaries;
 namespace Abp.Tests.Localization
 {
     /// <summary>
-    /// Derived from LocalizationDictionary to be able to add "<see cref="Add"/>" method.
+    ///     Derived from LocalizationDictionary to be able to add "<see cref="Add" />" method.
     /// </summary>
     public class LocalizationDictionaryWithAddMethod : LocalizationDictionary
     {

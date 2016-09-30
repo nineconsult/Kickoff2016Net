@@ -7,7 +7,7 @@ using MongoDB.Driver.Linq;
 namespace Abp.MongoDb.Repositories
 {
     /// <summary>
-    /// Implements IRepository for MongoDB.
+    ///     Implements IRepository for MongoDB.
     /// </summary>
     /// <typeparam name="TEntity">Type of the Entity for this repository</typeparam>
     public class MongoDbRepositoryBase<TEntity> : MongoDbRepositoryBase<TEntity, int>, IRepository<TEntity>
@@ -20,13 +20,20 @@ namespace Abp.MongoDb.Repositories
     }
 
     /// <summary>
-    /// Implements IRepository for MongoDB.
+    ///     Implements IRepository for MongoDB.
     /// </summary>
     /// <typeparam name="TEntity">Type of the Entity for this repository</typeparam>
     /// <typeparam name="TPrimaryKey">Primary key of the entity</typeparam>
     public class MongoDbRepositoryBase<TEntity, TPrimaryKey> : AbpRepositoryBase<TEntity, TPrimaryKey>
         where TEntity : class, IEntity<TPrimaryKey>
     {
+        private readonly IMongoDatabaseProvider _databaseProvider;
+
+        public MongoDbRepositoryBase(IMongoDatabaseProvider databaseProvider)
+        {
+            _databaseProvider = databaseProvider;
+        }
+
         public virtual MongoDatabase Database
         {
             get { return _databaseProvider.Database; }
@@ -34,17 +41,7 @@ namespace Abp.MongoDb.Repositories
 
         public virtual MongoCollection<TEntity> Collection
         {
-            get
-            {
-                return _databaseProvider.Database.GetCollection<TEntity>(typeof(TEntity).Name);
-            }
-        }
-
-        private readonly IMongoDatabaseProvider _databaseProvider;
-
-        public MongoDbRepositoryBase(IMongoDatabaseProvider databaseProvider)
-        {
-            _databaseProvider = databaseProvider;
+            get { return _databaseProvider.Database.GetCollection<TEntity>(typeof (TEntity).Name); }
         }
 
         public override IQueryable<TEntity> GetAll()
@@ -69,6 +66,7 @@ namespace Abp.MongoDb.Repositories
             Collection.Insert(entity);
             return entity;
         }
+
         public override TEntity Update(TEntity entity)
         {
             Collection.Save(entity);

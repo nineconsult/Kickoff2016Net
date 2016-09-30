@@ -6,14 +6,14 @@ using StackExchange.Redis;
 namespace Abp.Runtime.Caching.Redis
 {
     /// <summary>
-    /// Used to store cache in a Redis server.
+    ///     Used to store cache in a Redis server.
     /// </summary>
     public class AbpRedisCache : CacheBase
     {
         private readonly IDatabase _database;
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
         public AbpRedisCache(string name, IAbpRedisCacheDatabaseProvider redisCacheDatabaseProvider)
             : base(name)

@@ -4,8 +4,8 @@ namespace Abp.EntityFramework
 {
     public class DefaultDbContextResolver : IDbContextResolver, ITransientDependency
     {
-        private readonly IIocResolver _iocResolver;
         private readonly IDbContextTypeMatcher _dbContextTypeMatcher;
+        private readonly IIocResolver _iocResolver;
 
         public DefaultDbContextResolver(IIocResolver iocResolver, IDbContextTypeMatcher dbContextTypeMatcher)
         {
@@ -15,7 +15,7 @@ namespace Abp.EntityFramework
 
         public TDbContext Resolve<TDbContext>(string connectionString)
         {
-            var dbContextType = typeof(TDbContext);
+            var dbContextType = typeof (TDbContext);
 
             if (!dbContextType.IsAbstract)
             {
@@ -24,14 +24,11 @@ namespace Abp.EntityFramework
                     nameOrConnectionString = connectionString
                 });
             }
-            else
+            var concreteType = _dbContextTypeMatcher.GetConcreteType(dbContextType);
+            return (TDbContext) _iocResolver.Resolve(concreteType, new
             {
-                var concreteType = _dbContextTypeMatcher.GetConcreteType(dbContextType);
-                return (TDbContext)_iocResolver.Resolve(concreteType, new
-                {
-                    nameOrConnectionString = connectionString
-                });
-            }
+                nameOrConnectionString = connectionString
+            });
         }
     }
 }

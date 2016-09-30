@@ -52,7 +52,6 @@ namespace Abp.Web.Tests
 
         public class MySpecificException : Exception
         {
-            
         }
 
         public class MyErrorInfoConverter : IExceptionToErrorInfoConverter

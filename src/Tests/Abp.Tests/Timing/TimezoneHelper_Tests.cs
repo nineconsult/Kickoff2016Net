@@ -1,6 +1,5 @@
 ﻿using System;
 using Abp.Timing.Timezone;
-using NSubstitute.ExceptionExtensions;
 using Shouldly;
 using Xunit;
 
@@ -30,20 +29,14 @@ namespace Abp.Tests.Timing
             var allTimezones = TimeZoneInfo.GetSystemTimeZones();
             foreach (var timezone in allTimezones)
             {
-                Should.NotThrow(() =>
-                {
-                    TimezoneHelper.WindowsToIana(timezone.Id);
-                });
+                Should.NotThrow(() => { TimezoneHelper.WindowsToIana(timezone.Id); });
             }
         }
 
         [Fact]
         public void Should_Throw_Exception_For_Unknown_Windows_Timezone_Id()
         {
-            Should.Throw<Exception>(() =>
-            {
-                TimezoneHelper.WindowsToIana("abc");
-            });
+            Should.Throw<Exception>(() => { TimezoneHelper.WindowsToIana("abc"); });
         }
     }
 }

@@ -28,36 +28,33 @@ namespace Abp.Domain.Entities.Caching
         IEventHandler<EntityChangedEventData<TEntity>>, IEntityCache<TCacheItem, TPrimaryKey>
         where TEntity : class, IEntity<TPrimaryKey>
     {
-        public TCacheItem this[TPrimaryKey id]
-        {
-            get { return Get(id); }
-        }
-
-        public string CacheName { get; private set; }
-
-        public ITypedCache<TPrimaryKey, TCacheItem> InternalCache
-        {
-            get
-            {
-                return CacheManager.GetCache<TPrimaryKey, TCacheItem>(CacheName);
-            }
-        }
-
-        public IObjectMapper ObjectMapper { get; set; }
-
-        protected ICacheManager CacheManager { get; private set; }
-
-        protected IRepository<TEntity, TPrimaryKey> Repository { get; private set; }
-
         protected EntityCache(
-            ICacheManager cacheManager, 
-            IRepository<TEntity, TPrimaryKey> repository, 
+            ICacheManager cacheManager,
+            IRepository<TEntity, TPrimaryKey> repository,
             string cacheName = null)
         {
             Repository = repository;
             CacheManager = cacheManager;
             CacheName = cacheName ?? GenerateDefaultCacheName();
             ObjectMapper = NullObjectMapper.Instance;
+        }
+
+        public IObjectMapper ObjectMapper { get; set; }
+
+        protected ICacheManager CacheManager { get; }
+
+        protected IRepository<TEntity, TPrimaryKey> Repository { get; }
+
+        public TCacheItem this[TPrimaryKey id]
+        {
+            get { return Get(id); }
+        }
+
+        public string CacheName { get; }
+
+        public ITypedCache<TPrimaryKey, TCacheItem> InternalCache
+        {
+            get { return CacheManager.GetCache<TPrimaryKey, TCacheItem>(CacheName); }
         }
 
         public TCacheItem Get(TPrimaryKey id)

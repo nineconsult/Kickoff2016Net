@@ -7,11 +7,12 @@ using Xunit;
 namespace Abp.TestBase.Tests.Application.Services
 {
     /// <summary>
-    /// Should support working without database or a unit of work.
+    ///     Should support working without database or a unit of work.
     /// </summary>
     public class ApplicationWithoutDb_Tests : AbpIntegratedTestBase
     {
         private readonly IMyAppService _myAppService;
+
         public ApplicationWithoutDb_Tests()
         {
             LocalIocManager.Register<IMyAppService, MyAppService>(DependencyLifeStyle.Transient);
@@ -36,7 +37,7 @@ namespace Abp.TestBase.Tests.Application.Services
         {
             public MyMethodOutput MyMethod(MyMethodInput input)
             {
-                return new MyMethodOutput { Result = 42 };
+                return new MyMethodOutput {Result = 42};
             }
         }
 

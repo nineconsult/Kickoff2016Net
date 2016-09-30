@@ -4,15 +4,15 @@ using Newtonsoft.Json;
 namespace Abp.Json
 {
     /// <summary>
-    /// Defines helper methods to work with JSON.
+    ///     Defines helper methods to work with JSON.
     /// </summary>
     public static class JsonSerializationHelper
     {
         private const char TypeSeperator = '|';
 
         /// <summary>
-        /// Serializes an object with a type information included.
-        /// So, it can be deserialized using <see cref="DeserializeWithType"/> method later.
+        ///     Serializes an object with a type information included.
+        ///     So, it can be deserialized using <see cref="DeserializeWithType" /> method later.
         /// </summary>
         public static string SerializeWithType(object obj)
         {
@@ -20,8 +20,8 @@ namespace Abp.Json
         }
 
         /// <summary>
-        /// Serializes an object with a type information included.
-        /// So, it can be deserialized using <see cref="DeserializeWithType"/> method later.
+        ///     Serializes an object with a type information included.
+        ///     So, it can be deserialized using <see cref="DeserializeWithType" /> method later.
         /// </summary>
         public static string SerializeWithType(object obj, Type type)
         {
@@ -36,15 +36,15 @@ namespace Abp.Json
         }
 
         /// <summary>
-        /// Deserializes an object serialized with <see cref="SerializeWithType(object)"/> methods.
+        ///     Deserializes an object serialized with <see cref="SerializeWithType(object)" /> methods.
         /// </summary>
         public static T DeserializeWithType<T>(string serializedObj)
         {
-            return (T)DeserializeWithType(serializedObj);
+            return (T) DeserializeWithType(serializedObj);
         }
 
         /// <summary>
-        /// Deserializes an object serialized with <see cref="SerializeWithType(object)"/> methods.
+        ///     Deserializes an object serialized with <see cref="SerializeWithType(object)" /> methods.
         /// </summary>
         public static object DeserializeWithType(string serializedObj)
         {

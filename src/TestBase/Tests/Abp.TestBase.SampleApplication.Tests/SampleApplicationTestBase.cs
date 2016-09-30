@@ -9,6 +9,7 @@ using Abp.TestBase.SampleApplication.Crm;
 using Abp.TestBase.SampleApplication.EntityFramework;
 using Abp.TestBase.SampleApplication.People;
 using Castle.MicroKernel.Registration;
+using Effort;
 using EntityFramework.DynamicFilters;
 
 namespace Abp.TestBase.SampleApplication.Tests
@@ -20,7 +21,7 @@ namespace Abp.TestBase.SampleApplication.Tests
             //Fake DbConnection using Effort!
             LocalIocManager.IocContainer.Register(
                 Component.For<DbConnection>()
-                    .UsingFactoryMethod(Effort.DbConnectionFactory.CreateTransient)
+                    .UsingFactoryMethod(DbConnectionFactory.CreateTransient)
                     .LifestyleSingleton()
                 );
 
@@ -38,10 +39,10 @@ namespace Abp.TestBase.SampleApplication.Tests
                             TenantId = 1,
                             Name = "List of Tenant-1",
                             People = new List<Person>
-                                     {
-                                         new Person {Name = "halil"},
-                                         new Person {Name = "emre", IsDeleted = true}
-                                     }
+                            {
+                                new Person {Name = "halil"},
+                                new Person {Name = "emre", IsDeleted = true}
+                            }
                         });
 
                     context.ContactLists.Add(
@@ -50,9 +51,9 @@ namespace Abp.TestBase.SampleApplication.Tests
                             TenantId = 2,
                             Name = "List of Tenant-2",
                             People = new List<Person>
-                                     {
-                                         new Person {Name = "asimov"},
-                                     }
+                            {
+                                new Person {Name = "asimov"}
+                            }
                         });
                 });
 
@@ -82,33 +83,33 @@ namespace Abp.TestBase.SampleApplication.Tests
                 });
 
             UsingDbContext(
-              context =>
-              {
-                  AddCompany(context, 
-                      "Volosoft",
-                      "Turkey",
-                      "Istanbul", 
-                      "Denizkoskler Mah. Avcilar", 
-                      "Halil",
-                      "Gumuspala Mah. Avcilar",
-                      "Ismail", 
-                      "Headquarter", 
-                      "Europe Headquarter");
+                context =>
+                {
+                    AddCompany(context,
+                        "Volosoft",
+                        "Turkey",
+                        "Istanbul",
+                        "Denizkoskler Mah. Avcilar",
+                        "Halil",
+                        "Gumuspala Mah. Avcilar",
+                        "Ismail",
+                        "Headquarter",
+                        "Europe Headquarter");
 
-                  AddCompany(context,
-                      "Microsoft",
-                      "USA",
-                      "New York",
-                      "Herkimer St, Brooklyn, NY",
-                      "Neal",
-                      "Vinegar Hill, Brooklyn, NY",
-                      "Peter",
-                      "Main Office",
-                      "IT Office");
-              });
+                    AddCompany(context,
+                        "Microsoft",
+                        "USA",
+                        "New York",
+                        "Herkimer St, Brooklyn, NY",
+                        "Neal",
+                        "Vinegar Hill, Brooklyn, NY",
+                        "Peter",
+                        "Main Office",
+                        "IT Office");
+                });
         }
 
-        private void AddCompany(SampleApplicationDbContext context,string name,string country, string city, string address1, string modifier1, string address2, string modifier2, string branchName1, string branchName2)
+        private void AddCompany(SampleApplicationDbContext context, string name, string country, string city, string address1, string modifier1, string address2, string modifier2, string branchName1, string branchName2)
         {
             context.Companies.Add(new Company
             {
@@ -139,18 +140,18 @@ namespace Abp.TestBase.SampleApplication.Tests
                     }
                 },
                 Branches = new List<Branch>
-                      {
-                          new Branch
-                          {
-                              Name = branchName1,
-                              CreationTime = new DateTime(2017, 03, 16, 0, 0, 0, DateTimeKind.Local),
-                          },
-                          new Branch()
-                          {
-                              Name = branchName2,
-                              CreationTime = new DateTime(2017, 03, 16, 0, 0, 0, DateTimeKind.Utc)
-                          }
-                      }
+                {
+                    new Branch
+                    {
+                        Name = branchName1,
+                        CreationTime = new DateTime(2017, 03, 16, 0, 0, 0, DateTimeKind.Local)
+                    },
+                    new Branch
+                    {
+                        Name = branchName2,
+                        CreationTime = new DateTime(2017, 03, 16, 0, 0, 0, DateTimeKind.Utc)
+                    }
+                }
             });
         }
 

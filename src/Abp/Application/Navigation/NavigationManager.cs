@@ -7,15 +7,9 @@ namespace Abp.Application.Navigation
 {
     internal class NavigationManager : INavigationManager, ISingletonDependency
     {
-        public IDictionary<string, MenuDefinition> Menus { get; private set; }
-
-        public MenuDefinition MainMenu
-        {
-            get { return Menus["MainMenu"]; }
-        }
+        private readonly INavigationConfiguration _configuration;
 
         private readonly IIocResolver _iocResolver;
-        private readonly INavigationConfiguration _configuration;
 
         public NavigationManager(IIocResolver iocResolver, INavigationConfiguration configuration)
         {
@@ -23,9 +17,16 @@ namespace Abp.Application.Navigation
             _configuration = configuration;
 
             Menus = new Dictionary<string, MenuDefinition>
-                    {
-                        {"MainMenu", new MenuDefinition("MainMenu", new FixedLocalizableString("Main menu"))} //TODO: Localization for "Main menu"
-                    };
+            {
+                {"MainMenu", new MenuDefinition("MainMenu", new FixedLocalizableString("Main menu"))} //TODO: Localization for "Main menu"
+            };
+        }
+
+        public IDictionary<string, MenuDefinition> Menus { get; }
+
+        public MenuDefinition MainMenu
+        {
+            get { return Menus["MainMenu"]; }
         }
 
         public void Initialize()

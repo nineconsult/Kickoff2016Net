@@ -32,7 +32,7 @@ namespace Abp.Tests.Threading
                     _asyncMethod1Worked.ShouldBe(true);
                     await Task.Delay(10);
                 },
-                (exception) => { }
+                exception => { }
                 ).Wait();
 
             _asyncMethod2Worked.ShouldBe(false);
@@ -43,7 +43,7 @@ namespace Abp.Tests.Threading
                     _asyncMethod2Worked.ShouldBe(true);
                     await Task.Delay(10);
                 },
-                (exception) => { }
+                exception => { }
                 ).Result;
 
             returnValue.ShouldBe(42);
@@ -64,7 +64,7 @@ namespace Abp.Tests.Threading
 
             calledFinally.ShouldBe(true);
         }
-        
+
         [Fact]
         public async Task Should_Call_Finally_On_Exception()
         {
@@ -109,7 +109,6 @@ namespace Abp.Tests.Threading
 
         private void MyMethod2Sync()
         {
-
         }
     }
 }

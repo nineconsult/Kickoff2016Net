@@ -58,40 +58,40 @@ namespace Abp.Tests.Dependency
 
         public class MyClass1
         {
+            public MyClass1()
+            {
+                CreateCount++;
+            }
+
             public static int CreateCount { get; set; }
 
             public MyClass2 Obj2 { get; set; }
 
             public MyClass3 Obj3 { get; set; }
-
-            public MyClass1()
-            {
-                CreateCount++;
-            }
         }
 
         public class MyClass2
         {
+            public MyClass2()
+            {
+                CreateCount++;
+            }
+
             public static int CreateCount { get; set; }
 
             public MyClass1 Obj1 { get; set; }
 
             public MyClass3 Obj3 { get; set; }
-
-            public MyClass2()
-            {
-                CreateCount++;
-            }
         }
 
         public class MyClass3
         {
-            public static int CreateCount { get; set; }
-
             public MyClass3()
             {
                 CreateCount++;
             }
+
+            public static int CreateCount { get; set; }
         }
     }
 }

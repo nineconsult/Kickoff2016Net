@@ -5,13 +5,13 @@ using Hangfire;
 
 namespace Abp.Hangfire
 {
-    [DependsOn(typeof(AbpKernelModule))]
+    [DependsOn(typeof (AbpKernelModule))]
     public class AbpHangfireModule : AbpModule
     {
         public override void PreInitialize()
         {
             IocManager.Register<IAbpHangfireConfiguration, AbpHangfireConfiguration>();
-            
+
             Configuration.Modules
                 .AbpHangfire()
                 .GlobalConfiguration

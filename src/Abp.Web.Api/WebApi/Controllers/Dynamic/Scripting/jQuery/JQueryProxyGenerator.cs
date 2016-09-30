@@ -40,7 +40,8 @@ namespace Abp.WebApi.Controllers.Dynamic.Scripting.jQuery
                 var methodNo = 0;
                 foreach (var methodInfo in _controllerInfo.Actions.Values)
                 {
-                    script.AppendLine("                " + methodInfo.ActionName.ToCamelCase() + ": serviceNamespace." + methodInfo.ActionName.ToCamelCase() + ((methodNo++) < (_controllerInfo.Actions.Count - 1) ? "," : ""));
+                    script.AppendLine("                " + methodInfo.ActionName.ToCamelCase() + ": serviceNamespace." + methodInfo.ActionName.ToCamelCase() +
+                                      ((methodNo++) < (_controllerInfo.Actions.Count - 1) ? "," : ""));
                 }
 
                 script.AppendLine("            };");

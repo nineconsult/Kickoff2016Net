@@ -19,7 +19,6 @@ namespace Abp.WebApi.OData.Controllers
         protected AbpODataEntityController(IRepository<TEntity> repository)
             : base(repository)
         {
-
         }
     }
 
@@ -27,18 +26,18 @@ namespace Abp.WebApi.OData.Controllers
         where TPrimaryKey : IEquatable<TPrimaryKey>
         where TEntity : class, IEntity<TPrimaryKey>
     {
-        public IUnitOfWorkManager UnitOfWorkManager { get; set; }
-
-        protected IRepository<TEntity, TPrimaryKey> Repository { get; private set; }
+        private bool _disposed;
 
         private IUnitOfWorkCompleteHandle _unitOfWorkCompleteHandler;
-
-        private bool _disposed;
 
         protected AbpODataEntityController(IRepository<TEntity, TPrimaryKey> repository)
         {
             Repository = repository;
         }
+
+        public IUnitOfWorkManager UnitOfWorkManager { get; set; }
+
+        protected IRepository<TEntity, TPrimaryKey> Repository { get; }
 
         public override Task<HttpResponseMessage> ExecuteAsync(HttpControllerContext controllerContext, CancellationToken cancellationToken)
         {
@@ -70,7 +69,7 @@ namespace Abp.WebApi.OData.Controllers
 
             var createdEntity = await Repository.InsertAsync(entity);
             await UnitOfWorkManager.Current.SaveChangesAsync();
-            
+
             return Created(createdEntity);
         }
 
@@ -80,13 +79,13 @@ namespace Abp.WebApi.OData.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             var dbLookup = await Repository.GetAsync(key);
             if (entity == null)
             {
                 return NotFound();
             }
-            
+
             entity.Patch(dbLookup);
 
             return Updated(entity);
@@ -103,7 +102,7 @@ namespace Abp.WebApi.OData.Controllers
             {
                 return BadRequest();
             }
-            
+
             var updated = await Repository.UpdateAsync(update);
 
             return Updated(updated);
@@ -116,7 +115,7 @@ namespace Abp.WebApi.OData.Controllers
             {
                 return NotFound();
             }
-            
+
             await Repository.DeleteAsync(key);
 
             return StatusCode(HttpStatusCode.NoContent);

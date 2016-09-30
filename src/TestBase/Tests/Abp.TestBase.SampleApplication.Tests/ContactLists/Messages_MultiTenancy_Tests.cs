@@ -12,8 +12,8 @@ namespace Abp.TestBase.SampleApplication.Tests.ContactLists
 {
     public class Messages_MultiTenancy_Tests : SampleApplicationTestBase
     {
-        private object context;
         private readonly IRepository<Message> _messageRepository;
+        private object context;
 
         public Messages_MultiTenancy_Tests()
         {
@@ -153,7 +153,7 @@ namespace Abp.TestBase.SampleApplication.Tests.ContactLists
             using (var unitOfWork = unitOfWorkManager.Begin())
             {
                 unitOfWorkManager.Current.GetTenantId().ShouldBe(null);
-                
+
                 //We can also set tenantId parameter's value without changing AbpSession.TenantId
                 using (unitOfWorkManager.Current.SetTenantId(1))
                 {

@@ -5,14 +5,14 @@ using Abp.Dependency;
 namespace Abp.Timing.Timezone
 {
     /// <summary>
-    /// Time zone converter class
+    ///     Time zone converter class
     /// </summary>
     public class TimeZoneConverter : ITimeZoneConverter, ITransientDependency
     {
         private readonly ISettingManager _settingManager;
 
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="settingManager"></param>
         public TimeZoneConverter(ISettingManager settingManager)
@@ -20,7 +20,7 @@ namespace Abp.Timing.Timezone
             _settingManager = settingManager;
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public DateTime? Convert(DateTime? date, int? tenantId, long userId)
         {
             if (!date.HasValue)
@@ -34,15 +34,15 @@ namespace Abp.Timing.Timezone
             }
 
             var usersTimezone = _settingManager.GetSettingValueForUser(TimingSettingNames.TimeZone, tenantId, userId);
-            if(string.IsNullOrEmpty(usersTimezone))
+            if (string.IsNullOrEmpty(usersTimezone))
             {
                 return date;
             }
-            
+
             return TimezoneHelper.ConvertFromUtc(date.Value.ToUniversalTime(), usersTimezone);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public DateTime? Convert(DateTime? date, int tenantId)
         {
             if (!date.HasValue)
@@ -63,8 +63,8 @@ namespace Abp.Timing.Timezone
 
             return TimezoneHelper.ConvertFromUtc(date.Value.ToUniversalTime(), tenantsTimezone);
         }
-        
-        /// <inheritdoc/>
+
+        /// <inheritdoc />
         public DateTime? Convert(DateTime? date)
         {
             if (!date.HasValue)

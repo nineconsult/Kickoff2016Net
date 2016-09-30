@@ -11,18 +11,16 @@ using Castle.Core.Internal;
 namespace Abp.Notifications
 {
     /// <summary>
-    /// Used to distribute notifications to users.
+    ///     Used to distribute notifications to users.
     /// </summary>
     public class NotificationDistributer : DomainService, INotificationDistributer
     {
-        public IRealTimeNotifier RealTimeNotifier { get; set; }
-
         private readonly INotificationDefinitionManager _notificationDefinitionManager;
         private readonly INotificationStore _notificationStore;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NotificationDistributionJob"/> class.
+        ///     Initializes a new instance of the <see cref="NotificationDistributionJob" /> class.
         /// </summary>
         public NotificationDistributer(
             INotificationDefinitionManager notificationDefinitionManager,
@@ -35,6 +33,8 @@ namespace Abp.Notifications
 
             RealTimeNotifier = NullRealTimeNotifier.Instance;
         }
+
+        public IRealTimeNotifier RealTimeNotifier { get; set; }
 
         public async Task DistributeAsync(Guid notificationId)
         {
@@ -153,7 +153,7 @@ namespace Abp.Notifications
             return notificationInfo
                 .TenantIds
                 .Split(",")
-                .Select(tenantIdAsStr => tenantIdAsStr == "null" ? (int?)null : (int?)tenantIdAsStr.To<int>())
+                .Select(tenantIdAsStr => tenantIdAsStr == "null" ? (int?) null : (int?) tenantIdAsStr.To<int>())
                 .ToArray();
         }
 

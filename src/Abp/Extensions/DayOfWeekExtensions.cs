@@ -3,12 +3,12 @@
 namespace Abp.Extensions
 {
     /// <summary>
-    /// Extension methods for <see cref="DayOfWeekExtensions"/>.
+    ///     Extension methods for <see cref="DayOfWeekExtensions" />.
     /// </summary>
     public static class DayOfWeekExtensions
     {
         /// <summary>
-        /// Check if given <see cref="DayOfWeek"/> value is weekend.
+        ///     Check if given <see cref="DayOfWeek" /> value is weekend.
         /// </summary>
         public static bool IsWeekend(this DayOfWeek dayOfWeek)
         {
@@ -16,7 +16,7 @@ namespace Abp.Extensions
         }
 
         /// <summary>
-        /// Check if given <see cref="DayOfWeek"/> value is weekday.
+        ///     Check if given <see cref="DayOfWeek" /> value is weekday.
         /// </summary>
         public static bool IsWeekday(this DayOfWeek dayOfWeek)
         {

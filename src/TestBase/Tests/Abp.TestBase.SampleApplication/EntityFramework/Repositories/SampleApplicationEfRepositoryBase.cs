@@ -15,7 +15,7 @@ namespace Abp.TestBase.SampleApplication.EntityFramework.Repositories
     }
 
     public class SampleApplicationEfRepositoryBase<TEntity, TPrimaryKey> : EfRepositoryBase<SampleApplicationDbContext, TEntity, TPrimaryKey>
-    where TEntity : class, IEntity<TPrimaryKey>
+        where TEntity : class, IEntity<TPrimaryKey>
     {
         public SampleApplicationEfRepositoryBase(IDbContextProvider<SampleApplicationDbContext> dbContextProvider)
             : base(dbContextProvider)

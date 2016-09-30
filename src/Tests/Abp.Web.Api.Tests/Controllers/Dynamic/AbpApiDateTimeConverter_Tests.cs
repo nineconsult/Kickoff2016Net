@@ -65,7 +65,7 @@ namespace Abp.Web.Api.Tests.Controllers.Dynamic
             dto.Date.Kind.ShouldBe(DateTimeKind.Local);
         }
 
-        class DateTimeConverterTestDto
+        private class DateTimeConverterTestDto
         {
             public DateTime Date { get; set; }
         }

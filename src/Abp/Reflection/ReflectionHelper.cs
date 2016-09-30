@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Abp.Reflection.Extensions;
 
 namespace Abp.Reflection
 {
     /// <summary>
-    /// Defines helper methods for reflection.
+    ///     Defines helper methods for reflection.
     /// </summary>
     internal static class ReflectionHelper
     {
         /// <summary>
-        /// Checks whether <paramref name="givenType"/> implements/inherits <paramref name="genericType"/>.
+        ///     Checks whether <paramref name="givenType" /> implements/inherits <paramref name="genericType" />.
         /// </summary>
         /// <param name="givenType">Type to check</param>
         /// <param name="genericType">Generic type</param>
@@ -40,7 +39,7 @@ namespace Abp.Reflection
         }
 
         /// <summary>
-        /// Gets a list of attributes defined for a class member and it's declaring type including inherited attributes.
+        ///     Gets a list of attributes defined for a class member and it's declaring type including inherited attributes.
         /// </summary>
         /// <typeparam name="TAttribute">Type of the attribute</typeparam>
         /// <param name="memberInfo">MemberInfo</param>
@@ -50,23 +49,23 @@ namespace Abp.Reflection
             var attributeList = new List<TAttribute>();
 
             //Add attributes on the member
-            if (memberInfo.IsDefined(typeof(TAttribute), true))
+            if (memberInfo.IsDefined(typeof (TAttribute), true))
             {
-                attributeList.AddRange(memberInfo.GetCustomAttributes(typeof(TAttribute), true).Cast<TAttribute>());
+                attributeList.AddRange(memberInfo.GetCustomAttributes(typeof (TAttribute), true).Cast<TAttribute>());
             }
 
             //Add attributes on the class
-            if (memberInfo.DeclaringType != null && memberInfo.DeclaringType.IsDefined(typeof(TAttribute), true))
+            if (memberInfo.DeclaringType != null && memberInfo.DeclaringType.IsDefined(typeof (TAttribute), true))
             {
-                attributeList.AddRange(memberInfo.DeclaringType.GetCustomAttributes(typeof(TAttribute), true).Cast<TAttribute>());
+                attributeList.AddRange(memberInfo.DeclaringType.GetCustomAttributes(typeof (TAttribute), true).Cast<TAttribute>());
             }
 
             return attributeList;
         }
 
         /// <summary>
-        /// Tries to gets an of attribute defined for a class member and it's declaring type including inherited attributes.
-        /// Returns null if it's not declared at all.
+        ///     Tries to gets an of attribute defined for a class member and it's declaring type including inherited attributes.
+        ///     Returns null if it's not declared at all.
         /// </summary>
         /// <typeparam name="TAttribute">Type of the attribute</typeparam>
         /// <param name="memberInfo">MemberInfo</param>
@@ -74,22 +73,22 @@ namespace Abp.Reflection
             where TAttribute : Attribute
         {
             //Get attribute on the member
-            if (memberInfo.IsDefined(typeof(TAttribute), true))
+            if (memberInfo.IsDefined(typeof (TAttribute), true))
             {
-                return memberInfo.GetCustomAttributes(typeof(TAttribute), true).Cast<TAttribute>().First();
+                return memberInfo.GetCustomAttributes(typeof (TAttribute), true).Cast<TAttribute>().First();
             }
 
             //Get attribute from class
-            if (memberInfo.DeclaringType != null && memberInfo.DeclaringType.IsDefined(typeof(TAttribute), true))
+            if (memberInfo.DeclaringType != null && memberInfo.DeclaringType.IsDefined(typeof (TAttribute), true))
             {
-                return memberInfo.DeclaringType.GetCustomAttributes(typeof(TAttribute), true).Cast<TAttribute>().First();
+                return memberInfo.DeclaringType.GetCustomAttributes(typeof (TAttribute), true).Cast<TAttribute>().First();
             }
 
             return null;
         }
 
         /// <summary>
-        /// Gets value of a property by it's full path from given object
+        ///     Gets value of a property by it's full path from given object
         /// </summary>
         /// <param name="obj">Object to get value from</param>
         /// <param name="objectType">Type of given object</param>
@@ -117,7 +116,7 @@ namespace Abp.Reflection
         }
 
         /// <summary>
-        /// Sets value of a property by it's full path on given object
+        ///     Sets value of a property by it's full path on given object
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="objectType"></param>
@@ -143,7 +142,7 @@ namespace Abp.Reflection
                 return;
             }
 
-            for (int i = 0; i < properties.Length - 1; i++)
+            for (var i = 0; i < properties.Length - 1; i++)
             {
                 property = currentType.GetProperty(properties[i]);
                 obj = property.GetValue(obj, null);

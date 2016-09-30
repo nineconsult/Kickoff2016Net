@@ -8,7 +8,7 @@ using Abp.WebApi.OData.Configuration;
 
 namespace Abp.WebApi.OData
 {
-    [DependsOn(typeof(AbpWebApiModule))]
+    [DependsOn(typeof (AbpWebApiModule))]
     public class AbpWebApiODataModule : AbpModule
     {
         public override void PreInitialize()
@@ -21,10 +21,7 @@ namespace Abp.WebApi.OData
             IocManager.Register<MetadataController>(DependencyLifeStyle.Transient);
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
 
-            Configuration.Modules.AbpWebApi().HttpConfiguration.MapODataServiceRoute(
-                    routeName: "ODataRoute",
-                    routePrefix: "odata",
-                    model: Configuration.Modules.AbpWebApiOData().ODataModelBuilder.GetEdmModel()
+            Configuration.Modules.AbpWebApi().HttpConfiguration.MapODataServiceRoute("ODataRoute", "odata", Configuration.Modules.AbpWebApiOData().ODataModelBuilder.GetEdmModel()
                 );
         }
     }

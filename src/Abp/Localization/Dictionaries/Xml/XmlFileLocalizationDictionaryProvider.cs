@@ -4,14 +4,14 @@ using Abp.Localization.Sources.Xml;
 namespace Abp.Localization.Dictionaries.Xml
 {
     /// <summary>
-    /// Provides localization dictionaries from XML files in a directory.
+    ///     Provides localization dictionaries from XML files in a directory.
     /// </summary>
     public class XmlFileLocalizationDictionaryProvider : LocalizationDictionaryProviderBase
     {
         private readonly string _directoryPath;
 
         /// <summary>
-        /// Creates a new <see cref="XmlFileLocalizationDictionaryProvider"/>.
+        ///     Creates a new <see cref="XmlFileLocalizationDictionaryProvider" />.
         /// </summary>
         /// <param name="directoryPath">Path of the dictionary that contains all related XML files</param>
         public XmlFileLocalizationDictionaryProvider(string directoryPath)
@@ -42,7 +42,7 @@ namespace Abp.Localization.Dictionaries.Xml
                 {
                     if (DefaultDictionary != null)
                     {
-                        throw new AbpInitializationException("Only one default localization dictionary can be for source: " + sourceName);                        
+                        throw new AbpInitializationException("Only one default localization dictionary can be for source: " + sourceName);
                     }
 
                     DefaultDictionary = dictionary;

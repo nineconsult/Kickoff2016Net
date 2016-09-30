@@ -13,34 +13,18 @@ using Abp.Runtime.Session;
 namespace Abp.Notifications
 {
     /// <summary>
-    /// Implements <see cref="INotificationPublisher"/>.
+    ///     Implements <see cref="INotificationPublisher" />.
     /// </summary>
     public class NotificationPublisher : AbpServiceBase, INotificationPublisher, ITransientDependency
     {
         public const int MaxUserCountToDirectlyDistributeANotification = 5;
-
-        /// <summary>
-        /// Indicates all tenants.
-        /// </summary>
-        public static int[] AllTenants
-        {
-            get
-            {
-                return new[] { NotificationInfo.AllTenantIds.To<int>() };
-            }
-        }
-
-        /// <summary>
-        /// Reference to ABP session.
-        /// </summary>
-        public IAbpSession AbpSession { get; set; }
-
-        private readonly INotificationStore _store;
         private readonly IBackgroundJobManager _backgroundJobManager;
         private readonly INotificationDistributer _notificationDistributer;
 
+        private readonly INotificationStore _store;
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="NotificationPublisher"/> class.
+        ///     Initializes a new instance of the <see cref="NotificationPublisher" /> class.
         /// </summary>
         public NotificationPublisher(
             INotificationStore store,
@@ -52,6 +36,19 @@ namespace Abp.Notifications
             _notificationDistributer = notificationDistributer;
             AbpSession = NullAbpSession.Instance;
         }
+
+        /// <summary>
+        ///     Indicates all tenants.
+        /// </summary>
+        public static int[] AllTenants
+        {
+            get { return new[] {NotificationInfo.AllTenantIds.To<int>()}; }
+        }
+
+        /// <summary>
+        ///     Reference to ABP session.
+        /// </summary>
+        public IAbpSession AbpSession { get; set; }
 
         //Create EntityIdentifier includes entityType and entityId.
         [UnitOfWork]

@@ -16,7 +16,7 @@ namespace Abp.NHibernate.Tests
         public Basic_Repository_Tests()
         {
             _personRepository = Resolve<IRepository<Person>>();
-            UsingSession(session => session.Save(new Person() { Name = "emre" }));
+            UsingSession(session => session.Save(new Person {Name = "emre"}));
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace Abp.NHibernate.Tests
         [Fact]
         public void Should_Insert_People()
         {
-            _personRepository.Insert(new Person() { Name = "halil" });
+            _personRepository.Insert(new Person {Name = "halil"});
 
             var insertedPerson = UsingSession(session => session.Query<Person>().FirstOrDefault(p => p.Name == "halil"));
             insertedPerson.ShouldNotBe(null);
@@ -62,7 +62,7 @@ namespace Abp.NHibernate.Tests
                     triggerCount++;
                 });
 
-            _personRepository.Insert(new Person { Name = "halil" });
+            _personRepository.Insert(new Person {Name = "halil"});
 
             triggerCount.ShouldBe(1);
         }

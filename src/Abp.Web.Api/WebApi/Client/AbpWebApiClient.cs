@@ -16,18 +16,6 @@ namespace Abp.WebApi.Client
 {
     public class AbpWebApiClient : ITransientDependency, IAbpWebApiClient
     {
-        public static TimeSpan DefaultTimeout { get; set; }
-
-        public string BaseUrl { get; set; }
-
-        public TimeSpan Timeout { get; set; }
-
-        public Collection<Cookie> Cookies { get; private set; }
-
-        public ICollection<NameValue> RequestHeaders { get; set; }
-
-        public ICollection<NameValue> ResponseHeaders { get; set; }
-
         static AbpWebApiClient()
         {
             DefaultTimeout = TimeSpan.FromSeconds(90);
@@ -40,6 +28,18 @@ namespace Abp.WebApi.Client
             RequestHeaders = new List<NameValue>();
             ResponseHeaders = new List<NameValue>();
         }
+
+        public static TimeSpan DefaultTimeout { get; set; }
+
+        public string BaseUrl { get; set; }
+
+        public TimeSpan Timeout { get; set; }
+
+        public Collection<Cookie> Cookies { get; }
+
+        public ICollection<NameValue> RequestHeaders { get; set; }
+
+        public ICollection<NameValue> ResponseHeaders { get; set; }
 
         public virtual async Task PostAsync(string url, int? timeout = null)
         {
@@ -77,7 +77,7 @@ namespace Abp.WebApi.Client
                     {
                         client.DefaultRequestHeaders.Add(header.Name, header.Value);
                     }
-                    
+
                     using (var requestContent = new StringContent(Object2JsonString(input), Encoding.UTF8, "application/json"))
                     {
                         foreach (var cookie in Cookies)

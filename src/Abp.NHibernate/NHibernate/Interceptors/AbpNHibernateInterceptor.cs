@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Abp.Dependency;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
@@ -8,37 +7,36 @@ using Abp.Events.Bus.Entities;
 using Abp.Extensions;
 using Abp.Runtime.Session;
 using Abp.Timing;
-using Abp.Utils;
 using NHibernate;
 using NHibernate.Type;
-using NHibernate.Util;
 
 namespace Abp.NHibernate.Interceptors
 {
     internal class AbpNHibernateInterceptor : EmptyInterceptor
     {
-        public IEntityChangeEventHelper EntityChangeEventHelper { get; set; }
-
-        private readonly IIocManager _iocManager;
         private readonly Lazy<IAbpSession> _abpSession;
         private readonly Lazy<IGuidGenerator> _guidGenerator;
+
+        private readonly IIocManager _iocManager;
 
         public AbpNHibernateInterceptor(IIocManager iocManager)
         {
             _iocManager = iocManager;
             _abpSession =
                 new Lazy<IAbpSession>(
-                    () => _iocManager.IsRegistered(typeof(IAbpSession))
+                    () => _iocManager.IsRegistered(typeof (IAbpSession))
                         ? _iocManager.Resolve<IAbpSession>()
                         : NullAbpSession.Instance
                     );
             _guidGenerator =
                 new Lazy<IGuidGenerator>(
-                    () => _iocManager.IsRegistered(typeof(IGuidGenerator))
+                    () => _iocManager.IsRegistered(typeof (IGuidGenerator))
                         ? _iocManager.Resolve<IGuidGenerator>()
                         : SequentialGuidGenerator.Instance
                     );
         }
+
+        public IEntityChangeEventHelper EntityChangeEventHelper { get; set; }
 
         public override bool OnSave(object entity, object id, object[] state, string[] propertyNames, IType[] types)
         {
@@ -115,7 +113,7 @@ namespace Abp.NHibernate.Interceptors
                 {
                     if (propertyNames[i] == "IsDeleted")
                     {
-                        previousIsDeleted = (bool)previousState[i];
+                        previousIsDeleted = (bool) previousState[i];
                         break;
                     }
                 }
@@ -187,7 +185,7 @@ namespace Abp.NHibernate.Interceptors
                     NormalizeDateTimePropertiesForComponentType(state[i], types[i]);
                 }
 
-                if (types[i].ReturnedClass != typeof(DateTime) && types[i].ReturnedClass != typeof(DateTime?))
+                if (types[i].ReturnedClass != typeof (DateTime) && types[i].ReturnedClass != typeof (DateTime?))
                 {
                     continue;
                 }
@@ -208,7 +206,7 @@ namespace Abp.NHibernate.Interceptors
             var componentType = type as ComponentType;
             if (componentType != null)
             {
-                for (int i = 0; i < componentType.PropertyNames.Length; i++)
+                for (var i = 0; i < componentType.PropertyNames.Length; i++)
                 {
                     var propertyName = componentType.PropertyNames[i];
                     if (componentType.Subtypes[i].IsComponentType)
@@ -217,7 +215,7 @@ namespace Abp.NHibernate.Interceptors
                         NormalizeDateTimePropertiesForComponentType(value, componentType.Subtypes[i]);
                     }
 
-                    if (componentType.Subtypes[i].ReturnedClass != typeof(DateTime) && componentType.Subtypes[i].ReturnedClass != typeof(DateTime?))
+                    if (componentType.Subtypes[i].ReturnedClass != typeof (DateTime) && componentType.Subtypes[i].ReturnedClass != typeof (DateTime?))
                     {
                         continue;
                     }

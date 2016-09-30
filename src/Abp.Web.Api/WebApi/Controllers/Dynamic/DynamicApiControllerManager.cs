@@ -6,7 +6,7 @@ using Abp.Collections.Extensions;
 namespace Abp.WebApi.Controllers.Dynamic
 {
     /// <summary>
-    /// This class is used to store dynamic controller information.
+    ///     This class is used to store dynamic controller information.
     /// </summary>
     internal static class DynamicApiControllerManager
     {
@@ -18,7 +18,7 @@ namespace Abp.WebApi.Controllers.Dynamic
         }
 
         /// <summary>
-        /// Registers given controller info to be found later.
+        ///     Registers given controller info to be found later.
         /// </summary>
         /// <param name="controllerInfo">Controller info</param>
         public static void Register(DynamicApiControllerInfo controllerInfo)
@@ -27,7 +27,7 @@ namespace Abp.WebApi.Controllers.Dynamic
         }
 
         /// <summary>
-        /// Searches and returns a dynamic api controller for given name.
+        ///     Searches and returns a dynamic api controller for given name.
         /// </summary>
         /// <param name="controllerName">Name of the controller</param>
         /// <returns>Controller info</returns>

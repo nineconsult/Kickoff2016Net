@@ -29,8 +29,8 @@ using Abp.Timing;
 namespace Abp
 {
     /// <summary>
-    /// Kernel (core) module of the ABP system.
-    /// No need to depend on this, it's automatically the first module always.
+    ///     Kernel (core) module of the ABP system.
+    ///     No need to depend on this, it's automatically the first module always.
     /// </summary>
     public sealed class AbpKernelModule : AbpModule
     {
@@ -50,7 +50,7 @@ namespace Abp
             Configuration.Auditing.Selectors.Add(
                 new NamedTypeSelector(
                     "Abp.ApplicationServices",
-                    type => typeof(IApplicationService).IsAssignableFrom(type)
+                    type => typeof (IApplicationService).IsAssignableFrom(type)
                     )
                 );
 
@@ -75,7 +75,7 @@ namespace Abp
 
         public override void Initialize()
         {
-            foreach (var replaceAction in ((AbpStartupConfiguration)Configuration).ServiceReplaceActions.Values)
+            foreach (var replaceAction in ((AbpStartupConfiguration) Configuration).ServiceReplaceActions.Values)
             {
                 replaceAction();
             }
@@ -118,20 +118,11 @@ namespace Abp
 
         private void ConfigureCaches()
         {
-            Configuration.Caching.Configure(AbpCacheNames.ApplicationSettings, cache =>
-            {
-                cache.DefaultSlidingExpireTime = TimeSpan.FromHours(8);
-            });
+            Configuration.Caching.Configure(AbpCacheNames.ApplicationSettings, cache => { cache.DefaultSlidingExpireTime = TimeSpan.FromHours(8); });
 
-            Configuration.Caching.Configure(AbpCacheNames.TenantSettings, cache =>
-            {
-                cache.DefaultSlidingExpireTime = TimeSpan.FromMinutes(60);
-            });
+            Configuration.Caching.Configure(AbpCacheNames.TenantSettings, cache => { cache.DefaultSlidingExpireTime = TimeSpan.FromMinutes(60); });
 
-            Configuration.Caching.Configure(AbpCacheNames.UserSettings, cache =>
-            {
-                cache.DefaultSlidingExpireTime = TimeSpan.FromMinutes(20);
-            });
+            Configuration.Caching.Configure(AbpCacheNames.UserSettings, cache => { cache.DefaultSlidingExpireTime = TimeSpan.FromMinutes(20); });
         }
 
         private void RegisterMissingComponents()

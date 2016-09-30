@@ -10,12 +10,12 @@ using System.Web.Http;
 namespace Abp.WebApi.Controllers.Dynamic.Formatters
 {
     /// <summary>
-    /// This class is used to return plain text reponse from <see cref="ApiController"/>s.
+    ///     This class is used to return plain text reponse from <see cref="ApiController" />s.
     /// </summary>
     public class PlainTextFormatter : MediaTypeFormatter
     {
         /// <summary>
-        /// Creates a new <see cref="PlainTextFormatter"/> object.
+        ///     Creates a new <see cref="PlainTextFormatter" /> object.
         /// </summary>
         public PlainTextFormatter()
         {
@@ -24,12 +24,12 @@ namespace Abp.WebApi.Controllers.Dynamic.Formatters
 
         public override bool CanReadType(Type type)
         {
-            return type == typeof(string);
+            return type == typeof (string);
         }
 
         public override bool CanWriteType(Type type)
         {
-            return type == typeof(string);
+            return type == typeof (string);
         }
 
         public override Task<object> ReadFromStreamAsync(Type type, Stream stream, HttpContent content, IFormatterLogger formatterLogger)
@@ -49,7 +49,7 @@ namespace Abp.WebApi.Controllers.Dynamic.Formatters
         {
             using (var writer = new StreamWriter(stream))
             {
-                writer.Write((string)value);
+                writer.Write((string) value);
                 writer.Flush();
             }
 

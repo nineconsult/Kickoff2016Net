@@ -15,7 +15,7 @@ namespace Abp.NHibernate.Uow
 
             if (!(unitOfWork is NhUnitOfWork))
             {
-                throw new ArgumentException("unitOfWork is not type of " + typeof(NhUnitOfWork).FullName, "unitOfWork");
+                throw new ArgumentException("unitOfWork is not type of " + typeof (NhUnitOfWork).FullName, "unitOfWork");
             }
 
             return (unitOfWork as NhUnitOfWork).Session;

@@ -4,12 +4,12 @@ using Abp.Dependency;
 namespace Abp.Configuration.Startup
 {
     /// <summary>
-    /// Extension methods for <see cref="IAbpStartupConfiguration"/>.
+    ///     Extension methods for <see cref="IAbpStartupConfiguration" />.
     /// </summary>
     public static class AbpStartupConfigurationExtensions
     {
         /// <summary>
-        /// Used to replace a service type.
+        ///     Used to replace a service type.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
         /// <param name="type">Type.</param>
@@ -17,14 +17,11 @@ namespace Abp.Configuration.Startup
         /// <param name="lifeStyle">Life style.</param>
         public static void ReplaceService(this IAbpStartupConfiguration configuration, Type type, Type impl, DependencyLifeStyle lifeStyle = DependencyLifeStyle.Singleton)
         {
-            configuration.ReplaceService(type, () =>
-            {
-                configuration.IocManager.Register(type, impl, lifeStyle);
-            });
+            configuration.ReplaceService(type, () => { configuration.IocManager.Register(type, impl, lifeStyle); });
         }
 
         /// <summary>
-        /// Used to replace a service type.
+        ///     Used to replace a service type.
         /// </summary>
         /// <typeparam name="TType">Type of the service.</typeparam>
         /// <typeparam name="TImpl">Type of the implementation.</typeparam>
@@ -34,10 +31,7 @@ namespace Abp.Configuration.Startup
             where TType : class
             where TImpl : class, TType
         {
-            configuration.ReplaceService(typeof(TType), () =>
-            {
-                configuration.IocManager.Register<TType, TImpl>(lifeStyle);
-            });
+            configuration.ReplaceService(typeof (TType), () => { configuration.IocManager.Register<TType, TImpl>(lifeStyle); });
         }
     }
 }

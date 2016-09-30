@@ -58,9 +58,9 @@ namespace Abp.Tests.Localization.Json
         public ICollection<Type> FindAll()
         {
             return new List<Type>
-                   {
-                       typeof (MyLangModule)
-                   };
+            {
+                typeof (MyLangModule)
+            };
         }
     }
 
@@ -73,7 +73,7 @@ namespace Abp.Tests.Localization.Json
                     "Lang",
                     new XmlEmbeddedFileLocalizationDictionaryProvider(
                         Assembly.GetExecutingAssembly(),
-                         "Abp.Tests.Localization.Json.XmlSources"
+                        "Abp.Tests.Localization.Json.XmlSources"
                         )
                     )
                 );
@@ -83,10 +83,8 @@ namespace Abp.Tests.Localization.Json
                     "Lang",
                     new JsonEmbeddedFileLocalizationDictionaryProvider(
                         Assembly.GetExecutingAssembly(),
-                         "Abp.Tests.Localization.Json.JsonSources"
+                        "Abp.Tests.Localization.Json.JsonSources"
                         )));
-
-            
         }
 
         public override void Initialize()

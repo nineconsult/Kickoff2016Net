@@ -7,14 +7,14 @@ using Abp.Dependency;
 namespace Abp.Notifications
 {
     /// <summary>
-    /// Implements  <see cref="IUserNotificationManager"/>.
+    ///     Implements  <see cref="IUserNotificationManager" />.
     /// </summary>
     public class UserNotificationManager : IUserNotificationManager, ISingletonDependency
     {
         private readonly INotificationStore _store;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserNotificationManager"/> class.
+        ///     Initializes a new instance of the <see cref="UserNotificationManager" /> class.
         /// </summary>
         public UserNotificationManager(INotificationStore store)
         {

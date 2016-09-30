@@ -5,13 +5,8 @@ namespace Abp.Web.Mvc.Models
 {
     public class ErrorViewModel
     {
-        public ErrorInfo ErrorInfo { get; set; }
-
-        public Exception Exception { get; set; }
-
         public ErrorViewModel()
         {
-            
         }
 
         public ErrorViewModel(Exception exception)
@@ -19,5 +14,9 @@ namespace Abp.Web.Mvc.Models
             Exception = exception;
             ErrorInfo = ErrorInfoBuilder.Instance.BuildForException(exception);
         }
+
+        public ErrorInfo ErrorInfo { get; set; }
+
+        public Exception Exception { get; set; }
     }
 }

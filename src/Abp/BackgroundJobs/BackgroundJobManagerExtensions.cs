@@ -4,12 +4,12 @@ using Abp.Threading;
 namespace Abp.BackgroundJobs
 {
     /// <summary>
-    /// Some extension methods for <see cref="IBackgroundJobManager"/>.
+    ///     Some extension methods for <see cref="IBackgroundJobManager" />.
     /// </summary>
     public static class BackgroundJobManagerExtensions
     {
         /// <summary>
-        /// Enqueues a job to be executed.
+        ///     Enqueues a job to be executed.
         /// </summary>
         /// <typeparam name="TJob">Type of the job.</typeparam>
         /// <typeparam name="TArgs">Type of the arguments of job.</typeparam>

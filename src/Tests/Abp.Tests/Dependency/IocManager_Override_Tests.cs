@@ -23,9 +23,9 @@ namespace Abp.Tests.Dependency
             //Assert
             service.ShouldBeOfType<MyImpl1>();
             allServices.Length.ShouldBe(3);
-            allServices.Any(s => s.GetType() == typeof(MyImpl1)).ShouldBeTrue();
-            allServices.Any(s => s.GetType() == typeof(MyImpl2)).ShouldBeTrue();
-            allServices.Any(s => s.GetType() == typeof(MyImpl3)).ShouldBeTrue();
+            allServices.Any(s => s.GetType() == typeof (MyImpl1)).ShouldBeTrue();
+            allServices.Any(s => s.GetType() == typeof (MyImpl2)).ShouldBeTrue();
+            allServices.Any(s => s.GetType() == typeof (MyImpl3)).ShouldBeTrue();
         }
 
         [Fact]
@@ -42,8 +42,8 @@ namespace Abp.Tests.Dependency
             //Assert
             service.ShouldBeOfType<MyImpl2>();
             allServices.Length.ShouldBe(2);
-            allServices.Any(s => s.GetType() == typeof(MyImpl1)).ShouldBeTrue();
-            allServices.Any(s => s.GetType() == typeof(MyImpl2)).ShouldBeTrue();
+            allServices.Any(s => s.GetType() == typeof (MyImpl1)).ShouldBeTrue();
+            allServices.Any(s => s.GetType() == typeof (MyImpl2)).ShouldBeTrue();
         }
 
         [Fact]
@@ -61,9 +61,9 @@ namespace Abp.Tests.Dependency
             //Assert
             service.ShouldBeOfType<MyImpl3>();
             allServices.Length.ShouldBe(3);
-            allServices.Any(s => s.GetType() == typeof(MyImpl1)).ShouldBeTrue();
-            allServices.Any(s => s.GetType() == typeof(MyImpl2)).ShouldBeTrue();
-            allServices.Any(s => s.GetType() == typeof(MyImpl3)).ShouldBeTrue();
+            allServices.Any(s => s.GetType() == typeof (MyImpl1)).ShouldBeTrue();
+            allServices.Any(s => s.GetType() == typeof (MyImpl2)).ShouldBeTrue();
+            allServices.Any(s => s.GetType() == typeof (MyImpl3)).ShouldBeTrue();
         }
 
         [Fact]
@@ -81,24 +81,21 @@ namespace Abp.Tests.Dependency
             //Assert
             service.ShouldBeOfType<MyImpl2>();
             allServices.Length.ShouldBe(3);
-            allServices.Any(s => s.GetType() == typeof(MyImpl1)).ShouldBeTrue();
-            allServices.Any(s => s.GetType() == typeof(MyImpl2)).ShouldBeTrue();
-            allServices.Any(s => s.GetType() == typeof(MyImpl3)).ShouldBeTrue();
+            allServices.Any(s => s.GetType() == typeof (MyImpl1)).ShouldBeTrue();
+            allServices.Any(s => s.GetType() == typeof (MyImpl2)).ShouldBeTrue();
+            allServices.Any(s => s.GetType() == typeof (MyImpl3)).ShouldBeTrue();
         }
 
         public class MyImpl1 : IMyService
         {
-            
         }
 
         public class MyImpl2 : IMyService
         {
-
         }
 
         public class MyImpl3 : IMyService
         {
-
         }
 
         public interface IMyService

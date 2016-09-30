@@ -5,7 +5,7 @@ using Abp.Modules;
 
 namespace Abp.MemoryDb
 {
-    [DependsOn(typeof(AbpKernelModule))]
+    [DependsOn(typeof (AbpKernelModule))]
     public class MemoryDatabase : ISingletonDependency
     {
         private readonly Dictionary<Type, object> _sets;
@@ -19,7 +19,7 @@ namespace Abp.MemoryDb
 
         public List<TEntity> Set<TEntity>()
         {
-            var entityType = typeof(TEntity);
+            var entityType = typeof (TEntity);
 
             lock (_syncObj)
             {

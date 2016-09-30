@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Net.Configuration;
 
 namespace Abp.Reflection
 {
     /// <summary>
-    /// Some simple type-checking methods used internally.
+    ///     Some simple type-checking methods used internally.
     /// </summary>
     internal static class TypeHelper
     {
@@ -21,12 +20,12 @@ namespace Abp.Reflection
                 return false;
             }
 
-            return type.GetGenericTypeDefinition() == typeof(Func<>);
+            return type.GetGenericTypeDefinition() == typeof (Func<>);
         }
 
         public static bool IsFunc<TReturn>(object obj)
         {
-            return obj != null && obj.GetType() == typeof(Func<TReturn>);
+            return obj != null && obj.GetType() == typeof (Func<TReturn>);
         }
 
         public static bool IsPrimitiveExtendedIncludingNullable(Type type)
@@ -36,7 +35,7 @@ namespace Abp.Reflection
                 return true;
             }
 
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof (Nullable<>))
             {
                 return IsPrimitiveExtended(type.GenericTypeArguments[0]);
             }

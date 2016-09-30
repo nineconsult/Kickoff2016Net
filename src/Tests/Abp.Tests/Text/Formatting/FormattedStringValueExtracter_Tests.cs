@@ -67,7 +67,7 @@ namespace Abp.Tests.Text.Formatting
 
             result.Matches.Count.ShouldBe(expectedPairs.Length);
 
-            for (int i = 0; i < expectedPairs.Length; i++)
+            for (var i = 0; i < expectedPairs.Length; i++)
             {
                 var actualMatch = result.Matches[i];
                 var expectedPair = expectedPairs[i];

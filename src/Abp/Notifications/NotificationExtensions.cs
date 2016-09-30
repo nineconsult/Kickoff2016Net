@@ -6,17 +6,39 @@ using Abp.Threading;
 namespace Abp.Notifications
 {
     /// <summary>
-    /// Extension methods for
-    /// <see cref="INotificationSubscriptionManager"/>, 
-    /// <see cref="INotificationPublisher"/>, 
-    /// <see cref="IUserNotificationManager"/>.
+    ///     Extension methods for
+    ///     <see cref="INotificationSubscriptionManager" />,
+    ///     <see cref="INotificationPublisher" />,
+    ///     <see cref="IUserNotificationManager" />.
     /// </summary>
     public static class NotificationExtensions
     {
+        #region INotificationPublisher
+
+        /// <summary>
+        ///     Publishes a new notification.
+        /// </summary>
+        /// <param name="notificationPublisher">Notification publisher</param>
+        /// <param name="notificationName">Unique notification name</param>
+        /// <param name="data">Notification data (optional)</param>
+        /// <param name="entityIdentifier">The entity identifier if this notification is related to an entity</param>
+        /// <param name="severity">Notification severity</param>
+        /// <param name="userIds">
+        ///     Target user id(s). Used to send notification to specific user(s). If this is null/empty, the
+        ///     notification is sent to all subscribed users
+        /// </param>
+        public static void Publish(this INotificationPublisher notificationPublisher, string notificationName, NotificationData data = null, EntityIdentifier entityIdentifier = null,
+            NotificationSeverity severity = NotificationSeverity.Info, UserIdentifier[] userIds = null)
+        {
+            AsyncHelper.RunSync(() => notificationPublisher.PublishAsync(notificationName, data, entityIdentifier, severity, userIds));
+        }
+
+        #endregion
+
         #region INotificationSubscriptionManager
 
         /// <summary>
-        /// Subscribes to a notification.
+        ///     Subscribes to a notification.
         /// </summary>
         /// <param name="notificationSubscriptionManager">Notification subscription manager</param>
         /// <param name="user">User.</param>
@@ -28,18 +50,18 @@ namespace Abp.Notifications
         }
 
         /// <summary>
-        /// Subscribes to all available notifications for given user.
-        /// It does not subscribe entity related notifications.
+        ///     Subscribes to all available notifications for given user.
+        ///     It does not subscribe entity related notifications.
         /// </summary>
         /// <param name="notificationSubscriptionManager">Notification subscription manager</param>
         /// <param name="user">User.</param>
         public static void SubscribeToAllAvailableNotifications(this INotificationSubscriptionManager notificationSubscriptionManager, UserIdentifier user)
         {
-            AsyncHelper.RunSync(() => notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(user));            
+            AsyncHelper.RunSync(() => notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(user));
         }
 
         /// <summary>
-        /// Unsubscribes from a notification.
+        ///     Unsubscribes from a notification.
         /// </summary>
         /// <param name="notificationSubscriptionManager">Notification subscription manager</param>
         /// <param name="user">User.</param>
@@ -51,8 +73,8 @@ namespace Abp.Notifications
         }
 
         /// <summary>
-        /// Gets all subscribtions for given notification.
-        /// TODO: Can work only for single database approach!
+        ///     Gets all subscribtions for given notification.
+        ///     TODO: Can work only for single database approach!
         /// </summary>
         /// <param name="notificationSubscriptionManager">Notification subscription manager</param>
         /// <param name="notificationName">Name of the notification.</param>
@@ -63,19 +85,20 @@ namespace Abp.Notifications
         }
 
         /// <summary>
-        /// Gets all subscribtions for given notification.
+        ///     Gets all subscribtions for given notification.
         /// </summary>
         /// <param name="notificationSubscriptionManager">Notification subscription manager</param>
         /// <param name="tenantId">Tenant id. Null for the host.</param>
         /// <param name="notificationName">Name of the notification.</param>
         /// <param name="entityIdentifier">entity identifier</param>
-        public static List<NotificationSubscription> GetSubscriptions(this INotificationSubscriptionManager notificationSubscriptionManager, int? tenantId, string notificationName, EntityIdentifier entityIdentifier = null)
+        public static List<NotificationSubscription> GetSubscriptions(this INotificationSubscriptionManager notificationSubscriptionManager, int? tenantId, string notificationName,
+            EntityIdentifier entityIdentifier = null)
         {
             return AsyncHelper.RunSync(() => notificationSubscriptionManager.GetSubscriptionsAsync(tenantId, notificationName, entityIdentifier));
         }
 
         /// <summary>
-        /// Gets subscribed notifications for a user.
+        ///     Gets subscribed notifications for a user.
         /// </summary>
         /// <param name="notificationSubscriptionManager">Notification subscription manager</param>
         /// <param name="user">User.</param>
@@ -85,7 +108,7 @@ namespace Abp.Notifications
         }
 
         /// <summary>
-        /// Checks if a user subscribed for a notification.
+        ///     Checks if a user subscribed for a notification.
         /// </summary>
         /// <param name="notificationSubscriptionManager">Notification subscription manager</param>
         /// <param name="user">User.</param>
@@ -98,41 +121,24 @@ namespace Abp.Notifications
 
         #endregion
 
-        #region INotificationPublisher
-
-        /// <summary>
-        /// Publishes a new notification.
-        /// </summary>
-        /// <param name="notificationPublisher">Notification publisher</param>
-        /// <param name="notificationName">Unique notification name</param>
-        /// <param name="data">Notification data (optional)</param>
-        /// <param name="entityIdentifier">The entity identifier if this notification is related to an entity</param>
-        /// <param name="severity">Notification severity</param>
-        /// <param name="userIds">Target user id(s). Used to send notification to specific user(s). If this is null/empty, the notification is sent to all subscribed users</param>
-        public static void Publish(this INotificationPublisher notificationPublisher, string notificationName, NotificationData data = null, EntityIdentifier entityIdentifier = null, NotificationSeverity severity = NotificationSeverity.Info, UserIdentifier[] userIds = null)
-        {
-            AsyncHelper.RunSync(() => notificationPublisher.PublishAsync(notificationName, data, entityIdentifier, severity, userIds));
-        }
-
-        #endregion
-
         #region IUserNotificationManager
 
         /// <summary>
-        /// Gets notifications for a user.
+        ///     Gets notifications for a user.
         /// </summary>
         /// <param name="userNotificationManager">User notificaiton manager</param>
         /// <param name="user">User.</param>
         /// <param name="state">State</param>
         /// <param name="skipCount">Skip count.</param>
         /// <param name="maxResultCount">Maximum result count.</param>
-        public static List<UserNotification> GetUserNotifications(this IUserNotificationManager userNotificationManager, UserIdentifier user, UserNotificationState? state = null, int skipCount = 0, int maxResultCount = int.MaxValue)
+        public static List<UserNotification> GetUserNotifications(this IUserNotificationManager userNotificationManager, UserIdentifier user, UserNotificationState? state = null, int skipCount = 0,
+            int maxResultCount = int.MaxValue)
         {
-            return AsyncHelper.RunSync(() => userNotificationManager.GetUserNotificationsAsync(user, state, skipCount: skipCount, maxResultCount: maxResultCount));
+            return AsyncHelper.RunSync(() => userNotificationManager.GetUserNotificationsAsync(user, state, skipCount, maxResultCount));
         }
 
         /// <summary>
-        /// Gets user notification count.
+        ///     Gets user notification count.
         /// </summary>
         /// <param name="userNotificationManager">User notificaiton manager</param>
         /// <param name="user">User.</param>
@@ -143,7 +149,7 @@ namespace Abp.Notifications
         }
 
         /// <summary>
-        /// Gets a user notification by given id.
+        ///     Gets a user notification by given id.
         /// </summary>
         /// <param name="userNotificationManager">User notificaiton manager</param>
         /// <param name="tenantId">Tenant Id</param>
@@ -154,7 +160,7 @@ namespace Abp.Notifications
         }
 
         /// <summary>
-        /// Updates a user notification state.
+        ///     Updates a user notification state.
         /// </summary>
         /// <param name="userNotificationManager">User notificaiton manager</param>
         /// <param name="tenantId">Tenant Id</param>
@@ -166,7 +172,7 @@ namespace Abp.Notifications
         }
 
         /// <summary>
-        /// Updates all notification states for a user.
+        ///     Updates all notification states for a user.
         /// </summary>
         /// <param name="userNotificationManager">User notificaiton manager</param>
         /// <param name="user">User.</param>
@@ -177,7 +183,7 @@ namespace Abp.Notifications
         }
 
         /// <summary>
-        /// Deletes a user notification.
+        ///     Deletes a user notification.
         /// </summary>
         /// <param name="userNotificationManager">User notificaiton manager</param>
         /// <param name="tenantId">Tenant Id</param>
@@ -188,7 +194,7 @@ namespace Abp.Notifications
         }
 
         /// <summary>
-        /// Deletes all notifications of a user.
+        ///     Deletes all notifications of a user.
         /// </summary>
         /// <param name="userNotificationManager">User notificaiton manager</param>
         /// <param name="user">The user id.</param>

@@ -7,13 +7,16 @@ namespace Abp.Localization
 {
     public class LanguageManager : ILanguageManager, ITransientDependency
     {
-        public LanguageInfo CurrentLanguage { get { return GetCurrentLanguage(); } }
-
         private readonly ILanguageProvider _languageProvider;
 
         public LanguageManager(ILanguageProvider languageProvider)
         {
             _languageProvider = languageProvider;
+        }
+
+        public LanguageInfo CurrentLanguage
+        {
+            get { return GetCurrentLanguage(); }
         }
 
         public IReadOnlyList<LanguageInfo> GetLanguages()

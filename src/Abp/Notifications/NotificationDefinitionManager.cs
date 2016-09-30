@@ -9,7 +9,7 @@ using Abp.Dependency;
 namespace Abp.Notifications
 {
     /// <summary>
-    /// Implements <see cref="INotificationDefinitionManager"/>.
+    ///     Implements <see cref="INotificationDefinitionManager" />.
     /// </summary>
     internal class NotificationDefinitionManager : INotificationDefinitionManager, ISingletonDependency
     {
@@ -26,20 +26,6 @@ namespace Abp.Notifications
             _iocManager = iocManager;
 
             _notificationDefinitions = new Dictionary<string, NotificationDefinition>();
-        }
-
-        public void Initialize()
-        {
-            var context = new NotificationDefinitionContext(this);
-
-            foreach (var providerType in _configuration.Providers)
-            {
-                _iocManager.RegisterIfNot(providerType, DependencyLifeStyle.Transient); //TODO: Needed?
-                using (var provider = _iocManager.ResolveAsDisposable<NotificationProvider>(providerType))
-                {
-                    provider.Object.SetNotifications(context);
-                }
-            }
         }
 
         public void Add(NotificationDefinition notificationDefinition)
@@ -143,6 +129,20 @@ namespace Abp.Notifications
             }
 
             return availableDefinitions.ToImmutableList();
+        }
+
+        public void Initialize()
+        {
+            var context = new NotificationDefinitionContext(this);
+
+            foreach (var providerType in _configuration.Providers)
+            {
+                _iocManager.RegisterIfNot(providerType, DependencyLifeStyle.Transient); //TODO: Needed?
+                using (var provider = _iocManager.ResolveAsDisposable<NotificationProvider>(providerType))
+                {
+                    provider.Object.SetNotifications(context);
+                }
+            }
         }
     }
 }

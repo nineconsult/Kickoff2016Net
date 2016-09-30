@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Abp.Notifications
 {
     /// <summary>
-    /// Null pattern implementation of <see cref="INotificationStore"/>.
+    ///     Null pattern implementation of <see cref="INotificationStore" />.
     /// </summary>
     public class NullNotificationStore : INotificationStore
     {
@@ -74,7 +74,8 @@ namespace Abp.Notifications
             return Task.FromResult(0);
         }
 
-        public Task<List<UserNotificationInfoWithNotificationInfo>> GetUserNotificationsWithNotificationsAsync(UserIdentifier user, UserNotificationState? state = null, int skipCount = 0, int maxResultCount = int.MaxValue)
+        public Task<List<UserNotificationInfoWithNotificationInfo>> GetUserNotificationsWithNotificationsAsync(UserIdentifier user, UserNotificationState? state = null, int skipCount = 0,
+            int maxResultCount = int.MaxValue)
         {
             return Task.FromResult(new List<UserNotificationInfoWithNotificationInfo>());
         }
@@ -86,7 +87,7 @@ namespace Abp.Notifications
 
         public Task<UserNotificationInfoWithNotificationInfo> GetUserNotificationWithNotificationOrNullAsync(int? tenantId, Guid userNotificationId)
         {
-            return Task.FromResult((UserNotificationInfoWithNotificationInfo)null);
+            return Task.FromResult((UserNotificationInfoWithNotificationInfo) null);
         }
 
         public Task InsertTenantNotificationAsync(TenantNotificationInfo tenantNotificationInfo)

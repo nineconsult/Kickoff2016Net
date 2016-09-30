@@ -7,14 +7,14 @@ using Abp.Timing;
 namespace Abp.WebApi.Controllers.Dynamic.Binders
 {
     /// <summary>
-    /// Binds datetime values from api requests to model
+    ///     Binds datetime values from api requests to model
     /// </summary>
     public class AbpApiDateTimeBinder : IModelBinder
     {
         public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
         {
             var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
-            var date = value.ConvertTo(typeof(DateTime?), CultureInfo.CurrentCulture) as DateTime?;
+            var date = value.ConvertTo(typeof (DateTime?), CultureInfo.CurrentCulture) as DateTime?;
             if (date.HasValue)
             {
                 bindingContext.Model = Clock.Normalize(date.Value);

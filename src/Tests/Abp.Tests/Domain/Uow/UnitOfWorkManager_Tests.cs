@@ -12,7 +12,7 @@ namespace Abp.Tests.Domain.Uow
         public void Should_Call_Uow_Methods()
         {
             var fakeUow = Substitute.For<IUnitOfWork>();
-            
+
             LocalIocManager.IocContainer.Register(
                 Component.For<IUnitOfWorkDefaultOptions>().ImplementedBy<UnitOfWorkDefaultOptions>().LifestyleSingleton(),
                 Component.For<ICurrentUnitOfWorkProvider>().ImplementedBy<CallContextCurrentUnitOfWorkProvider>().LifestyleSingleton(),

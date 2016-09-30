@@ -4,7 +4,7 @@ using Abp.Reflection;
 namespace Abp.Domain.Entities
 {
     /// <summary>
-    /// Some helper methods for entities.
+    ///     Some helper methods for entities.
     /// </summary>
     public static class EntityHelper
     {
@@ -19,7 +19,7 @@ namespace Abp.Domain.Entities
         }
 
         /// <summary>
-        /// Gets primary key type of given entity type
+        ///     Gets primary key type of given entity type
         /// </summary>
         public static Type GetPrimaryKeyType(Type entityType)
         {

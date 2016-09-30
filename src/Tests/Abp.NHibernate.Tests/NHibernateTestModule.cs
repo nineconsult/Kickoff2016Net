@@ -8,7 +8,7 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Abp.NHibernate.Tests
 {
-    [DependsOn(typeof(AbpNHibernateModule))]
+    [DependsOn(typeof (AbpNHibernateModule))]
     public class NHibernateTestModule : AbpModule
     {
         public override void PreInitialize()

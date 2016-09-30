@@ -11,13 +11,13 @@ namespace Abp.TestBase.SampleApplication.Crm
     {
         public string Name { get; set; }
 
-        public DateTime CreationTime { get; set; }
-
         public Address ShippingAddress { get; set; }
 
         public Address BillingAddress { get; set; }
-        
+
         [ForeignKey("CompanyId")]
         public virtual ICollection<Branch> Branches { get; set; }
+
+        public DateTime CreationTime { get; set; }
     }
 }

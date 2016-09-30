@@ -6,12 +6,12 @@ using Abp.Threading;
 namespace Abp.Authorization
 {
     /// <summary>
-    /// Extension methods for <see cref="IPermissionChecker"/>
+    ///     Extension methods for <see cref="IPermissionChecker" />
     /// </summary>
     public static class PermissionCheckerExtensions
     {
         /// <summary>
-        /// Checks if current user is granted for a permission.
+        ///     Checks if current user is granted for a permission.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="permissionName">Name of the permission</param>
@@ -21,7 +21,7 @@ namespace Abp.Authorization
         }
 
         /// <summary>
-        /// Checks if a user is granted for a permission.
+        ///     Checks if a user is granted for a permission.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="userId">Id of the user to check</param>
@@ -33,7 +33,7 @@ namespace Abp.Authorization
         }
 
         /// <summary>
-        /// Checks if a user is granted for a permission.
+        ///     Checks if a user is granted for a permission.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="user">User to check</param>
@@ -44,7 +44,7 @@ namespace Abp.Authorization
         }
 
         /// <summary>
-        /// Checks if given user is granted for given permission.
+        ///     Checks if given user is granted for given permission.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="userId">User id</param>
@@ -57,7 +57,7 @@ namespace Abp.Authorization
         }
 
         /// <summary>
-        /// Checks if given user is granted for given permission.
+        ///     Checks if given user is granted for given permission.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="user">User</param>
@@ -69,7 +69,7 @@ namespace Abp.Authorization
         }
 
         /// <summary>
-        /// Checks if given user is granted for given permission.
+        ///     Checks if given user is granted for given permission.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="userId">User id</param>
@@ -95,22 +95,19 @@ namespace Abp.Authorization
 
                 return true;
             }
-            else
+            foreach (var permissionName in permissionNames)
             {
-                foreach (var permissionName in permissionNames)
+                if (await permissionChecker.IsGrantedAsync(userId, permissionName))
                 {
-                    if (await permissionChecker.IsGrantedAsync(userId, permissionName))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-
-                return false;
             }
+
+            return false;
         }
 
         /// <summary>
-        /// Checks if given user is granted for given permission.
+        ///     Checks if given user is granted for given permission.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="user">User</param>
@@ -135,22 +132,19 @@ namespace Abp.Authorization
 
                 return true;
             }
-            else
+            foreach (var permissionName in permissionNames)
             {
-                foreach (var permissionName in permissionNames)
+                if (await permissionChecker.IsGrantedAsync(user, permissionName))
                 {
-                    if (await permissionChecker.IsGrantedAsync(user, permissionName))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-
-                return false;
             }
+
+            return false;
         }
 
         /// <summary>
-        /// Checks if current user is granted for given permission.
+        ///     Checks if current user is granted for given permission.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="requiresAll">True, to require all given permissions are granted. False, to require one or more.</param>
@@ -161,7 +155,7 @@ namespace Abp.Authorization
         }
 
         /// <summary>
-        /// Checks if current user is granted for given permission.
+        ///     Checks if current user is granted for given permission.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="requiresAll">True, to require all given permissions are granted. False, to require one or more.</param>
@@ -185,24 +179,21 @@ namespace Abp.Authorization
 
                 return true;
             }
-            else
+            foreach (var permissionName in permissionNames)
             {
-                foreach (var permissionName in permissionNames)
+                if (await permissionChecker.IsGrantedAsync(permissionName))
                 {
-                    if (await permissionChecker.IsGrantedAsync(permissionName))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-
-                return false;
             }
+
+            return false;
         }
 
         /// <summary>
-        /// Authorizes current user for given permission or permissions,
-        /// throws <see cref="AbpAuthorizationException"/> if not authorized.
-        /// User it authorized if any of the <see cref="permissionNames"/> are granted.
+        ///     Authorizes current user for given permission or permissions,
+        ///     throws <see cref="AbpAuthorizationException" /> if not authorized.
+        ///     User it authorized if any of the <see cref="permissionNames" /> are granted.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="permissionNames">Name of the permissions to authorize</param>
@@ -213,14 +204,14 @@ namespace Abp.Authorization
         }
 
         /// <summary>
-        /// Authorizes current user for given permission or permissions,
-        /// throws <see cref="AbpAuthorizationException"/> if not authorized.
-        /// User it authorized if any of the <see cref="permissionNames"/> are granted.
+        ///     Authorizes current user for given permission or permissions,
+        ///     throws <see cref="AbpAuthorizationException" /> if not authorized.
+        ///     User it authorized if any of the <see cref="permissionNames" /> are granted.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="requireAll">
-        /// If this is set to true, all of the <see cref="permissionNames"/> must be granted.
-        /// If it's false, at least one of the <see cref="permissionNames"/> must be granted.
+        ///     If this is set to true, all of the <see cref="permissionNames" /> must be granted.
+        ///     If it's false, at least one of the <see cref="permissionNames" /> must be granted.
         /// </param>
         /// <param name="permissionNames">Name of the permissions to authorize</param>
         /// <exception cref="AbpAuthorizationException">Throws authorization exception if</exception>
@@ -230,9 +221,9 @@ namespace Abp.Authorization
         }
 
         /// <summary>
-        /// Authorizes current user for given permission or permissions,
-        /// throws <see cref="AbpAuthorizationException"/> if not authorized.
-        /// User it authorized if any of the <see cref="permissionNames"/> are granted.
+        ///     Authorizes current user for given permission or permissions,
+        ///     throws <see cref="AbpAuthorizationException" /> if not authorized.
+        ///     User it authorized if any of the <see cref="permissionNames" /> are granted.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="permissionNames">Name of the permissions to authorize</param>
@@ -243,13 +234,13 @@ namespace Abp.Authorization
         }
 
         /// <summary>
-        /// Authorizes current user for given permission or permissions,
-        /// throws <see cref="AbpAuthorizationException"/> if not authorized.
+        ///     Authorizes current user for given permission or permissions,
+        ///     throws <see cref="AbpAuthorizationException" /> if not authorized.
         /// </summary>
         /// <param name="permissionChecker">Permission checker</param>
         /// <param name="requireAll">
-        /// If this is set to true, all of the <see cref="permissionNames"/> must be granted.
-        /// If it's false, at least one of the <see cref="permissionNames"/> must be granted.
+        ///     If this is set to true, all of the <see cref="permissionNames" /> must be granted.
+        ///     If it's false, at least one of the <see cref="permissionNames" /> must be granted.
         /// </param>
         /// <param name="permissionNames">Name of the permissions to authorize</param>
         /// <exception cref="AbpAuthorizationException">Throws authorization exception if</exception>
@@ -267,13 +258,10 @@ namespace Abp.Authorization
                     string.Join(", ", permissionNames)
                     );
             }
-            else
-            {
-                throw new AbpAuthorizationException(
-                    "Required permissions are not granted. At least one of these permissions must be granted: " +
-                    string.Join(", ", permissionNames)
-                    );
-            }
+            throw new AbpAuthorizationException(
+                "Required permissions are not granted. At least one of these permissions must be granted: " +
+                string.Join(", ", permissionNames)
+                );
         }
     }
 }

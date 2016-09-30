@@ -6,12 +6,12 @@ using Newtonsoft.Json;
 namespace Abp.Notifications
 {
     /// <summary>
-    /// Extension methods for <see cref="NotificationSubscriptionInfo"/>.
+    ///     Extension methods for <see cref="NotificationSubscriptionInfo" />.
     /// </summary>
     public static class NotificationSubscriptionInfoExtensions
     {
         /// <summary>
-        /// Converts <see cref="UserNotificationInfo"/> to <see cref="UserNotification"/>.
+        ///     Converts <see cref="UserNotificationInfo" /> to <see cref="UserNotification" />.
         /// </summary>
         public static NotificationSubscription ToNotificationSubscription(this NotificationSubscriptionInfo subscriptionInfo)
         {

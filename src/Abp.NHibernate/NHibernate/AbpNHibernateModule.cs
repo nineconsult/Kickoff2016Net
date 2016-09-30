@@ -5,30 +5,29 @@ using Abp.Modules;
 using Abp.NHibernate.Filters;
 using Abp.NHibernate.Interceptors;
 using Abp.NHibernate.Repositories;
-using Castle.Components.DictionaryAdapter.Xml;
 using NHibernate;
 
 namespace Abp.NHibernate
 {
     /// <summary>
-    /// This module is used to implement "Data Access Layer" in NHibernate.
+    ///     This module is used to implement "Data Access Layer" in NHibernate.
     /// </summary>
-    [DependsOn(typeof(AbpKernelModule))]
+    [DependsOn(typeof (AbpKernelModule))]
     public class AbpNHibernateModule : AbpModule
     {
         /// <summary>
-        /// NHibernate session factory object.
+        ///     NHibernate session factory object.
         /// </summary>
         private ISessionFactory _sessionFactory;
-        
-        /// <inheritdoc/>
+
+        /// <inheritdoc />
         public override void Initialize()
         {
             IocManager.Register<AbpNHibernateInterceptor>(DependencyLifeStyle.Transient);
 
             _sessionFactory = Configuration.Modules.AbpNHibernate().FluentConfiguration
-                .Mappings(m => m.FluentMappings.Add(typeof(MayHaveTenantFilter)))
-                .Mappings(m => m.FluentMappings.Add(typeof(MustHaveTenantFilter)))
+                .Mappings(m => m.FluentMappings.Add(typeof (MayHaveTenantFilter)))
+                .Mappings(m => m.FluentMappings.Add(typeof (MustHaveTenantFilter)))
                 .ExposeConfiguration(config => config.SetInterceptor(IocManager.Resolve<AbpNHibernateInterceptor>()))
                 .BuildSessionFactory();
 
@@ -36,7 +35,7 @@ namespace Abp.NHibernate
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public override void Shutdown()
         {
             _sessionFactory.Dispose();

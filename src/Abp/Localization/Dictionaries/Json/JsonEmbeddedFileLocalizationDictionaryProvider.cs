@@ -6,7 +6,7 @@ using Abp.Localization.Dictionaries.Xml;
 namespace Abp.Localization.Dictionaries.Json
 {
     /// <summary>
-    /// Provides localization dictionaries from JSON files embedded into an <see cref="Assembly"/>.
+    ///     Provides localization dictionaries from JSON files embedded into an <see cref="Assembly" />.
     /// </summary>
     public class JsonEmbeddedFileLocalizationDictionaryProvider : LocalizationDictionaryProviderBase
     {
@@ -14,19 +14,19 @@ namespace Abp.Localization.Dictionaries.Json
         private readonly string _rootNamespace;
 
         /// <summary>
-        /// Creates a new <see cref="JsonEmbeddedFileLocalizationDictionaryProvider"/> object.
+        ///     Creates a new <see cref="JsonEmbeddedFileLocalizationDictionaryProvider" /> object.
         /// </summary>
         /// <param name="assembly">Assembly that contains embedded json files</param>
         /// <param name="rootNamespace">
-        /// <para>
-        /// Namespace of the embedded json dictionary files
-        /// </para>
-        /// <para>
-        /// Notice : Json folder name is different from Xml folder name.
-        /// </para>
-        /// <para>
-        /// You must name it like this : Json**** and Xml****; Do not name : ****Json and ****Xml
-        /// </para>
+        ///     <para>
+        ///         Namespace of the embedded json dictionary files
+        ///     </para>
+        ///     <para>
+        ///         Notice : Json folder name is different from Xml folder name.
+        ///     </para>
+        ///     <para>
+        ///         You must name it like this : Json**** and Xml****; Do not name : ****Json and ****Xml
+        ///     </para>
         /// </param>
         public JsonEmbeddedFileLocalizationDictionaryProvider(Assembly assembly, string rootNamespace)
         {

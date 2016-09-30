@@ -4,28 +4,31 @@ using Abp.Web.Configuration;
 
 namespace Abp.Web.Models
 {
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public class ErrorInfoBuilder : IErrorInfoBuilder, ISingletonDependency
     {
-        /// <inheritdoc/>
-        public static IErrorInfoBuilder Instance { get { return IocManager.Instance.Resolve<IErrorInfoBuilder>(); } }
-
-        private IExceptionToErrorInfoConverter Converter { get; set; }
-
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public ErrorInfoBuilder(IAbpWebModuleConfiguration configuration)
         {
             Converter = new DefaultErrorInfoConverter(configuration);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
+        public static IErrorInfoBuilder Instance
+        {
+            get { return IocManager.Instance.Resolve<IErrorInfoBuilder>(); }
+        }
+
+        private IExceptionToErrorInfoConverter Converter { get; set; }
+
+        /// <inheritdoc />
         public ErrorInfo BuildForException(Exception exception)
         {
             return Converter.Convert(exception);
         }
 
         /// <summary>
-        /// Adds an exception converter that is used by <paramref name="ForException"/> method.
+        ///     Adds an exception converter that is used by <paramref name="ForException" /> method.
         /// </summary>
         /// <param name="converter">Converter object</param>
         public void AddExceptionConverter(IExceptionToErrorInfoConverter converter)

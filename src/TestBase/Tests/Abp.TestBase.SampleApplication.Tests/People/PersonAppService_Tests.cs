@@ -28,7 +28,7 @@ namespace Abp.TestBase.SampleApplication.Tests.People
         public async Task Should_Insert_New_Person()
         {
             ContactList contactList = null;
-            int peopleCount = 0;
+            var peopleCount = 0;
 
             await UsingDbContext(
                 async context =>
@@ -55,7 +55,7 @@ namespace Abp.TestBase.SampleApplication.Tests.People
         public async Task Should_Rollback_If_Uow_Is_Not_Completed()
         {
             ContactList contactList = null;
-            int peopleCount = 0;
+            var peopleCount = 0;
 
             await UsingDbContext(
                 async context =>
@@ -67,7 +67,7 @@ namespace Abp.TestBase.SampleApplication.Tests.People
             //CreatePersonAsync will use same UOW.
             using (var uow = LocalIocManager.Resolve<IUnitOfWorkManager>().Begin())
             {
-                await _personAppService.CreatePersonAsync(new CreatePersonInput { ContactListId = contactList.Id, Name = "john" });
+                await _personAppService.CreatePersonAsync(new CreatePersonInput {ContactListId = contactList.Id, Name = "john"});
                 //await uow.CompleteAsync(); //It's intentionally removed from code to see roll-back
             }
 
@@ -82,7 +82,7 @@ namespace Abp.TestBase.SampleApplication.Tests.People
         [Fact]
         public async Task Should_Not_Insert_For_Invalid_Input()
         {
-            await Assert.ThrowsAsync<AbpValidationException>(async () => await _personAppService.CreatePersonAsync(new CreatePersonInput { Name = null }));
+            await Assert.ThrowsAsync<AbpValidationException>(async () => await _personAppService.CreatePersonAsync(new CreatePersonInput {Name = null}));
         }
 
         [Fact]
@@ -96,7 +96,7 @@ namespace Abp.TestBase.SampleApplication.Tests.People
         [Fact]
         public void Should_Get_Related_People_With_Filter()
         {
-            var output = _personAppService.GetPeople(new GetPeopleInput { NameFilter = "h" });
+            var output = _personAppService.GetPeople(new GetPeopleInput {NameFilter = "h"});
             output.Items.FirstOrDefault(p => p.Name == "halil").ShouldNotBe(null);
             output.Items.All(p => p.Name.Contains("h")).ShouldBe(true);
         }
@@ -108,10 +108,10 @@ namespace Abp.TestBase.SampleApplication.Tests.People
 
             var permissionChecker = Substitute.For<IPermissionChecker>();
             permissionChecker.IsGrantedAsync("CanDeletePerson").Returns(async info =>
-                                                                        {
-                                                                            await Task.Delay(10);
-                                                                            return true;
-                                                                        });
+            {
+                await Task.Delay(10);
+                return true;
+            });
 
             LocalIocManager.IocContainer.Register(
                 Component.For<IPermissionChecker>().UsingFactoryMethod(() => permissionChecker).LifestyleSingleton()

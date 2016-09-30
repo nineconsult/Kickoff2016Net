@@ -6,6 +6,7 @@ using Abp.Domain.Repositories;
 using Abp.EntityFramework.Repositories;
 using Abp.Tests;
 using Castle.MicroKernel.Registration;
+using NSubstitute;
 using Shouldly;
 using Xunit;
 
@@ -15,9 +16,9 @@ namespace Abp.EntityFramework.Tests.Repositories
     {
         public EntityFrameworkGenericRepositoryRegistrar_Tests()
         {
-            var fakeBaseDbContextProvider = NSubstitute.Substitute.For<IDbContextProvider<MyBaseDbContext>>();
-            var fakeMainDbContextProvider = NSubstitute.Substitute.For<IDbContextProvider<MyMainDbContext>>();
-            var fakeModuleDbContextProvider = NSubstitute.Substitute.For<IDbContextProvider<MyModuleDbContext>>();
+            var fakeBaseDbContextProvider = Substitute.For<IDbContextProvider<MyBaseDbContext>>();
+            var fakeMainDbContextProvider = Substitute.For<IDbContextProvider<MyMainDbContext>>();
+            var fakeModuleDbContextProvider = Substitute.For<IDbContextProvider<MyModuleDbContext>>();
 
             LocalIocManager.IocContainer.Register(
                 Component.For<IDbContextProvider<MyBaseDbContext>>().UsingFactoryMethod(() => fakeBaseDbContextProvider),
@@ -28,8 +29,8 @@ namespace Abp.EntityFramework.Tests.Repositories
 
             using (var repositoryRegistrar = LocalIocManager.ResolveAsDisposable<EntityFrameworkGenericRepositoryRegistrar>())
             {
-                repositoryRegistrar.Object.RegisterForDbContext(typeof(MyModuleDbContext), LocalIocManager);
-                repositoryRegistrar.Object.RegisterForDbContext(typeof(MyMainDbContext), LocalIocManager);
+                repositoryRegistrar.Object.RegisterForDbContext(typeof (MyModuleDbContext), LocalIocManager);
+                repositoryRegistrar.Object.RegisterForDbContext(typeof (MyMainDbContext), LocalIocManager);
             }
         }
 
@@ -65,10 +66,10 @@ namespace Abp.EntityFramework.Tests.Repositories
         }
 
         [AutoRepositoryTypes(
-            typeof(IMyModuleRepository<>),
-            typeof(IMyModuleRepository<,>),
-            typeof(MyModuleRepositoryBase<>),
-            typeof(MyModuleRepositoryBase<,>)
+            typeof (IMyModuleRepository<>),
+            typeof (IMyModuleRepository<,>),
+            typeof (MyModuleRepositoryBase<>),
+            typeof (MyModuleRepositoryBase<,>)
             )]
         public class MyModuleDbContext : MyBaseDbContext
         {
@@ -82,34 +83,28 @@ namespace Abp.EntityFramework.Tests.Repositories
 
         public class MyEntity1 : Entity
         {
-
         }
 
         public class MyEntity2 : Entity<long>
         {
-
         }
 
         public class MyEntity3 : Entity<Guid>
         {
-
         }
 
         public class MyNonEntity
         {
-
         }
 
         public interface IMyModuleRepository<TEntity> : IRepository<TEntity>
             where TEntity : class, IEntity<int>
         {
-
         }
 
         public interface IMyModuleRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
             where TEntity : class, IEntity<TPrimaryKey>
         {
-
         }
 
         public class MyModuleRepositoryBase<TEntity, TPrimaryKey> : EfRepositoryBase<MyModuleDbContext, TEntity, TPrimaryKey>, IMyModuleRepository<TEntity, TPrimaryKey>

@@ -38,7 +38,7 @@ namespace Abp.AutoMapper
 
                     if (autoMapToAttribute.Direction.HasFlag(AutoMapDirection.From))
                     {
-                        Mapper.CreateMap(targetType, type);                                
+                        Mapper.CreateMap(targetType, type);
                     }
                 }
             }

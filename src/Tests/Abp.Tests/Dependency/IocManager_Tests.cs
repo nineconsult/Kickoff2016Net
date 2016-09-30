@@ -15,17 +15,14 @@ namespace Abp.Tests.Dependency
 
         public interface IEmpty
         {
-            
         }
 
         public class EmptyImplOne : IEmpty
         {
-            
         }
 
         public class EmptyImplTwo : IEmpty
         {
-
         }
     }
 }

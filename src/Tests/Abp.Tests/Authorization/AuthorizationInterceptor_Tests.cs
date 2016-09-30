@@ -12,8 +12,8 @@ namespace Abp.Tests.Authorization
 {
     public class AuthorizationInterceptor_Tests : TestBaseWithLocalIocManager
     {
-        private readonly MyTestClassToBeAuthorized_Sync _syncObj;
         private readonly MyTestClassToBeAuthorized_Async _asyncObj;
+        private readonly MyTestClassToBeAuthorized_Sync _syncObj;
 
         public AuthorizationInterceptor_Tests()
         {
@@ -46,7 +46,7 @@ namespace Abp.Tests.Authorization
         public void Test_Authorization_Sync()
         {
             //Authorized methods
-            
+
             _syncObj.MethodWithoutPermission();
             _syncObj.Called_MethodWithoutPermission.ShouldBe(true);
 
@@ -58,7 +58,7 @@ namespace Abp.Tests.Authorization
 
             _syncObj.MethodWithPermission1AndPermission3();
             _syncObj.Called_MethodWithPermission1AndPermission3.ShouldBe(true);
-            
+
             //Non authorized methods
 
             Assert.Throws<AbpAuthorizationException>(() => _syncObj.MethodWithPermission3());
@@ -152,15 +152,15 @@ namespace Abp.Tests.Authorization
         public class MyTestClassToBeAuthorized_Async
         {
             public bool Called_MethodWithoutPermission { get; private set; }
-            
+
             public bool Called_MethodWithPermission1 { get; private set; }
-            
+
             public bool Called_MethodWithPermission3 { get; private set; }
-            
+
             public bool Called_MethodWithPermission1AndPermission2 { get; private set; }
-            
+
             public bool Called_MethodWithPermission1AndPermission3 { get; private set; }
-            
+
             public bool Called_MethodWithPermission1AndPermission3WithRequireAll { get; private set; }
 
             public virtual async Task MethodWithoutPermission()

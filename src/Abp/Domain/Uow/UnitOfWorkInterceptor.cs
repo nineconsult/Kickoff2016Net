@@ -5,7 +5,7 @@ using Castle.DynamicProxy;
 namespace Abp.Domain.Uow
 {
     /// <summary>
-    /// This interceptor is used to manage database connection and transactions.
+    ///     This interceptor is used to manage database connection and transactions.
     /// </summary>
     internal class UnitOfWorkInterceptor : IInterceptor
     {
@@ -17,7 +17,7 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// Intercepts a method.
+        ///     Intercepts a method.
         /// </summary>
         /// <param name="invocation">Method invocation arguments</param>
         public void Intercept(IInvocation invocation)
@@ -61,10 +61,10 @@ namespace Abp.Domain.Uow
 
             invocation.Proceed();
 
-            if (invocation.Method.ReturnType == typeof(Task))
+            if (invocation.Method.ReturnType == typeof (Task))
             {
                 invocation.ReturnValue = InternalAsyncHelper.AwaitTaskWithPostActionAndFinally(
-                    (Task)invocation.ReturnValue,
+                    (Task) invocation.ReturnValue,
                     async () => await uow.CompleteAsync(),
                     exception => uow.Dispose()
                     );
@@ -75,7 +75,7 @@ namespace Abp.Domain.Uow
                     invocation.Method.ReturnType.GenericTypeArguments[0],
                     invocation.ReturnValue,
                     async () => await uow.CompleteAsync(),
-                    (exception) => uow.Dispose()
+                    exception => uow.Dispose()
                     );
             }
         }

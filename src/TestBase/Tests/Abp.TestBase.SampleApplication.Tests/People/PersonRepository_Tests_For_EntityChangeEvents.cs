@@ -15,8 +15,8 @@ namespace Abp.TestBase.SampleApplication.Tests.People
 {
     public class PersonRepository_Tests_For_EntityChangeEvents : SampleApplicationTestBase
     {
-        private readonly IRepository<Person> _personRepository;
         private readonly IRepository<Message> _messageRepository;
+        private readonly IRepository<Person> _personRepository;
 
         public PersonRepository_Tests_For_EntityChangeEvents()
         {
@@ -65,7 +65,7 @@ namespace Abp.TestBase.SampleApplication.Tests.People
                     createdTriggerCount++;
                 });
 
-            _personRepository.Insert(new Person { ContactListId = 1, Name = "halil" });
+            _personRepository.Insert(new Person {ContactListId = 1, Name = "halil"});
 
             changingTriggerCount.ShouldBe(1);
             creatingTriggerCount.ShouldBe(1);
@@ -165,7 +165,7 @@ namespace Abp.TestBase.SampleApplication.Tests.People
         [Fact]
         public async Task Should_Insert_A_New_Entity_On_EntityCreated_Event()
         {
-            var person = await _personRepository.InsertAsync(new Person { Name = "Tuana", ContactListId = 1 });
+            var person = await _personRepository.InsertAsync(new Person {Name = "Tuana", ContactListId = 1});
             person.IsTransient().ShouldBeFalse();
 
             var text = string.Format("{0} is created with Id = {1}!", person.Name, person.Id);

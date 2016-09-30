@@ -12,9 +12,9 @@ namespace Abp.TestBase.SampleApplication.Crm
 
         public string Name { get; set; }
 
-        public DateTime CreationTime { get; set; }
-
         [ForeignKey("CompanyId")]
         public virtual Company Company { get; set; }
+
+        public DateTime CreationTime { get; set; }
     }
 }

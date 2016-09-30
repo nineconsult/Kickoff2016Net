@@ -12,25 +12,18 @@ namespace Abp.Localization
 {
     internal class LocalizationManager : ILocalizationManager
     {
-        public ILogger Logger { get; set; }
-
-        /// <summary>
-        /// Gets current language for the application.
-        /// </summary>
-        [Obsolete("Inject ILanguageManager and use ILanguageManager.CurrentLanguage.")]
-        public LanguageInfo CurrentLanguage { get { return _languageManager.CurrentLanguage; } }
-
-        private readonly ILanguageManager _languageManager;
         private readonly ILocalizationConfiguration _configuration;
         private readonly IIocResolver _iocResolver;
+
+        private readonly ILanguageManager _languageManager;
         private readonly IDictionary<string, ILocalizationSource> _sources;
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
         public LocalizationManager(
             ILanguageManager languageManager,
-            ILocalizationConfiguration configuration, 
+            ILocalizationConfiguration configuration,
             IIocResolver iocResolver)
         {
             Logger = NullLogger.Instance;
@@ -40,15 +33,61 @@ namespace Abp.Localization
             _sources = new Dictionary<string, ILocalizationSource>();
         }
 
-        public void Initialize()
+        public ILogger Logger { get; set; }
+
+        /// <summary>
+        ///     Gets current language for the application.
+        /// </summary>
+        [Obsolete("Inject ILanguageManager and use ILanguageManager.CurrentLanguage.")]
+        public LanguageInfo CurrentLanguage
         {
-            InitializeSources();
+            get { return _languageManager.CurrentLanguage; }
         }
 
         [Obsolete("Inject ILanguageManager and use ILanguageManager.GetLanguages().")]
         public IReadOnlyList<LanguageInfo> GetAllLanguages()
         {
             return _languageManager.GetLanguages();
+        }
+
+        /// <summary>
+        ///     Gets a localization source with name.
+        /// </summary>
+        /// <param name="name">Unique name of the localization source</param>
+        /// <returns>The localization source</returns>
+        public ILocalizationSource GetSource(string name)
+        {
+            if (!_configuration.IsEnabled)
+            {
+                return NullLocalizationSource.Instance;
+            }
+
+            if (name == null)
+            {
+                throw new ArgumentNullException("name");
+            }
+
+            ILocalizationSource source;
+            if (!_sources.TryGetValue(name, out source))
+            {
+                throw new AbpException("Can not find a source with name: " + name);
+            }
+
+            return source;
+        }
+
+        /// <summary>
+        ///     Gets all registered localization sources.
+        /// </summary>
+        /// <returns>List of sources</returns>
+        public IReadOnlyList<ILocalizationSource> GetAllSources()
+        {
+            return _sources.Values.ToImmutableList();
+        }
+
+        public void Initialize()
+        {
+            InitializeSources();
         }
 
         private void InitializeSources()
@@ -87,41 +126,6 @@ namespace Abp.Localization
 
                 Logger.Debug("Initialized localization source: " + source.Name);
             }
-        }
-
-        /// <summary>
-        /// Gets a localization source with name.
-        /// </summary>
-        /// <param name="name">Unique name of the localization source</param>
-        /// <returns>The localization source</returns>
-        public ILocalizationSource GetSource(string name)
-        {
-            if (!_configuration.IsEnabled)
-            {
-                return NullLocalizationSource.Instance;
-            }
-
-            if (name == null)
-            {
-                throw new ArgumentNullException("name");
-            }
-
-            ILocalizationSource source;
-            if (!_sources.TryGetValue(name, out source))
-            {
-                throw new AbpException("Can not find a source with name: " + name);
-            }
-
-            return source;
-        }
-
-        /// <summary>
-        /// Gets all registered localization sources.
-        /// </summary>
-        /// <returns>List of sources</returns>
-        public IReadOnlyList<ILocalizationSource> GetAllSources()
-        {
-            return _sources.Values.ToImmutableList();
         }
     }
 }

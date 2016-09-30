@@ -5,15 +5,25 @@ using Abp.Json;
 namespace Abp.Notifications
 {
     /// <summary>
-    /// Used to store data for a notification.
-    /// It can be directly used or can be derived.
+    ///     Used to store data for a notification.
+    ///     It can be directly used or can be derived.
     /// </summary>
     [Serializable]
     public class NotificationData
     {
+        private Dictionary<string, object> _properties;
+
         /// <summary>
-        /// Gets notification data type name.
-        /// It returns the full class name by default.
+        ///     Createa a new NotificationData object.
+        /// </summary>
+        public NotificationData()
+        {
+            Properties = new Dictionary<string, object>();
+        }
+
+        /// <summary>
+        ///     Gets notification data type name.
+        ///     It returns the full class name by default.
         /// </summary>
         public virtual string Type
         {
@@ -21,7 +31,7 @@ namespace Abp.Notifications
         }
 
         /// <summary>
-        /// Shortcut to set/get <see cref="Properties"/>.
+        ///     Shortcut to set/get <see cref="Properties" />.
         /// </summary>
         public object this[string key]
         {
@@ -30,7 +40,7 @@ namespace Abp.Notifications
         }
 
         /// <summary>
-        /// Can be used to add custom properties to this notification.
+        ///     Can be used to add custom properties to this notification.
         /// </summary>
         public Dictionary<string, object> Properties
         {
@@ -44,15 +54,6 @@ namespace Abp.Notifications
 
                 _properties = value;
             }
-        }
-        private Dictionary<string, object> _properties;
-
-        /// <summary>
-        /// Createa a new NotificationData object.
-        /// </summary>
-        public NotificationData()
-        {
-            Properties = new Dictionary<string, object>();
         }
 
         public override string ToString()

@@ -19,7 +19,7 @@ namespace Abp.Tests.Events.Bus
                     triggeredEvent = true;
                 });
 
-            EventBus.Trigger(new EntityUpdatedEventData<Person>(new Person { Id = 42 }));
+            EventBus.Trigger(new EntityUpdatedEventData<Person>(new Person {Id = 42}));
 
             triggeredEvent.ShouldBe(true);
         }
@@ -36,20 +36,18 @@ namespace Abp.Tests.Events.Bus
                     triggeredEvent = true;
                 });
 
-            EventBus.Trigger(new EntityChangedEventData<Student>(new Student { Id = 42 }));
+            EventBus.Trigger(new EntityChangedEventData<Student>(new Student {Id = 42}));
 
             triggeredEvent.ShouldBe(true);
         }
-        
-        
+
+
         public class Person : Entity
         {
-            
         }
 
         public class Student : Person
         {
-            
         }
     }
 }

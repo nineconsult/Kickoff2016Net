@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -12,15 +11,15 @@ using Abp.Xml.Extensions;
 namespace Abp.Timing.Timezone
 {
     /// <summary>
-    /// A helper class for timezone operations
+    ///     A helper class for timezone operations
     /// </summary>
     public static class TimezoneHelper
     {
-        static readonly Dictionary<string, string> TimeZoneMappings = new Dictionary<string, string>();
-        static readonly object SyncObj = new object();
+        private static readonly object SyncObj = new object();
+        private static readonly Dictionary<string, string> TimeZoneMappings = new Dictionary<string, string>();
 
         /// <summary>
-        /// Maps given windows timezone id to IANA timezone id
+        ///     Maps given windows timezone id to IANA timezone id
         /// </summary>
         /// <param name="windowsTimezoneId"></param>
         /// <returns></returns>
@@ -74,7 +73,7 @@ namespace Abp.Timing.Timezone
 
             var resourceName = resourceNames.First(r => r.Contains("WindowsZones.xml"));
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
             {
                 var bytes = stream.GetAllBytes();
                 var xmlString = Encoding.UTF8.GetString(bytes, 3, bytes.Length - 3); //Skipping byte order mark

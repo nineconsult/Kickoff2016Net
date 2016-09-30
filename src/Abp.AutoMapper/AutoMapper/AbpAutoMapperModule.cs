@@ -1,22 +1,21 @@
-﻿using Abp.Localization;
-using Abp.Modules;
-using System.Reflection;
+﻿using System.Reflection;
 using Abp.Configuration.Startup;
+using Abp.Localization;
+using Abp.Modules;
 using Abp.Reflection;
 using AutoMapper;
 using Castle.Core.Logging;
+using IObjectMapper = Abp.ObjectMapping.IObjectMapper;
 
 namespace Abp.AutoMapper
 {
     [DependsOn(typeof (AbpKernelModule))]
     public class AbpAutoMapperModule : AbpModule
     {
-        public ILogger Logger { get; set; }
-
-        private readonly ITypeFinder _typeFinder;
-
         private static bool _createdMappingsBefore;
         private static readonly object _syncObj = new object();
+
+        private readonly ITypeFinder _typeFinder;
 
         public AbpAutoMapperModule(ITypeFinder typeFinder)
         {
@@ -24,9 +23,11 @@ namespace Abp.AutoMapper
             Logger = NullLogger.Instance;
         }
 
+        public ILogger Logger { get; set; }
+
         public override void PreInitialize()
         {
-            Configuration.ReplaceService<Abp.ObjectMapping.IObjectMapper, AutoMapperObjectMapper>();
+            Configuration.ReplaceService<IObjectMapper, AutoMapperObjectMapper>();
         }
 
         public override void PostInitialize()
@@ -54,9 +55,9 @@ namespace Abp.AutoMapper
         private void FindAndAutoMapTypes()
         {
             var types = _typeFinder.Find(type =>
-                type.IsDefined(typeof(AutoMapAttribute)) ||
-                type.IsDefined(typeof(AutoMapFromAttribute)) ||
-                type.IsDefined(typeof(AutoMapToAttribute))
+                type.IsDefined(typeof (AutoMapAttribute)) ||
+                type.IsDefined(typeof (AutoMapFromAttribute)) ||
+                type.IsDefined(typeof (AutoMapToAttribute))
                 );
 
             Logger.DebugFormat("Found {0} classes defines auto mapping attributes", types.Length);

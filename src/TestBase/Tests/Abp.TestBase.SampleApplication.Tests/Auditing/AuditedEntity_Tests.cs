@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Abp.TestBase.SampleApplication.Tests.Auditing
 {
-    public class AuditedEntity_Tests: SampleApplicationTestBase
+    public class AuditedEntity_Tests : SampleApplicationTestBase
     {
         private readonly IRepository<Message> _messageRepository;
 

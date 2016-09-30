@@ -6,8 +6,8 @@ using Abp.Runtime.Caching.Redis;
 using Abp.Tests;
 using Castle.MicroKernel.Registration;
 using NSubstitute;
-using Xunit;
 using Shouldly;
+using Xunit;
 
 namespace Abp.RedisCache.Tests
 {
@@ -23,10 +23,7 @@ namespace Abp.RedisCache.Tests
             LocalIocManager.IocContainer.Register(Component.For<IAbpStartupConfiguration>().UsingFactoryMethod(() => Substitute.For<IAbpStartupConfiguration>()));
 
             var defaultSlidingExpireTime = TimeSpan.FromHours(24);
-            LocalIocManager.Resolve<ICachingConfiguration>().Configure("MyTestCacheItems", cache =>
-            {
-                cache.DefaultSlidingExpireTime = defaultSlidingExpireTime;
-            });
+            LocalIocManager.Resolve<ICachingConfiguration>().Configure("MyTestCacheItems", cache => { cache.DefaultSlidingExpireTime = defaultSlidingExpireTime; });
 
             _cache = LocalIocManager.Resolve<ICacheManager>().GetCache<string, MyCacheItem>("MyTestCacheItems");
             _cache.DefaultSlidingExpireTime.ShouldBe(defaultSlidingExpireTime);
@@ -37,7 +34,7 @@ namespace Abp.RedisCache.Tests
         [InlineData("B", 43)]
         public void Simple_Get_Set_Test(string cacheKey, int cacheValue)
         {
-            var item = _cache.Get(cacheKey, () => new MyCacheItem { Value = cacheValue });
+            var item = _cache.Get(cacheKey, () => new MyCacheItem {Value = cacheValue});
 
             item.ShouldNotBe(null);
             item.Value.ShouldBe(cacheValue);

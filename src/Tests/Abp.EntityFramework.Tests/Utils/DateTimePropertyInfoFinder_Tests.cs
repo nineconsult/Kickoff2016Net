@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Abp.EntityFramework.Utils;
 using System.Linq;
+using Abp.EntityFramework.Utils;
 using Shouldly;
 using Xunit;
 
@@ -12,7 +12,7 @@ namespace Abp.EntityFramework.Tests.Utils
         [Fact]
         public void GetDatePropertyInfos_Test()
         {
-            var dateTimePropertInfos = DateTimePropertyInfoHelper.GetDatePropertyInfos(typeof(Hotel));
+            var dateTimePropertInfos = DateTimePropertyInfoHelper.GetDatePropertyInfos(typeof (Hotel));
 
             dateTimePropertInfos.DateTimePropertyInfos.Count.ShouldBe(2);
             dateTimePropertInfos.ComplexTypePropertyPaths.Count.ShouldBe(6);

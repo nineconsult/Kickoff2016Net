@@ -10,14 +10,25 @@ namespace Abp.UI.Inputs
     [Serializable]
     public abstract class InputTypeBase : IInputType
     {
+        protected InputTypeBase()
+            : this(new AlwaysValidValueValidator())
+        {
+        }
+
+        protected InputTypeBase(IValueValidator validator)
+        {
+            Attributes = new Dictionary<string, object>();
+            Validator = validator;
+        }
+
         public virtual string Name
         {
             get
             {
                 var type = GetType();
-                if (type.IsDefined(typeof(InputTypeAttribute)))
+                if (type.IsDefined(typeof (InputTypeAttribute)))
                 {
-                    return type.GetCustomAttributes(typeof(InputTypeAttribute)).Cast<InputTypeAttribute>().First().Name;
+                    return type.GetCustomAttributes(typeof (InputTypeAttribute)).Cast<InputTypeAttribute>().First().Name;
                 }
 
                 return type.Name;
@@ -25,8 +36,8 @@ namespace Abp.UI.Inputs
         }
 
         /// <summary>
-        /// Gets/sets arbitrary objects related to this object.
-        /// Gets null if given key does not exists.
+        ///     Gets/sets arbitrary objects related to this object.
+        ///     Gets null if given key does not exists.
         /// </summary>
         /// <param name="key">Key</param>
         public object this[string key]
@@ -36,22 +47,10 @@ namespace Abp.UI.Inputs
         }
 
         /// <summary>
-        /// Arbitrary objects related to this object.
+        ///     Arbitrary objects related to this object.
         /// </summary>
-        public IDictionary<string, object> Attributes { get; private set; }
+        public IDictionary<string, object> Attributes { get; }
 
         public IValueValidator Validator { get; set; }
-
-        protected InputTypeBase()
-            :this(new AlwaysValidValueValidator())
-        {
-
-        }
-
-        protected InputTypeBase(IValueValidator validator)
-        {
-            Attributes = new Dictionary<string, object>();
-            Validator = validator;
-        }
     }
 }

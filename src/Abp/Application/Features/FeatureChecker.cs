@@ -5,24 +5,14 @@ using Abp.Runtime.Session;
 namespace Abp.Application.Features
 {
     /// <summary>
-    /// Default implementation for <see cref="IFeatureChecker"/>.
+    ///     Default implementation for <see cref="IFeatureChecker" />.
     /// </summary>
     public class FeatureChecker : IFeatureChecker, ITransientDependency
     {
-        /// <summary>
-        /// Reference to current session.
-        /// </summary>
-        public IAbpSession AbpSession { get; set; }
-
-        /// <summary>
-        /// Reference to the store used to get feature values.
-        /// </summary>
-        public IFeatureValueStore FeatureValueStore { get; set; }
-
         private readonly IFeatureManager _featureManager;
 
         /// <summary>
-        /// Creates a new <see cref="FeatureChecker"/> object.
+        ///     Creates a new <see cref="FeatureChecker" /> object.
         /// </summary>
         public FeatureChecker(IFeatureManager featureManager)
         {
@@ -32,7 +22,17 @@ namespace Abp.Application.Features
             AbpSession = NullAbpSession.Instance;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        ///     Reference to current session.
+        /// </summary>
+        public IAbpSession AbpSession { get; set; }
+
+        /// <summary>
+        ///     Reference to the store used to get feature values.
+        /// </summary>
+        public IFeatureValueStore FeatureValueStore { get; set; }
+
+        /// <inheritdoc />
         public Task<string> GetValueAsync(string name)
         {
             if (!AbpSession.TenantId.HasValue)
@@ -43,7 +43,7 @@ namespace Abp.Application.Features
             return GetValueAsync(AbpSession.TenantId.Value, name);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task<string> GetValueAsync(int tenantId, string name)
         {
             var feature = _featureManager.Get(name);

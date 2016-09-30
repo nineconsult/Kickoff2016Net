@@ -6,17 +6,17 @@ using Abp.Dependency;
 namespace Abp.Domain.Uow
 {
     /// <summary>
-    /// Default implementation of <see cref="IConnectionStringResolver"/>.
-    /// Get connection string from <see cref="IAbpStartupConfiguration"/>,
-    /// or "Default" connection string in config file,
-    /// or single connection string in config file.
+    ///     Default implementation of <see cref="IConnectionStringResolver" />.
+    ///     Get connection string from <see cref="IAbpStartupConfiguration" />,
+    ///     or "Default" connection string in config file,
+    ///     or single connection string in config file.
     /// </summary>
     public class DefaultConnectionStringResolver : IConnectionStringResolver, ITransientDependency
     {
         private readonly IAbpStartupConfiguration _configuration;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultConnectionStringResolver"/> class.
+        ///     Initializes a new instance of the <see cref="DefaultConnectionStringResolver" /> class.
         /// </summary>
         public DefaultConnectionStringResolver(IAbpStartupConfiguration configuration)
         {
@@ -46,7 +46,8 @@ namespace Abp.Domain.Uow
                 return ConfigurationManager.ConnectionStrings[0].ConnectionString;
             }
 
-            throw new AbpException("Could not find a connection string definition for the application. Set IAbpStartupConfiguration.DefaultNameOrConnectionString or add a 'Default' connection string to application .config file.");
+            throw new AbpException(
+                "Could not find a connection string definition for the application. Set IAbpStartupConfiguration.DefaultNameOrConnectionString or add a 'Default' connection string to application .config file.");
         }
     }
 }

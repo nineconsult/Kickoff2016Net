@@ -9,77 +9,36 @@ using Abp.Runtime.Session;
 namespace Abp.Domain.Uow
 {
     /// <summary>
-    /// Base for all Unit Of Work classes.
+    ///     Base for all Unit Of Work classes.
     /// </summary>
     public abstract class UnitOfWorkBase : IUnitOfWork
     {
-        public string Id { get; private set; }
+        /// <summary>
+        ///     A reference to the exception if this unit of work failed.
+        /// </summary>
+        private Exception _exception;
 
-        public IUnitOfWork Outer { get; set; }
-
-        /// <inheritdoc/>
-        public event EventHandler Completed;
-
-        /// <inheritdoc/>
-        public event EventHandler<UnitOfWorkFailedEventArgs> Failed;
-
-        /// <inheritdoc/>
-        public event EventHandler Disposed;
-
-        /// <inheritdoc/>
-        public UnitOfWorkOptions Options { get; private set; }
-
-        /// <inheritdoc/>
-        public IReadOnlyList<DataFilterConfiguration> Filters
-        {
-            get { return _filters.ToImmutableList(); }
-        }
         private readonly List<DataFilterConfiguration> _filters;
 
         /// <summary>
-        /// Gets default UOW options.
-        /// </summary>
-        protected IUnitOfWorkDefaultOptions DefaultOptions { get; private set; }
-
-        /// <summary>
-        /// Gets the connection string resolver.
-        /// </summary>
-        protected IConnectionStringResolver ConnectionStringResolver { get; private set; }
-
-        /// <summary>
-        /// Gets a value indicates that this unit of work is disposed or not.
-        /// </summary>
-        public bool IsDisposed { get; private set; }
-
-        /// <summary>
-        /// Reference to current ABP session.
-        /// </summary>
-        public IAbpSession AbpSession { private get; set; }
-
-        /// <summary>
-        /// Is <see cref="Begin"/> method called before?
+        ///     Is <see cref="Begin" /> method called before?
         /// </summary>
         private bool _isBeginCalledBefore;
 
         /// <summary>
-        /// Is <see cref="Complete"/> method called before?
+        ///     Is <see cref="Complete" /> method called before?
         /// </summary>
         private bool _isCompleteCalledBefore;
 
         /// <summary>
-        /// Is this unit of work successfully completed.
+        ///     Is this unit of work successfully completed.
         /// </summary>
         private bool _succeed;
-
-        /// <summary>
-        /// A reference to the exception if this unit of work failed.
-        /// </summary>
-        private Exception _exception;
 
         private int? _tenantId;
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
         protected UnitOfWorkBase(IConnectionStringResolver connectionStringResolver, IUnitOfWorkDefaultOptions defaultOptions)
         {
@@ -91,7 +50,49 @@ namespace Abp.Domain.Uow
             AbpSession = NullAbpSession.Instance;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        ///     Gets default UOW options.
+        /// </summary>
+        protected IUnitOfWorkDefaultOptions DefaultOptions { get; private set; }
+
+        /// <summary>
+        ///     Gets the connection string resolver.
+        /// </summary>
+        protected IConnectionStringResolver ConnectionStringResolver { get; }
+
+        /// <summary>
+        ///     Reference to current ABP session.
+        /// </summary>
+        public IAbpSession AbpSession { private get; set; }
+
+        public string Id { get; }
+
+        public IUnitOfWork Outer { get; set; }
+
+        /// <inheritdoc />
+        public event EventHandler Completed;
+
+        /// <inheritdoc />
+        public event EventHandler<UnitOfWorkFailedEventArgs> Failed;
+
+        /// <inheritdoc />
+        public event EventHandler Disposed;
+
+        /// <inheritdoc />
+        public UnitOfWorkOptions Options { get; private set; }
+
+        /// <inheritdoc />
+        public IReadOnlyList<DataFilterConfiguration> Filters
+        {
+            get { return _filters.ToImmutableList(); }
+        }
+
+        /// <summary>
+        ///     Gets a value indicates that this unit of work is disposed or not.
+        /// </summary>
+        public bool IsDisposed { get; private set; }
+
+        /// <inheritdoc />
         public void Begin(UnitOfWorkOptions options)
         {
             if (options == null)
@@ -109,13 +110,13 @@ namespace Abp.Domain.Uow
             BeginUow();
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public abstract void SaveChanges();
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public abstract Task SaveChangesAsync();
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public IDisposable DisableFilter(params string[] filterNames)
         {
             //TODO: Check if filters exists?
@@ -137,7 +138,7 @@ namespace Abp.Domain.Uow
             return new DisposeAction(() => EnableFilter(disabledFilters.ToArray()));
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public IDisposable EnableFilter(params string[] filterNames)
         {
             //TODO: Check if filters exists?
@@ -159,13 +160,13 @@ namespace Abp.Domain.Uow
             return new DisposeAction(() => DisableFilter(enabledFilters.ToArray()));
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public bool IsFilterEnabled(string filterName)
         {
             return GetFilter(filterName).IsEnabled;
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public IDisposable SetFilterParameter(string filterName, string parameterName, object value)
         {
             var filterIndex = GetFilterIndex(filterName);
@@ -222,7 +223,7 @@ namespace Abp.Domain.Uow
             return _tenantId;
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public void Complete()
         {
             PreventMultipleComplete();
@@ -239,7 +240,7 @@ namespace Abp.Domain.Uow
             }
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task CompleteAsync()
         {
             PreventMultipleComplete();
@@ -256,7 +257,7 @@ namespace Abp.Domain.Uow
             }
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public void Dispose()
         {
             if (IsDisposed)
@@ -276,29 +277,29 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// Should be implemented by derived classes to start UOW.
+        ///     Should be implemented by derived classes to start UOW.
         /// </summary>
         protected abstract void BeginUow();
 
         /// <summary>
-        /// Should be implemented by derived classes to complete UOW.
+        ///     Should be implemented by derived classes to complete UOW.
         /// </summary>
         protected abstract void CompleteUow();
 
         /// <summary>
-        /// Should be implemented by derived classes to complete UOW.
+        ///     Should be implemented by derived classes to complete UOW.
         /// </summary>
         protected abstract Task CompleteUowAsync();
 
         /// <summary>
-        /// Should be implemented by derived classes to dispose UOW.
+        ///     Should be implemented by derived classes to dispose UOW.
         /// </summary>
         protected abstract void DisposeUow();
 
         /// <summary>
-        /// Concrete Unit of work classes should implement this
-        /// method in order to disable a filter.
-        /// Should not call base method since it throws <see cref="NotImplementedException"/>.
+        ///     Concrete Unit of work classes should implement this
+        ///     method in order to disable a filter.
+        ///     Should not call base method since it throws <see cref="NotImplementedException" />.
         /// </summary>
         /// <param name="filterName">Filter name</param>
         protected virtual void ApplyDisableFilter(string filterName)
@@ -307,20 +308,20 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// Concrete Unit of work classes should implement this
-        /// method in order to enable a filter.
-        /// Should not call base method since it throws <see cref="NotImplementedException"/>.
+        ///     Concrete Unit of work classes should implement this
+        ///     method in order to enable a filter.
+        ///     Should not call base method since it throws <see cref="NotImplementedException" />.
         /// </summary>
         /// <param name="filterName">Filter name</param>
         protected virtual void ApplyEnableFilter(string filterName)
         {
             //throw new NotImplementedException("EnableFilter is not implemented for " + GetType().FullName);
         }
-        
+
         /// <summary>
-        /// Concrete Unit of work classes should implement this
-        /// method in order to set a parameter's value.
-        /// Should not call base method since it throws <see cref="NotImplementedException"/>.
+        ///     Concrete Unit of work classes should implement this
+        ///     method in order to set a parameter's value.
+        ///     Should not call base method since it throws <see cref="NotImplementedException" />.
         /// </summary>
         protected virtual void ApplyFilterParameterValue(string filterName, string parameterName, object value)
         {
@@ -333,7 +334,7 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// Called to trigger <see cref="Completed"/> event.
+        ///     Called to trigger <see cref="Completed" /> event.
         /// </summary>
         protected virtual void OnCompleted()
         {
@@ -341,7 +342,7 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// Called to trigger <see cref="Failed"/> event.
+        ///     Called to trigger <see cref="Failed" /> event.
         /// </summary>
         /// <param name="exception">Exception that cause failure</param>
         protected virtual void OnFailed(Exception exception)
@@ -350,7 +351,7 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// Called to trigger <see cref="Disposed"/> event.
+        ///     Called to trigger <see cref="Disposed" /> event.
         /// </summary>
         protected virtual void OnDisposed()
         {

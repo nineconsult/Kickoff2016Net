@@ -9,6 +9,20 @@ namespace Abp.TestBase.SampleApplication.EntityFramework
 {
     public class SampleApplicationDbContext : AbpDbContext
     {
+        public SampleApplicationDbContext()
+        {
+        }
+
+        public SampleApplicationDbContext(string nameOrConnectionString)
+            : base(nameOrConnectionString)
+        {
+        }
+
+        public SampleApplicationDbContext(DbConnection connection)
+            : base(connection, true)
+        {
+        }
+
         public virtual IDbSet<ContactList> ContactLists { get; set; }
 
         public virtual IDbSet<Person> People { get; set; }
@@ -18,22 +32,5 @@ namespace Abp.TestBase.SampleApplication.EntityFramework
         public virtual IDbSet<Company> Companies { get; set; }
 
         public virtual IDbSet<Branch> Branches { get; set; }
-
-        public SampleApplicationDbContext()
-        {
-
-        }
-
-        public SampleApplicationDbContext(string nameOrConnectionString)
-            : base(nameOrConnectionString)
-        {
-
-        }
-
-        public SampleApplicationDbContext(DbConnection connection)
-            : base(connection, true)
-        {
-
-        }
     }
 }

@@ -24,7 +24,7 @@ namespace Abp.Localization.Dictionaries.Json
 
             _directoryPath = directoryPath;
         }
-        
+
         public override void Initialize(string sourceName)
         {
             var fileNames = Directory.GetFiles(_directoryPath, "*.json", SearchOption.TopDirectoryOnly);

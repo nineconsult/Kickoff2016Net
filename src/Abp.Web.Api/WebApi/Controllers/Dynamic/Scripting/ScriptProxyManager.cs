@@ -87,12 +87,12 @@ namespace Abp.WebApi.Controllers.Dynamic.Scripting
 
         private class ScriptInfo
         {
-            public string Script { get; private set; }
-
             public ScriptInfo(string script)
             {
                 Script = script;
             }
+
+            public string Script { get; }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Abp.Tests.Threading
         private async Task<int> AsyncMethod2(int p)
         {
             await Task.Delay(10);
-            return p * 2;
+            return p*2;
         }
     }
 }

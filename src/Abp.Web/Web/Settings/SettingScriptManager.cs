@@ -7,7 +7,7 @@ using Abp.Dependency;
 namespace Abp.Web.Settings
 {
     /// <summary>
-    /// This class is used to build setting script.
+    ///     This class is used to build setting script.
     /// </summary>
     public class SettingScriptManager : ISettingScriptManager, ISingletonDependency
     {
@@ -47,7 +47,7 @@ namespace Abp.Web.Settings
                 var settingValue = await _settingManager.GetSettingValueAsync(settingDefinition.Name);
 
                 script.Append("        '" +
-                              settingDefinition.Name .Replace("'", @"\'") + "': " +
+                              settingDefinition.Name.Replace("'", @"\'") + "': " +
                               (settingValue == null ? "null" : "'" + settingValue.Replace(@"\", @"\\").Replace("'", @"\'") + "'"));
 
                 ++added;

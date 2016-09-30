@@ -10,11 +10,11 @@ namespace Abp.Web.Api.Tests.DynamicApiController
         [Fact]
         public void Should_Find_Right_Methods()
         {
-            var methods = DynamicApiControllerActionHelper.GetMethodsOfType(typeof(IMyApplicationService));
+            var methods = DynamicApiControllerActionHelper.GetMethodsOfType(typeof (IMyApplicationService));
             methods.Count.ShouldBe(4);
             foreach (var method in methods)
             {
-                DynamicApiControllerActionHelper.IsMethodOfType(method, typeof(IMyApplicationService)).ShouldBe(true);
+                DynamicApiControllerActionHelper.IsMethodOfType(method, typeof (IMyApplicationService)).ShouldBe(true);
             }
         }
 
@@ -29,7 +29,7 @@ namespace Abp.Web.Api.Tests.DynamicApiController
 
         private interface IMyBaseAppService : IApplicationService
         {
-            int MyBaseMethod();            
+            int MyBaseMethod();
         }
     }
 }

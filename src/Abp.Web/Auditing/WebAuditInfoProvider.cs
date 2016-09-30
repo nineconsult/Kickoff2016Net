@@ -8,22 +8,22 @@ using Castle.Core.Logging;
 namespace Abp.Auditing
 {
     /// <summary>
-    /// Implements <see cref="IAuditInfoProvider"/> to fill web specific audit informations.
+    ///     Implements <see cref="IAuditInfoProvider" /> to fill web specific audit informations.
     /// </summary>
     public class WebAuditInfoProvider : IAuditInfoProvider, ITransientDependency
     {
-        public ILogger Logger { get; set; }
-
         private readonly HttpContext _httpContext;
 
         /// <summary>
-        /// Creates a new <see cref="WebAuditInfoProvider"/>.
+        ///     Creates a new <see cref="WebAuditInfoProvider" />.
         /// </summary>
         public WebAuditInfoProvider()
         {
             _httpContext = HttpContext.Current;
             Logger = NullLogger.Instance;
         }
+
+        public ILogger Logger { get; set; }
 
         public virtual void Fill(AuditInfo auditInfo)
         {

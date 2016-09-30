@@ -8,17 +8,17 @@ using Abp.Threading;
 namespace Abp.Application.Features
 {
     /// <summary>
-    /// Some extension methods for <see cref="IFeatureChecker"/>.
+    ///     Some extension methods for <see cref="IFeatureChecker" />.
     /// </summary>
     public static class FeatureCheckerExtensions
-    {       
+    {
         /// <summary>
-        /// Gets value of a feature by it's name. This is sync version of <see cref="IFeatureChecker.GetValueAsync(string)"/>
-        /// 
-        /// This is a shortcut for <see cref="GetValue(IFeatureChecker, int, string)"/> that uses <see cref="IAbpSession.TenantId"/> as tenantId.
-        /// So, this method should be used only if TenantId can be obtained from the session.
+        ///     Gets value of a feature by it's name. This is sync version of <see cref="IFeatureChecker.GetValueAsync(string)" />
+        ///     This is a shortcut for <see cref="GetValue(IFeatureChecker, int, string)" /> that uses
+        ///     <see cref="IAbpSession.TenantId" /> as tenantId.
+        ///     So, this method should be used only if TenantId can be obtained from the session.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="featureName">Unique feature name</param>
         /// <returns>Feature's current value</returns>
         public static string GetValue(this IFeatureChecker featureChecker, string featureName)
@@ -27,9 +27,10 @@ namespace Abp.Application.Features
         }
 
         /// <summary>
-        /// Gets value of a feature by it's name. This is sync version of <see cref="IFeatureChecker.GetValueAsync(int, string)"/>
+        ///     Gets value of a feature by it's name. This is sync version of
+        ///     <see cref="IFeatureChecker.GetValueAsync(int, string)" />
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="tenantId">Tenant's Id</param>
         /// <param name="featureName">Unique feature name</param>
         /// <returns>Feature's current value</returns>
@@ -39,13 +40,13 @@ namespace Abp.Application.Features
         }
 
         /// <summary>
-        /// Checks if given feature is enabled.
-        /// This should be used for boolean-value features.
-        /// 
-        /// This is a shortcut for <see cref="IsEnabledAsync(IFeatureChecker, int, string)"/> that uses <see cref="IAbpSession.TenantId"/> as tenantId.
-        /// So, this method should be used only if TenantId can be obtained from the session.
+        ///     Checks if given feature is enabled.
+        ///     This should be used for boolean-value features.
+        ///     This is a shortcut for <see cref="IsEnabledAsync(IFeatureChecker, int, string)" /> that uses
+        ///     <see cref="IAbpSession.TenantId" /> as tenantId.
+        ///     So, this method should be used only if TenantId can be obtained from the session.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="featureName">Unique feature name</param>
         /// <returns>True, if current feature's value is "true".</returns>
         public static async Task<bool> IsEnabledAsync(this IFeatureChecker featureChecker, string featureName)
@@ -54,10 +55,10 @@ namespace Abp.Application.Features
         }
 
         /// <summary>
-        /// Checks if given feature is enabled.
-        /// This should be used for boolean-value features.
+        ///     Checks if given feature is enabled.
+        ///     This should be used for boolean-value features.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="tenantId">Tenant's Id</param>
         /// <param name="featureName">Unique feature name</param>
         /// <returns>True, if current feature's value is "true".</returns>
@@ -67,13 +68,13 @@ namespace Abp.Application.Features
         }
 
         /// <summary>
-        /// Checks if given feature is enabled.
-        /// This should be used for boolean-value features.
-        /// 
-        /// This is a shortcut for <see cref="IsEnabled(IFeatureChecker, int, string)"/> that uses <see cref="IAbpSession.TenantId"/> as tenantId.
-        /// So, this method should be used only if TenantId can be obtained from the session.
+        ///     Checks if given feature is enabled.
+        ///     This should be used for boolean-value features.
+        ///     This is a shortcut for <see cref="IsEnabled(IFeatureChecker, int, string)" /> that uses
+        ///     <see cref="IAbpSession.TenantId" /> as tenantId.
+        ///     So, this method should be used only if TenantId can be obtained from the session.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="name">Unique feature name</param>
         /// <returns>True, if current feature's value is "true".</returns>
         public static bool IsEnabled(this IFeatureChecker featureChecker, string name)
@@ -82,10 +83,10 @@ namespace Abp.Application.Features
         }
 
         /// <summary>
-        /// Checks if given feature is enabled.
-        /// This should be used for boolean-value features.
+        ///     Checks if given feature is enabled.
+        ///     This should be used for boolean-value features.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="tenantId">Tenant's Id</param>
         /// <param name="featureName">Unique feature name</param>
         /// <returns>True, if current feature's value is "true".</returns>
@@ -95,9 +96,9 @@ namespace Abp.Application.Features
         }
 
         /// <summary>
-        /// Used to check if one of all given features are enabled.
+        ///     Used to check if one of all given features are enabled.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
         /// <param name="featureNames">Name of the features</param>
         public static async Task<bool> IsEnabledAsync(this IFeatureChecker featureChecker, bool requiresAll, params string[] featureNames)
@@ -119,25 +120,22 @@ namespace Abp.Application.Features
 
                 return true;
             }
-            else
+            foreach (var featureName in featureNames)
             {
-                foreach (var featureName in featureNames)
+                if (await featureChecker.IsEnabledAsync(featureName))
                 {
-                    if (await featureChecker.IsEnabledAsync(featureName))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-
-                return false;
             }
+
+            return false;
         }
 
 
         /// <summary>
-        /// Used to check if one of all given features are enabled.
+        ///     Used to check if one of all given features are enabled.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="tenantId">Tenant id</param>
         /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
         /// <param name="featureNames">Name of the features</param>
@@ -160,24 +158,21 @@ namespace Abp.Application.Features
 
                 return true;
             }
-            else
+            foreach (var featureName in featureNames)
             {
-                foreach (var featureName in featureNames)
+                if (await featureChecker.IsEnabledAsync(tenantId, featureName))
                 {
-                    if (await featureChecker.IsEnabledAsync(tenantId, featureName))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-
-                return false;
             }
+
+            return false;
         }
 
         /// <summary>
-        /// Used to check if one of all given features are enabled.
+        ///     Used to check if one of all given features are enabled.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
         /// <param name="featureNames">Name of the features</param>
         public static bool IsEnabled(this IFeatureChecker featureChecker, bool requiresAll, params string[] featureNames)
@@ -186,9 +181,9 @@ namespace Abp.Application.Features
         }
 
         /// <summary>
-        /// Used to check if one of all given features are enabled.
+        ///     Used to check if one of all given features are enabled.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="tenantId">Tenant id</param>
         /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
         /// <param name="featureNames">Name of the features</param>
@@ -198,9 +193,9 @@ namespace Abp.Application.Features
         }
 
         /// <summary>
-        /// Checks if given feature is enabled. Throws <see cref="AbpAuthorizationException"/> if not.
+        ///     Checks if given feature is enabled. Throws <see cref="AbpAuthorizationException" /> if not.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="featureName">Unique feature name</param>
         public static async Task CheckEnabledAsync(this IFeatureChecker featureChecker, string featureName)
         {
@@ -209,11 +204,11 @@ namespace Abp.Application.Features
                 throw new AbpAuthorizationException("Feature is not enabled: " + featureName);
             }
         }
-        
+
         /// <summary>
-        /// Checks if given feature is enabled. Throws <see cref="AbpAuthorizationException"/> if not.
+        ///     Checks if given feature is enabled. Throws <see cref="AbpAuthorizationException" /> if not.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="featureName">Unique feature name</param>
         public static void CheckEnabled(this IFeatureChecker featureChecker, string featureName)
         {
@@ -224,9 +219,9 @@ namespace Abp.Application.Features
         }
 
         /// <summary>
-        /// Checks if one of all given features are enabled. Throws <see cref="AbpAuthorizationException"/> if not.
+        ///     Checks if one of all given features are enabled. Throws <see cref="AbpAuthorizationException" /> if not.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
         /// <param name="featureNames">Name of the features</param>
         public static async Task CheckEnabledAsync(this IFeatureChecker featureChecker, bool requiresAll, params string[] featureNames)
@@ -267,9 +262,9 @@ namespace Abp.Application.Features
         }
 
         /// <summary>
-        /// Checks if one of all given features are enabled. Throws <see cref="AbpAuthorizationException"/> if not.
+        ///     Checks if one of all given features are enabled. Throws <see cref="AbpAuthorizationException" /> if not.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="tenantId">Tenant id</param>
         /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
         /// <param name="featureNames">Name of the features</param>
@@ -311,9 +306,9 @@ namespace Abp.Application.Features
         }
 
         /// <summary>
-        /// Checks if one of all given features are enabled. Throws <see cref="AbpAuthorizationException"/> if not.
+        ///     Checks if one of all given features are enabled. Throws <see cref="AbpAuthorizationException" /> if not.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
         /// <param name="featureNames">Name of the features</param>
         public static void CheckEnabled(this IFeatureChecker featureChecker, bool requiresAll, params string[] featureNames)
@@ -322,9 +317,9 @@ namespace Abp.Application.Features
         }
 
         /// <summary>
-        /// Checks if one of all given features are enabled. Throws <see cref="AbpAuthorizationException"/> if not.
+        ///     Checks if one of all given features are enabled. Throws <see cref="AbpAuthorizationException" /> if not.
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker" /> instance</param>
         /// <param name="tenantId">Tenant id</param>
         /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
         /// <param name="featureNames">Name of the features</param>

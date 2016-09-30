@@ -10,13 +10,13 @@ using Castle.Windsor;
 namespace Abp.Events.Bus
 {
     /// <summary>
-    /// Installs event bus system and registers all handlers automatically.
+    ///     Installs event bus system and registers all handlers automatically.
     /// </summary>
     internal class EventBusInstaller : IWindsorInstaller
     {
-        private readonly IIocResolver _iocResolver;
-        private readonly IEventBusConfiguration _eventBusConfiguration;
         private IEventBus _eventBus;
+        private readonly IEventBusConfiguration _eventBusConfiguration;
+        private readonly IIocResolver _iocResolver;
 
         public EventBusInstaller(IIocResolver iocResolver)
         {
@@ -49,7 +49,7 @@ namespace Abp.Events.Bus
             /* This code checks if registering component implements any IEventHandler<TEventData> interface, if yes,
              * gets all event handler interfaces and registers type to Event Bus for each handling event.
              */
-            if (!typeof(IEventHandler).IsAssignableFrom(handler.ComponentModel.Implementation))
+            if (!typeof (IEventHandler).IsAssignableFrom(handler.ComponentModel.Implementation))
             {
                 return;
             }
@@ -57,7 +57,7 @@ namespace Abp.Events.Bus
             var interfaces = handler.ComponentModel.Implementation.GetInterfaces();
             foreach (var @interface in interfaces)
             {
-                if (!typeof(IEventHandler).IsAssignableFrom(@interface))
+                if (!typeof (IEventHandler).IsAssignableFrom(@interface))
                 {
                     continue;
                 }

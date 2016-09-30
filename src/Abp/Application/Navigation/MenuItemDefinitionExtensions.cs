@@ -4,12 +4,12 @@ using System.Linq;
 namespace Abp.Application.Navigation
 {
     /// <summary>
-    /// Extension methods for <see cref="MenuItemDefinition"/>.
+    ///     Extension methods for <see cref="MenuItemDefinition" />.
     /// </summary>
     public static class MenuItemDefinitionExtensions
     {
         /// <summary>
-        /// Moves a menu item to top in the list.
+        ///     Moves a menu item to top in the list.
         /// </summary>
         /// <param name="menuItems">List of menu items</param>
         /// <param name="menuItemName">Name of the menu item to move</param>
@@ -21,7 +21,7 @@ namespace Abp.Application.Navigation
         }
 
         /// <summary>
-        /// Moves a menu item to bottom in the list.
+        ///     Moves a menu item to bottom in the list.
         /// </summary>
         /// <param name="menuItems">List of menu items</param>
         /// <param name="menuItemName">Name of the menu item to move</param>
@@ -33,7 +33,7 @@ namespace Abp.Application.Navigation
         }
 
         /// <summary>
-        /// Moves a menu item in the list after another menu item in the list.
+        ///     Moves a menu item in the list after another menu item in the list.
         /// </summary>
         /// <param name="menuItems">List of menu items</param>
         /// <param name="menuItemName">Name of the menu item to move</param>
@@ -47,7 +47,7 @@ namespace Abp.Application.Navigation
         }
 
         /// <summary>
-        /// Moves a menu item in the list before another menu item in the list.
+        ///     Moves a menu item in the list before another menu item in the list.
         /// </summary>
         /// <param name="menuItems">List of menu items</param>
         /// <param name="menuItemName">Name of the menu item to move</param>

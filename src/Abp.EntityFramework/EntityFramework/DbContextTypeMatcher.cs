@@ -81,13 +81,13 @@ namespace Abp.EntityFramework
 
             var multiTenancySideContexes = allTargetTypes.Where(type =>
             {
-                var attrs = type.GetCustomAttributes(typeof(MultiTenancySideAttribute), true);
+                var attrs = type.GetCustomAttributes(typeof (MultiTenancySideAttribute), true);
                 if (attrs.IsNullOrEmpty())
                 {
                     return false;
                 }
 
-                return ((MultiTenancySideAttribute)attrs[0]).Side.HasFlag(currentTenancySide);
+                return ((MultiTenancySideAttribute) attrs[0]).Side.HasFlag(currentTenancySide);
             }).ToList();
 
             //Try to get the DbContext which is for current multitenancy side.
@@ -100,7 +100,7 @@ namespace Abp.EntityFramework
             {
                 //Try to get the DbContext which not defined AutoRepositoryTypesAttribute
                 var defaultRepositoryContexesInMultiTenancySide = multiTenancySideContexes
-                    .Where(type => !type.IsDefined(typeof(AutoRepositoryTypesAttribute), true))
+                    .Where(type => !type.IsDefined(typeof (AutoRepositoryTypesAttribute), true))
                     .ToList();
 
                 if (defaultRepositoryContexesInMultiTenancySide.Count == 1)
@@ -115,10 +115,10 @@ namespace Abp.EntityFramework
                     multiTenancySideContexes.JoinAsString(", ")
                     ));
             }
-            
+
             //Try to get the DbContext which not defined AutoRepositoryTypesAttribute
             var defaultRepositoryContexes = allTargetTypes
-                .Where(type => !type.IsDefined(typeof(AutoRepositoryTypesAttribute), true))
+                .Where(type => !type.IsDefined(typeof (AutoRepositoryTypesAttribute), true))
                 .ToList();
 
             if (defaultRepositoryContexes.Count == 1)
@@ -137,7 +137,7 @@ namespace Abp.EntityFramework
         private static void AddWithBaseTypes(Type dbContextType, List<Type> types)
         {
             types.Add(dbContextType);
-            if (dbContextType != typeof(AbpDbContext))
+            if (dbContextType != typeof (AbpDbContext))
             {
                 AddWithBaseTypes(dbContextType.BaseType, types);
             }

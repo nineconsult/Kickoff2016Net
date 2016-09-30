@@ -7,7 +7,7 @@ using StackExchange.Redis;
 namespace Abp.Runtime.Caching.Redis
 {
     /// <summary>
-    /// Implements <see cref="IAbpRedisCacheDatabaseProvider"/>.
+    ///     Implements <see cref="IAbpRedisCacheDatabaseProvider" />.
     /// </summary>
     public class AbpRedisCacheDatabaseProvider : IAbpRedisCacheDatabaseProvider, ISingletonDependency
     {
@@ -17,7 +17,7 @@ namespace Abp.Runtime.Caching.Redis
         private readonly Lazy<ConnectionMultiplexer> _connectionMultiplexer;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AbpRedisCacheDatabaseProvider"/> class.
+        ///     Initializes a new instance of the <see cref="AbpRedisCacheDatabaseProvider" /> class.
         /// </summary>
         public AbpRedisCacheDatabaseProvider()
         {
@@ -25,7 +25,7 @@ namespace Abp.Runtime.Caching.Redis
         }
 
         /// <summary>
-        /// Gets the database connection.
+        ///     Gets the database connection.
         /// </summary>
         public IDatabase GetDatabase()
         {

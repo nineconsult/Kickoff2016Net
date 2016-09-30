@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace Abp.Runtime.Caching
 {
     /// <summary>
-    /// Extension methods for <see cref="ITypedCache{TKey,TValue}"/>.
+    ///     Extension methods for <see cref="ITypedCache{TKey,TValue}" />.
     /// </summary>
     public static class TypedCacheExtensions
     {

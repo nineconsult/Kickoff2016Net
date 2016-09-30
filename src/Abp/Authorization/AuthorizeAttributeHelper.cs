@@ -9,18 +9,18 @@ namespace Abp.Authorization
 {
     internal class AuthorizeAttributeHelper : IAuthorizeAttributeHelper, ITransientDependency
     {
-        public IAbpSession AbpSession { get; set; }
-
-        public IPermissionChecker PermissionChecker { get; set; }
-
-        public ILocalizationManager LocalizationManager { get; set; }
-
         public AuthorizeAttributeHelper()
         {
             AbpSession = NullAbpSession.Instance;
             PermissionChecker = NullPermissionChecker.Instance;
             LocalizationManager = NullLocalizationManager.Instance;
         }
+
+        public IAbpSession AbpSession { get; set; }
+
+        public IPermissionChecker PermissionChecker { get; set; }
+
+        public ILocalizationManager LocalizationManager { get; set; }
 
         public async Task AuthorizeAsync(IEnumerable<IAbpAuthorizeAttribute> authorizeAttributes)
         {
@@ -37,7 +37,7 @@ namespace Abp.Authorization
 
         public async Task AuthorizeAsync(IAbpAuthorizeAttribute authorizeAttribute)
         {
-            await AuthorizeAsync(new[] { authorizeAttribute });
+            await AuthorizeAsync(new[] {authorizeAttribute});
         }
 
         public void Authorize(IEnumerable<IAbpAuthorizeAttribute> authorizeAttributes)
@@ -47,7 +47,7 @@ namespace Abp.Authorization
 
         public void Authorize(IAbpAuthorizeAttribute authorizeAttribute)
         {
-            Authorize(new[] { authorizeAttribute });
+            Authorize(new[] {authorizeAttribute});
         }
     }
 }

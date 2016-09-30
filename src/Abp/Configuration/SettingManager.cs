@@ -11,28 +11,18 @@ using Abp.Runtime.Session;
 namespace Abp.Configuration
 {
     /// <summary>
-    /// This class implements <see cref="ISettingManager"/> to manage setting values in the database.
+    ///     This class implements <see cref="ISettingManager" /> to manage setting values in the database.
     /// </summary>
     public class SettingManager : ISettingManager, ISingletonDependency
     {
         public const string ApplicationSettingsCacheKey = "ApplicationSettings";
-
-        /// <summary>
-        /// Reference to the current Session.
-        /// </summary>
-        public IAbpSession AbpSession { get; set; }
-
-        /// <summary>
-        /// Reference to the setting store.
-        /// </summary>
-        public ISettingStore SettingStore { get; set; }
+        private readonly ITypedCache<string, Dictionary<string, SettingInfo>> _applicationSettingCache;
 
         private readonly ISettingDefinitionManager _settingDefinitionManager;
-        private readonly ITypedCache<string, Dictionary<string, SettingInfo>> _applicationSettingCache;
         private readonly ITypedCache<int, Dictionary<string, SettingInfo>> _tenantSettingCache;
         private readonly ITypedCache<string, Dictionary<string, SettingInfo>> _userSettingCache;
-        
-        /// <inheritdoc/>
+
+        /// <inheritdoc />
         public SettingManager(ISettingDefinitionManager settingDefinitionManager, ICacheManager cacheManager)
         {
             _settingDefinitionManager = settingDefinitionManager;
@@ -45,9 +35,36 @@ namespace Abp.Configuration
             _userSettingCache = cacheManager.GetUserSettingsCache();
         }
 
+        /// <summary>
+        ///     Reference to the current Session.
+        /// </summary>
+        public IAbpSession AbpSession { get; set; }
+
+        /// <summary>
+        ///     Reference to the setting store.
+        /// </summary>
+        public ISettingStore SettingStore { get; set; }
+
+        #region Nested classes
+
+        private class SettingValueObject : ISettingValue
+        {
+            public SettingValueObject(string name, string value)
+            {
+                Value = value;
+                Name = name;
+            }
+
+            public string Name { get; }
+
+            public string Value { get; }
+        }
+
+        #endregion
+
         #region Public methods
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public Task<string> GetSettingValueAsync(string name)
         {
             return GetSettingValueInternalAsync(name, AbpSession.TenantId, AbpSession.UserId);
@@ -73,7 +90,7 @@ namespace Abp.Configuration
             return await GetAllSettingValuesAsync(SettingScopes.Application | SettingScopes.Tenant | SettingScopes.User);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task<IReadOnlyList<ISettingValue>> GetAllSettingValuesAsync(SettingScopes scopes)
         {
             var settingDefinitions = new Dictionary<string, SettingDefinition>();
@@ -148,7 +165,7 @@ namespace Abp.Configuration
             return settingValues.Values.ToImmutableList();
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task<IReadOnlyList<ISettingValue>> GetAllSettingValuesForApplicationAsync()
         {
             return (await GetApplicationSettingsAsync()).Values
@@ -156,7 +173,7 @@ namespace Abp.Configuration
                 .ToImmutableList();
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public async Task<IReadOnlyList<ISettingValue>> GetAllSettingValuesForTenantAsync(int tenantId)
         {
             return (await GetReadOnlyTenantSettings(tenantId)).Values
@@ -164,7 +181,7 @@ namespace Abp.Configuration
                 .ToImmutableList();
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public Task<IReadOnlyList<ISettingValue>> GetAllSettingValuesForUserAsync(long userId)
         {
             return GetAllSettingValuesForUserAsync(new UserIdentifier(AbpSession.TenantId, userId));
@@ -177,7 +194,7 @@ namespace Abp.Configuration
                 .ToImmutableList();
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         [UnitOfWork]
         public virtual async Task ChangeSettingForApplicationAsync(string name, string value)
         {
@@ -185,7 +202,7 @@ namespace Abp.Configuration
             await _applicationSettingCache.RemoveAsync(ApplicationSettingsCacheKey);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         [UnitOfWork]
         public virtual async Task ChangeSettingForTenantAsync(int tenantId, string name, string value)
         {
@@ -193,7 +210,7 @@ namespace Abp.Configuration
             await _tenantSettingCache.RemoveAsync(tenantId);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         [UnitOfWork]
         public virtual Task ChangeSettingForUserAsync(long userId, string name, string value)
         {
@@ -411,23 +428,6 @@ namespace Abp.Configuration
 
                     return dictionary;
                 });
-        }
-
-        #endregion
-
-        #region Nested classes
-
-        private class SettingValueObject : ISettingValue
-        {
-            public string Name { get; private set; }
-
-            public string Value { get; private set; }
-
-            public SettingValueObject(string name, string value)
-            {
-                Value = value;
-                Name = name;
-            }
         }
 
         #endregion

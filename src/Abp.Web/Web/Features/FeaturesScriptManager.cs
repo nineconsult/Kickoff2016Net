@@ -10,10 +10,9 @@ namespace Abp.Web.Features
 {
     public class FeaturesScriptManager : IFeaturesScriptManager, ITransientDependency
     {
-        public IAbpSession AbpSession { get; set; }
+        private readonly IFeatureChecker _featureChecker;
 
         private readonly IFeatureManager _featureManager;
-        private readonly IFeatureChecker _featureChecker;
 
         public FeaturesScriptManager(IFeatureManager featureManager, IFeatureChecker featureChecker)
         {
@@ -22,6 +21,8 @@ namespace Abp.Web.Features
 
             AbpSession = NullAbpSession.Instance;
         }
+
+        public IAbpSession AbpSession { get; set; }
 
         public async Task<string> GetScriptAsync()
         {

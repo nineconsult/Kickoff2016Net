@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace Abp.Runtime.Caching
 {
     /// <summary>
-    /// Extension methods for <see cref="ICache"/>.
+    ///     Extension methods for <see cref="ICache" />.
     /// </summary>
     public static class CacheExtensions
     {
@@ -22,31 +22,31 @@ namespace Abp.Runtime.Caching
         {
             return new TypedCacheWrapper<TKey, TValue>(cache);
         }
-        
+
         public static TValue Get<TKey, TValue>(this ICache cache, TKey key, Func<TKey, TValue> factory)
         {
-            return (TValue)cache.Get(key.ToString(), (k) => (object)factory(key));
+            return (TValue) cache.Get(key.ToString(), k => (object) factory(key));
         }
 
         public static TValue Get<TKey, TValue>(this ICache cache, TKey key, Func<TValue> factory)
         {
-            return cache.Get(key, (k) => factory());
+            return cache.Get(key, k => factory());
         }
 
         public static async Task<TValue> GetAsync<TKey, TValue>(this ICache cache, TKey key, Func<TKey, Task<TValue>> factory)
         {
-            var value = await cache.GetAsync(key.ToString(), async (keyAsString) =>
+            var value = await cache.GetAsync(key.ToString(), async keyAsString =>
             {
                 var v = await factory(key);
-                return (object)v;
+                return (object) v;
             });
 
-            return (TValue)value;
+            return (TValue) value;
         }
 
         public static Task<TValue> GetAsync<TKey, TValue>(this ICache cache, TKey key, Func<Task<TValue>> factory)
         {
-            return cache.GetAsync(key, (k) => factory());
+            return cache.GetAsync(key, k => factory());
         }
 
         public static TValue GetOrDefault<TKey, TValue>(this ICache cache, TKey key)
@@ -68,7 +68,7 @@ namespace Abp.Runtime.Caching
                 return default(TValue);
             }
 
-            return (TValue)value;
+            return (TValue) value;
         }
     }
 }

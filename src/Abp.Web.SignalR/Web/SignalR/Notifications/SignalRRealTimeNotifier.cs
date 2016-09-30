@@ -10,27 +10,14 @@ using Microsoft.AspNet.SignalR;
 namespace Abp.Web.SignalR.Notifications
 {
     /// <summary>
-    /// Implements <see cref="IRealTimeNotifier"/> to send notifications via SignalR.
+    ///     Implements <see cref="IRealTimeNotifier" /> to send notifications via SignalR.
     /// </summary>
     public class SignalRRealTimeNotifier : IRealTimeNotifier, ITransientDependency
     {
-        /// <summary>
-        /// Reference to the logger.
-        /// </summary>
-        public ILogger Logger { get; set; }
-
         private readonly IOnlineClientManager _onlineClientManager;
 
-        private static IHubContext CommonHub
-        {
-            get
-            {
-                return GlobalHost.ConnectionManager.GetHubContext<AbpCommonHub>();
-            }
-        }
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="SignalRRealTimeNotifier"/> class.
+        ///     Initializes a new instance of the <see cref="SignalRRealTimeNotifier" /> class.
         /// </summary>
         public SignalRRealTimeNotifier(IOnlineClientManager onlineClientManager)
         {
@@ -38,7 +25,17 @@ namespace Abp.Web.SignalR.Notifications
             Logger = NullLogger.Instance;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        ///     Reference to the logger.
+        /// </summary>
+        public ILogger Logger { get; set; }
+
+        private static IHubContext CommonHub
+        {
+            get { return GlobalHost.ConnectionManager.GetHubContext<AbpCommonHub>(); }
+        }
+
+        /// <inheritdoc />
         public Task SendNotificationsAsync(UserNotification[] userNotifications)
         {
             foreach (var userNotification in userNotifications)

@@ -16,19 +16,16 @@ using EntityFramework.DynamicFilters;
 namespace Abp.EntityFramework.Uow
 {
     /// <summary>
-    /// Implements Unit of work for Entity Framework.
+    ///     Implements Unit of work for Entity Framework.
     /// </summary>
     public class EfUnitOfWork : UnitOfWorkBase, ITransientDependency
     {
-        protected IDictionary<string, DbContext> ActiveDbContexts { get; private set; }
-
-        protected IIocResolver IocResolver { get; private set; }
-
-        protected TransactionScope CurrentTransaction;
         private readonly IDbContextResolver _dbContextResolver;
 
+        protected TransactionScope CurrentTransaction;
+
         /// <summary>
-        /// Creates a new <see cref="EfUnitOfWork"/>.
+        ///     Creates a new <see cref="EfUnitOfWork" />.
         /// </summary>
         public EfUnitOfWork(
             IIocResolver iocResolver,
@@ -42,13 +39,17 @@ namespace Abp.EntityFramework.Uow
             ActiveDbContexts = new Dictionary<string, DbContext>();
         }
 
+        protected IDictionary<string, DbContext> ActiveDbContexts { get; }
+
+        protected IIocResolver IocResolver { get; }
+
         protected override void BeginUow()
         {
             if (Options.IsTransactional == true)
             {
                 var transactionOptions = new TransactionOptions
                 {
-                    IsolationLevel = Options.IsolationLevel.GetValueOrDefault(IsolationLevel.ReadUncommitted),
+                    IsolationLevel = Options.IsolationLevel.GetValueOrDefault(IsolationLevel.ReadUncommitted)
                 };
 
                 if (Options.Timeout.HasValue)
@@ -121,7 +122,7 @@ namespace Abp.EntityFramework.Uow
             {
                 if (TypeHelper.IsFunc<object>(value))
                 {
-                    activeDbContext.SetFilterScopedParameterValue(filterName, parameterName, (Func<object>)value);
+                    activeDbContext.SetFilterScopedParameterValue(filterName, parameterName, (Func<object>) value);
                 }
                 else
                 {
@@ -134,21 +135,17 @@ namespace Abp.EntityFramework.Uow
             where TDbContext : DbContext
         {
             var connectionStringResolveArgs = new ConnectionStringResolveArgs(multiTenancySide);
-            connectionStringResolveArgs["DbContextType"] = typeof(TDbContext);
+            connectionStringResolveArgs["DbContextType"] = typeof (TDbContext);
             var connectionString = ResolveConnectionString(connectionStringResolveArgs);
 
-            var dbContextKey = typeof(TDbContext).FullName + "#" + connectionString;
+            var dbContextKey = typeof (TDbContext).FullName + "#" + connectionString;
 
             DbContext dbContext;
             if (!ActiveDbContexts.TryGetValue(dbContextKey, out dbContext))
             {
-
                 dbContext = _dbContextResolver.Resolve<TDbContext>(connectionString);
 
-                ((IObjectContextAdapter)dbContext).ObjectContext.ObjectMaterialized += (sender, args) =>
-                {
-                    ObjectContext_ObjectMaterialized(dbContext, args);
-                };
+                ((IObjectContextAdapter) dbContext).ObjectContext.ObjectMaterialized += (sender, args) => { ObjectContext_ObjectMaterialized(dbContext, args); };
 
                 foreach (var filter in Filters)
                 {
@@ -165,7 +162,7 @@ namespace Abp.EntityFramework.Uow
                     {
                         if (TypeHelper.IsFunc<object>(filterParameter.Value))
                         {
-                            dbContext.SetFilterScopedParameterValue(filter.FilterName, filterParameter.Key, (Func<object>)filterParameter.Value);
+                            dbContext.SetFilterScopedParameterValue(filter.FilterName, filterParameter.Key, (Func<object>) filterParameter.Value);
                         }
                         else
                         {
@@ -177,7 +174,7 @@ namespace Abp.EntityFramework.Uow
                 ActiveDbContexts[dbContextKey] = dbContext;
             }
 
-            return (TDbContext)dbContext;
+            return (TDbContext) dbContext;
         }
 
         protected override void DisposeUow()
