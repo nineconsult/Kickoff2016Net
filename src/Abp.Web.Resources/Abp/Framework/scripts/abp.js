@@ -317,18 +317,30 @@
 
     abp.notify.success = function (message, title, options) {
         abp.log.warn('abp.notify.success is not implemented!');
+        abp.log.info(message);
+        abp.log.info(title);
+        abp.log.info(options);
     };
 
     abp.notify.info = function (message, title, options) {
         abp.log.warn('abp.notify.info is not implemented!');
+        abp.log.info(message);
+        abp.log.info(title);
+        abp.log.info(options);
     };
 
     abp.notify.warn = function (message, title, options) {
         abp.log.warn('abp.notify.warn is not implemented!');
+        abp.log.info(message);
+        abp.log.info(title);
+        abp.log.info(options);
     };
 
     abp.notify.error = function (message, title, options) {
         abp.log.warn('abp.notify.error is not implemented!');
+        abp.log.info(message);
+        abp.log.info(title);
+        abp.log.info(options);
     };
 
     /* MESSAGE **************************************************/
@@ -398,10 +410,12 @@
 
     abp.ui.block = function (elm) {
         abp.log.warn('abp.ui.block is not implemented!');
+        abp.log.info(elm);
     };
 
     abp.ui.unblock = function (elm) {
         abp.log.warn('abp.ui.unblock is not implemented!');
+        abp.log.info(elm);
     };
 
     /* UI BUSY */
@@ -409,10 +423,13 @@
 
     abp.ui.setBusy = function (elm, optionsOrPromise) {
         abp.log.warn('abp.ui.setBusy is not implemented!');
+        abp.log.info(elm);
+        abp.log.info(optionsOrPromise);
     };
 
     abp.ui.clearBusy = function (elm) {
         abp.log.warn('abp.ui.clearBusy is not implemented!');
+        abp.log.info(elm);
     };
 
     /* SIMPLE EVENT BUS *****************************************/
