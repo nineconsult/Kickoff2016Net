@@ -1,17 +1,30 @@
 ﻿using System;
+using Abp.Domain.Entities;
+using Abp.Domain.Entities.Auditing;
 
 namespace Abp.Auditing
 {
     /// <summary>
     /// This informations are collected for an <see cref="AuditedAttribute"/> method.
     /// </summary>
-    public class AuditInfo
+    public class AuditInfo : IMayHaveTenant, IModificationAudited
     {
         /// <summary>
         /// TenantId.
         /// </summary>
         public int? TenantId { get; set; }
-        
+
+        /// <summary>
+        /// Rubbish
+        /// </summary>
+        public long? LastModifierUserId { get; set; }
+
+        /// <summary>
+        /// Rubbish
+        /// </summary>
+        public DateTime? LastModificationTime { get; set; }
+
+
         /// <summary>
         /// UserId.
         /// </summary>
