@@ -35,7 +35,7 @@ namespace Abp.Application.Navigation
         /// <param name="name">Unique name of the menu</param>
         /// <param name="displayName">Display name of the menu</param>
         /// <param name="customData">Can be used to store a custom object related to this menu.</param>
-        public MenuDefinition(string name, ILocalizableString displayName, object customData = null)
+        public MenuDefinition(string name, ILocalizableString displayName, object customData)
         {
             if (string.IsNullOrEmpty(name))
             {
