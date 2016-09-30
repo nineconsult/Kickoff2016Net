@@ -45,9 +45,9 @@ namespace Abp.EntityFramework
 
         public virtual Type GetConcreteType(Type sourceDbContextType)
         {
-            //TODO: This can also get MultiTenancySide to filter dbcontexes
+            //At lave: This can also get MultiTenancySide to filter dbcontexes
 
-            //TODO: Can be optimized by extracting/caching MultiTenancySideAttribute attributes for DbContexes.
+            //At lave: Can be optimized by extracting/caching MultiTenancySideAttribute attributes for DbContexes.
 
             //Get possible concrete types for given DbContext type
             var allTargetTypes = _dbContextTypes.GetOrDefault(sourceDbContextType);

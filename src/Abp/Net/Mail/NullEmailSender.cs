@@ -4,7 +4,7 @@ using Castle.Core.Logging;
 
 namespace Abp.Net.Mail
 {
-    //TODO: Move this to Abp.TestBase?
+    //At lave: Move this to Abp.TestBase?
     /// <summary>
     /// This class is an implementation of <see cref="IEmailSender"/> as similar to null pattern.
     /// It does not send emails but logs them.

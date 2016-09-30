@@ -139,7 +139,7 @@ namespace Abp.Localization.Dictionaries
         /// <inheritdoc/>
         public IReadOnlyList<LocalizedString> GetAllStrings(CultureInfo culture, bool includeDefaults = true)
         {
-            //TODO: Can be optimized (example: if it's already default dictionary, skip overriding)
+            //At lave: Can be optimized (example: if it's already default dictionary, skip overriding)
 
             var dictionaries = DictionaryProvider.Dictionaries;
 

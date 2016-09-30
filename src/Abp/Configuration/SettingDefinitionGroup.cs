@@ -45,7 +45,7 @@ namespace Abp.Configuration
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentException("name parameter is invalid! It can not be null or empty or whitespace", "name"); //TODO: Simpify throwing such exceptions
+                throw new ArgumentException("name parameter is invalid! It can not be null or empty or whitespace", "name"); //At lave: Simpify throwing such exceptions
             }
 
             Name = name;

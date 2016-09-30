@@ -59,7 +59,7 @@ namespace Abp.Configuration
 
         private IDisposableDependencyObjectWrapper<SettingProvider> CreateProvider(Type providerType)
         {
-            _iocManager.RegisterIfNot(providerType, DependencyLifeStyle.Transient); //TODO: Needed?
+            _iocManager.RegisterIfNot(providerType, DependencyLifeStyle.Transient); //At lave: Needed?
             return _iocManager.ResolveAsDisposable<SettingProvider>(providerType);
         }
     }

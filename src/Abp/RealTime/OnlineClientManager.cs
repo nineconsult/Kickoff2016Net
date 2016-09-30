@@ -48,7 +48,7 @@ namespace Abp.RealTime
 
         public IOnlineClient GetByUserIdOrNull(IUserIdentifier user)
         {
-            //TODO: We can create a dictionary for a faster lookup.
+            //At lave: We can create a dictionary for a faster lookup.
             return GetAllClients().FirstOrDefault(c => c.UserId == user.UserId && c.TenantId == user.TenantId);
         }
 

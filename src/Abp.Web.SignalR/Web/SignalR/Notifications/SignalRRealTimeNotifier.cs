@@ -59,7 +59,7 @@ namespace Abp.Web.SignalR.Notifications
                         continue;
                     }
 
-                    //TODO: await call or not?
+                    //At lave: await call or not?
                     signalRClient.getNotification(userNotification);
                 }
                 catch (Exception ex)

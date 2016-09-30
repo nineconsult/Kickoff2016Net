@@ -63,7 +63,7 @@ namespace Abp.Resources.Embedded
 
         private static string NormalizeFolderName(string pathPart)
         {
-            //TODO: Implement all rules of .NET
+            //At lave: Implement all rules of .NET
             return pathPart.Replace('-', '_');
         }
     }

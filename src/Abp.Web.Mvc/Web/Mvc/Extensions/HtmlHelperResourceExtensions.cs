@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 namespace Abp.Web.Mvc.Extensions
 {
     /// <summary>
-    /// TODO: What if resource changes? How to update cache?
+    /// At lave: What if resource changes? How to update cache?
     /// </summary>
     public static class HtmlHelperResourceExtensions
     {
@@ -67,7 +67,7 @@ namespace Abp.Web.Mvc.Extensions
                     }
                     else
                     {
-                        //TODO: Refactor...
+                        //At lave: Refactor...
                         var fullPath = HttpContext.Current.Server.MapPath(path.Replace("/", "\\"));
                         result = File.Exists(fullPath)
                             ? GetPathWithVersioningForPhysicalFile(path, fullPath)

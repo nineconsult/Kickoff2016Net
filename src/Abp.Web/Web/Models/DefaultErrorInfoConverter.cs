@@ -11,7 +11,7 @@ using Abp.Web.Localization;
 
 namespace Abp.Web.Models
 {
-    //TODO@Halil: I did not like constructing ErrorInfo this way. It works wlll but I think we should change it later...
+    //At lave@Halil: I did not like constructing ErrorInfo this way. It works wlll but I think we should change it later...
     internal class DefaultErrorInfoConverter : IExceptionToErrorInfoConverter
     {
         private readonly IAbpWebModuleConfiguration _configuration;

@@ -342,7 +342,7 @@ namespace Abp.EntityFramework
 
             var softDeleteEntry = entry.Cast<ISoftDelete>();
 
-            softDeleteEntry.State = EntityState.Unchanged; //TODO: Or Modified? IsDeleted = true makes it modified?
+            softDeleteEntry.State = EntityState.Unchanged; //At lave: Or Modified? IsDeleted = true makes it modified?
             softDeleteEntry.Entity.IsDeleted = true;
         }
 

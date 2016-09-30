@@ -52,7 +52,7 @@ namespace Abp.Notifications
 
         /// <summary>
         /// Gets all subscribtions for given notification.
-        /// TODO: Can work only for single database approach!
+        /// At lave: Can work only for single database approach!
         /// </summary>
         /// <param name="notificationSubscriptionManager">Notification subscription manager</param>
         /// <param name="notificationName">Name of the notification.</param>

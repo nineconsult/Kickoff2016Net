@@ -29,7 +29,7 @@ namespace Abp.Text
                 ? StringComparison.InvariantCultureIgnoreCase
                 : StringComparison.InvariantCulture;
 
-            if (str == format) //TODO: think on that!
+            if (str == format) //At lave: think on that!
             {
                 return new ExtractionResult(true);
             }

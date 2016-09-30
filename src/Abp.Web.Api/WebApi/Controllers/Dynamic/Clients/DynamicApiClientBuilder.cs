@@ -1,7 +1,7 @@
 ﻿namespace Abp.WebApi.Controllers.Dynamic.Clients
 {
     /// <summary>
-    /// TODO: This class and namespace is being developed. See https://github.com/aspnetboilerplate/aspnetboilerplate/issues/66 
+    /// At lave: This class and namespace is being developed. See https://github.com/aspnetboilerplate/aspnetboilerplate/issues/66 
     /// </summary>
     public static class DynamicApiClientBuilder
     {

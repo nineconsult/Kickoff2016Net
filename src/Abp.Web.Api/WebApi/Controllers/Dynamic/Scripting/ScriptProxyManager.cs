@@ -10,7 +10,7 @@ using Abp.WebApi.Controllers.Dynamic.Scripting.jQuery;
 
 namespace Abp.WebApi.Controllers.Dynamic.Scripting
 {
-    //TODO@Halil: This class can be optimized.
+    //At lave@Halil: This class can be optimized.
     public class ScriptProxyManager : ISingletonDependency
     {
         private readonly IDictionary<string, ScriptInfo> CachedScripts;

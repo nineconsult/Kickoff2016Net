@@ -32,7 +32,7 @@ namespace Abp.Authorization.Interceptors
                 return;
             }
 
-            //TODO: Async pre-action does not works with Castle Windsor. So, it's cancelled until another solution is found (issue #381).
+            //At lave: Async pre-action does not works with Castle Windsor. So, it's cancelled until another solution is found (issue #381).
 
             //if (AsyncHelper.IsAsyncMethod(invocation.Method))
             //{

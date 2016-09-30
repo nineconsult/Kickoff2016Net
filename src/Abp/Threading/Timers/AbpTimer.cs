@@ -7,7 +7,7 @@ namespace Abp.Threading.Timers
     /// <summary>
     /// A roboust timer implementation that ensures no overlapping occurs. It waits exactly specified <see cref="Period"/> between ticks.
     /// </summary>
-    //TODO: Extract interface or make all members virtual to make testing easier.
+    //At lave: Extract interface or make all members virtual to make testing easier.
     public class AbpTimer : RunnableBase, ITransientDependency
     {
         /// <summary>

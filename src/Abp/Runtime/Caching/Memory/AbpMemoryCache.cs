@@ -32,7 +32,7 @@ namespace Abp.Runtime.Caching.Memory
                 throw new AbpException("Can not insert null values to the cache!");
             }
 
-            //TODO: Optimize by using a default CacheItemPolicy?
+            //At lave: Optimize by using a default CacheItemPolicy?
             _memoryCache.Set(
                 key,
                 value,
