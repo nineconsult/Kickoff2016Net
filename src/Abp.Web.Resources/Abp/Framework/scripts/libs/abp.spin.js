@@ -40,7 +40,7 @@
         }
         const options = $.extend({}, optionsOrPromise);
         if (!elm) {
-            if (options.blockUI != false) {
+            if (options.blockUI !== false) {
                 abp.ui.block();
             }
 
@@ -51,7 +51,7 @@
             if ($busyIndicator.length) {
                 $busyIndicator.spin(abp.libs.spinjs.spinner_config_inner_busy_indicator);
             } else {
-                if (options.blockUI != false) {
+                if (options.blockUI !== false) {
                     abp.ui.block(elm);
                 }
 
