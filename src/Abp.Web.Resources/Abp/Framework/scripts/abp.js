@@ -10,7 +10,7 @@
 
     //Converts given path to absolute path using abp.appPath variable.
     abp.toAbsAppPath = function (path) {
-        if (path.indexOf('/') == 0) {
+        if (path.indexOf('/') === 0) {
             path = path.substring(1);
         }
 
@@ -33,7 +33,7 @@
         }
 
         var value = source[key];
-        if (value == undefined) {
+        if (value === undefined) {
             return key;
         }
 
@@ -55,7 +55,7 @@
     abp.localization.isCurrentCulture = function (name) {
         return abp.localization.currentCulture
             && abp.localization.currentCulture.name
-            && abp.localization.currentCulture.name.indexOf(name) == 0;
+            && abp.localization.currentCulture.name.indexOf(name) === 0;
     };
 
     abp.localization.defaultSourceName = undefined;
@@ -130,7 +130,7 @@
 
     abp.features.getValue = function (name) {
         var feature = abp.features.get(name);
-        if (feature == undefined) {
+        if (feature === undefined) {
             return undefined;
         }
 
@@ -139,7 +139,7 @@
 
     abp.features.isEnabled = function (name) {
         var value = abp.features.getValue(name);
-        return value == 'true' || value == 'True';
+        return value === 'true' || value === 'True';
     }
 
     /* SETTINGS **************************************************/
@@ -155,7 +155,7 @@
 
     abp.setting.getBoolean = function (name) {
         var value = abp.setting.get(name);
-        return value == 'true' || value == 'True';
+        return value === 'true' || value === 'True';
     };
 
     abp.setting.getInt = function (name) {
@@ -192,19 +192,21 @@
     };
 
     abp.notifications.getUiNotifyFuncBySeverity = function (severity) {
+        var result;
         switch (severity) {
             case abp.notifications.severity.SUCCESS:
-                return abp.notify.success;
+                result = abp.notify.success;
             case abp.notifications.severity.WARN:
-                return abp.notify.warn;
+                result = abp.notify.warn;
             case abp.notifications.severity.ERROR:
-                return abp.notify.error;
+                result = abp.notify.error;
             case abp.notifications.severity.FATAL:
-                return abp.notify.error;
+                result = abp.notify.error;
             case abp.notifications.severity.INFO:
             default:
-                return abp.notify.info;
+                result = abp.notify.info;
         }
+        return result;
     };
 
     abp.notifications.messageFormatters = {};
@@ -278,11 +280,10 @@
             return;
         }
 
-        if (logLevel != undefined && logLevel < abp.log.level) {
+        if (logLevel !== undefined && logLevel < abp.log.level) {
             return;
         }
 
-        console.log(logObject);
     };
 
     abp.log.debug = function (logObject) {
@@ -312,23 +313,22 @@
 
     /* NOTIFICATION *********************************************/
     //Defines Notification API, not implements it
-
     abp.notify = abp.notify || {};
 
     abp.notify.success = function (message, title, options) {
-        abp.log.warn('abp.notify.success is not implemented!');
+        abp.log.warn('abp.notify.success is not implemented! Message = ' + message + '. Title = ' + title + '. Options = ' + options);
     };
 
     abp.notify.info = function (message, title, options) {
-        abp.log.warn('abp.notify.info is not implemented!');
+        abp.log.warn('abp.notify.info is not implemented! Message = ' + message + '. Title = ' + title + '. Options = ' + options);
     };
 
     abp.notify.warn = function (message, title, options) {
-        abp.log.warn('abp.notify.warn is not implemented!');
+        abp.log.warn('abp.notify.warn is not implemented! Message = ' + message + '. Title = ' + title + '. Options = ' + options);
     };
 
     abp.notify.error = function (message, title, options) {
-        abp.log.warn('abp.notify.error is not implemented!');
+        abp.log.warn('abp.notify.error is not implemented! Message = ' + message + '. Title = ' + title + '. Options = ' + options);
     };
 
     /* MESSAGE **************************************************/
@@ -337,10 +337,10 @@
     abp.message = abp.message || {};
 
     var showMessage = function (message, title) {
-        alert((title || '') + ' ' + message);
+
 
         if (!$) {
-            abp.log.warn('abp.message can not return promise since jQuery is not defined!');
+            abp.log.warn('abp.message can not return promise since jQuery is not defined! Message = ' + message + '. Title = ' + title);
             return null;
         }
 
@@ -372,7 +372,7 @@
     abp.message.confirm = function (message, titleOrCallback, callback) {
         abp.log.warn('abp.message.confirm is not implemented!');
 
-        if (titleOrCallback && !(typeof titleOrCallback == 'string')) {
+        if (titleOrCallback && !(typeof titleOrCallback === 'string')) {
             callback = titleOrCallback;
         }
 
@@ -397,22 +397,22 @@
     //Defines UI Block API, not implements it
 
     abp.ui.block = function (elm) {
-        abp.log.warn('abp.ui.block is not implemented!');
+        abp.log.warn('abp.ui.block is not implemented! elm = ' + elm);
     };
 
     abp.ui.unblock = function (elm) {
-        abp.log.warn('abp.ui.unblock is not implemented!');
+        abp.log.warn('abp.ui.unblock is not implemented! elm = ' + elm);
     };
 
     /* UI BUSY */
     //Defines UI Busy API, not implements it
 
     abp.ui.setBusy = function (elm, optionsOrPromise) {
-        abp.log.warn('abp.ui.setBusy is not implemented!');
+        abp.log.warn('abp.ui.setBusy is not implemented! elm = ' + elm + '. optionsOrPromise = ' + optionsOrPromise);
     };
 
     abp.ui.clearBusy = function (elm) {
-        abp.log.warn('abp.ui.clearBusy is not implemented!');
+        abp.log.warn('abp.ui.clearBusy is not implemented! elm = ' + elm);
     };
 
     /* SIMPLE EVENT BUS *****************************************/
@@ -485,7 +485,7 @@
     abp.utils.createNamespace = function (root, ns) {
         var parts = ns.split('.');
         for (var i = 0; i < parts.length; i++) {
-            if (typeof root[parts[i]] == 'undefined') {
+            if (typeof root[parts[i]] === 'undefined') {
                 root[parts[i]] = {};
             }
 
