@@ -35,6 +35,7 @@ namespace Abp.RedisCache.Tests
         [Theory]
         [InlineData("A", 42)]
         [InlineData("B", 43)]
+        [Fact(Skip = "Not unit  test, connects to Redis server.. todo: extract to integration tests")]
         public void Simple_Get_Set_Test(string cacheKey, int cacheValue)
         {
             var item = _cache.Get(cacheKey, () => new MyCacheItem { Value = cacheValue });
